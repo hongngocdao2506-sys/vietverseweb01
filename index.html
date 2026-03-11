@@ -22,55 +22,6 @@ body{
 font-family:"Be Vietnam Pro",sans-serif;
 background:url("Background web@4x.png") center/cover fixed;
 color:#3a240f;
-overflow-x:hidden;
-}
-
-/* overlay */
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.45);
-z-index:-1;
-}
-
-/* floating lotus */
-
-.lotus{
-position:fixed;
-font-size:28px;
-opacity:0.25;
-animation:float 20s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-100vh);}
-}
-
-/* sections */
-
-section{
-min-height:100vh;
-display:none;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:60px 20px;
-
-opacity:0;
-transform:translateY(40px);
-transition:all .6s ease;
-}
-
-section.active{
-display:flex;
-opacity:1;
-transform:translateY(0);
 }
 
 /* titles */
@@ -81,73 +32,59 @@ color:#7a3f18;
 }
 
 h1{
-font-size:64px;
+font-size:60px;
 margin-bottom:20px;
 }
 
-p{
-max-width:720px;
-font-size:20px;
-line-height:1.6;
+section{
+min-height:100vh;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:60px 20px;
 }
 
-/* hint */
-
-.hint{
-margin-top:30px;
-font-size:16px;
-opacity:.8;
-animation:pulse 2s infinite;
+section.active{
+display:flex;
 }
-
-@keyframes pulse{
-0%{opacity:.4}
-50%{opacity:1}
-100%{opacity:.4}
-}
-
-/* buttons */
 
 button{
-padding:14px 28px;
-font-size:18px;
+padding:12px 26px;
+font-size:16px;
 border:none;
-border-radius:10px;
+border-radius:8px;
 background:#8b5a2b;
 color:white;
-margin-top:25px;
+margin:10px;
 cursor:pointer;
-transition:.3s;
 }
 
 button:hover{
-transform:translateY(-3px);
 background:#6f431d;
 }
 
-/* menu */
+/* menu cards */
 
 .menu{
 display:flex;
-gap:40px;
-margin-top:40px;
+gap:30px;
 flex-wrap:wrap;
 justify-content:center;
 }
 
 .card{
-width:260px;
-background:rgba(255,255,255,0.8);
-backdrop-filter:blur(10px);
-border-radius:18px;
-padding:30px;
+width:240px;
+background:rgba(255,255,255,0.85);
+border-radius:14px;
+padding:25px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 cursor:pointer;
-box-shadow:0 15px 35px rgba(0,0,0,0.25);
-transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.05);
+transform:scale(1.05);
 }
 
 /* quiz */
@@ -157,84 +94,10 @@ display:block;
 margin:10px auto;
 }
 
-/* progress */
-
-.progress{
-width:300px;
-height:8px;
-background:#ddd;
-border-radius:10px;
-margin:20px auto;
-overflow:hidden;
-}
-
-.bar{
-height:100%;
-width:0%;
-background:#8b5a2b;
-transition:.4s;
-}
-
-/* DOOR */
-
-#door{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:9999;
-display:flex;
-cursor:pointer;
-}
-
-.door-half{
-width:50%;
-height:100%;
-background:url("cua@4x.png") center/cover no-repeat;
-transition:transform 1.4s ease-in-out;
-}
-
-.left{
-clip-path:inset(0 50% 0 0);
-}
-
-.right{
-clip-path:inset(0 0 0 50%);
-transform:scaleX(-1);
-}
-
-#door.open .left{
-transform:translateX(-100%);
-}
-
-#door.open .right{
-transform:translateX(100%) scaleX(-1);
-}
-
-#door.hide{
-opacity:0;
-pointer-events:none;
-transition:opacity .8s;
-}
-
 </style>
 </head>
 
 <body>
-
-<div class="overlay"></div>
-
-<div class="lotus" style="left:10%">🌸</div>
-<div class="lotus" style="left:50%;animation-duration:22s">🌸</div>
-<div class="lotus" style="left:80%;animation-duration:25s">🌸</div>
-
-<!-- DOOR -->
-
-<div id="door">
-<div class="door-half left"></div>
-<div class="door-half right"></div>
-</div>
 
 <!-- HOME -->
 
@@ -242,13 +105,9 @@ transition:opacity .8s;
 
 <h1>VietVerse</h1>
 
-<p>
-Khám phá thế giới văn hóa Việt Nam theo cách hiện đại dành cho học sinh.
-</p>
+<p>Khám phá văn hóa Việt Nam theo cách hiện đại.</p>
 
-<div class="hint">
-👆 Bấm vào màn hình để khám phá
-</div>
+<button onclick="go('intro')">Bắt đầu</button>
 
 </section>
 
@@ -256,12 +115,12 @@ Khám phá thế giới văn hóa Việt Nam theo cách hiện đại dành cho 
 
 <section id="intro">
 
-<h1>Giới thiệu VietVerse</h1>
+<h1>Giới thiệu</h1>
 
 <p>
 
-VietVerse là nền tảng giúp học sinh khám phá văn hóa Việt
-thông qua trải nghiệm trực quan và quiz tương tác.
+VietVerse giúp học sinh tìm hiểu văn hóa Việt thông qua
+khám phá nội dung và quiz tương tác.
 
 </p>
 
@@ -273,49 +132,51 @@ thông qua trải nghiệm trực quan và quiz tương tác.
 
 <section id="menu">
 
-<h1>Bạn muốn khám phá gì?</h1>
+<h1>Bạn muốn làm gì?</h1>
 
 <div class="menu">
 
-<div class="card" onclick="go('explore')">
+<div class="card" onclick="go('exploreMenu')">
 <h2>🧭 Khám phá văn hóa</h2>
-<p>Ẩm thực, lễ hội, trang phục và nhạc cụ.</p>
 </div>
 
-<div class="card" onclick="go('quiz')">
+<div class="card" onclick="startQuiz()">
 <h2>🧠 Quiz văn hóa</h2>
-<p>Kiểm tra hiểu biết của bạn.</p>
 </div>
 
 </div>
 
 </section>
 
-<!-- EXPLORE -->
+<!-- EXPLORE MENU -->
+
+<section id="exploreMenu">
+
+<h1>Khám phá văn hóa</h1>
+
+<div class="menu">
+
+<div class="card" onclick="showExplore('food')">🍜 Ẩm thực</div>
+<div class="card" onclick="showExplore('music')">🎵 Âm nhạc</div>
+<div class="card" onclick="showExplore('custom')">🎎 Phong tục</div>
+<div class="card" onclick="showExplore('clothes')">👘 Trang phục</div>
+<div class="card" onclick="showExplore('art')">🎨 Nghệ thuật</div>
+
+</div>
+
+<button onclick="go('menu')">Quay lại</button>
+
+</section>
+
+<!-- EXPLORE CONTENT -->
 
 <section id="explore">
 
-<h1>Khám phá văn hóa Việt</h1>
+<h1 id="exploreTitle"></h1>
 
-<p>
+<p id="exploreText"></p>
 
-🍜 Phở – món ăn biểu tượng của Việt Nam  
-
-<br><br>
-
-👘 Áo dài – trang phục truyền thống  
-
-<br><br>
-
-🎎 Tết Nguyên Đán – lễ hội lớn nhất  
-
-<br><br>
-
-🎵 Đàn bầu – nhạc cụ độc đáo
-
-</p>
-
-<button onclick="go('menu')">Quay lại</button>
+<button onclick="go('exploreMenu')">Quay lại</button>
 
 </section>
 
@@ -325,44 +186,19 @@ thông qua trải nghiệm trực quan và quiz tương tác.
 
 <h1>Quiz Văn Hóa</h1>
 
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-
-<div class="quiz">
-
 <h2 id="question"></h2>
+
 <div id="answers"></div>
-<p id="score"></p>
 
-</div>
+<p id="quizResult"></p>
 
-<button onclick="go('menu')">Quay lại</button>
+<div id="quizButtons"></div>
 
 </section>
 
 <script>
 
-let opened=false
-
-const door=document.getElementById("door")
-
-door.addEventListener("click",()=>{
-
-if(opened) return
-
-opened=true
-
-door.classList.add("open")
-
-setTimeout(()=>{
-
-door.classList.add("hide")
-go("intro")
-
-},1400)
-
-})
+/* navigation */
 
 function go(target){
 
@@ -374,70 +210,161 @@ document.getElementById(target).classList.add("active")
 
 }
 
+/* explore */
+
+function showExplore(type){
+
+go("explore")
+
+const title=document.getElementById("exploreTitle")
+const text=document.getElementById("exploreText")
+
+const data={
+
+food:{
+title:"Ẩm thực Việt Nam",
+text:"Ẩm thực Việt nổi tiếng với sự cân bằng giữa vị chua, cay, mặn, ngọt. Các món như phở, bánh mì, bún bò Huế và gỏi cuốn đã trở thành biểu tượng ẩm thực Việt trên thế giới."
+},
+
+music:{
+title:"Âm nhạc truyền thống",
+text:"Âm nhạc truyền thống Việt Nam có nhiều loại hình như ca trù, quan họ, cải lương. Các nhạc cụ phổ biến gồm đàn bầu, đàn tranh và đàn nguyệt."
+},
+
+custom:{
+title:"Phong tục tập quán",
+text:"Phong tục Việt Nam gắn liền với gia đình và cộng đồng. Các dịp như Tết Nguyên Đán, Trung Thu hay giỗ tổ Hùng Vương mang ý nghĩa gắn kết và tưởng nhớ cội nguồn."
+},
+
+clothes:{
+title:"Trang phục truyền thống",
+text:"Áo dài là trang phục truyền thống nổi bật của Việt Nam, thể hiện sự thanh lịch và duyên dáng. Ngoài ra còn có các trang phục dân tộc của 54 dân tộc khác nhau."
+},
+
+art:{
+title:"Nghệ thuật truyền thống",
+text:"Nghệ thuật Việt Nam rất đa dạng với tranh Đông Hồ, múa rối nước, hát chèo và nhiều loại hình nghệ thuật dân gian khác."
+}
+
+}
+
+title.innerText=data[type].title
+text.innerText=data[type].text
+
+}
+
 /* quiz */
 
 const quiz=[
-{q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
-{q:"Trang phục truyền thống Việt Nam?",a:["Kimono","Áo dài","Hanbok"],c:1},
-{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Mùa hè","Tháng 9"],c:0},
-{q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn tranh","Đàn bầu","Đàn nguyệt"],c:1},
-{q:"Lễ hội Trung Thu có gì?",a:["Đèn lồng","Hoa mai","Hoa đào"],c:0}
+
+{
+q:"Phở có nguồn gốc từ đâu?",
+a:["Miền Bắc","Miền Trung","Miền Nam"],
+c:0
+},
+
+{
+q:"Trang phục truyền thống Việt Nam?",
+a:["Kimono","Áo dài","Hanbok"],
+c:1
+},
+
+{
+q:"Nhạc cụ một dây của Việt Nam?",
+a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],
+c:0
+},
+
+{
+q:"Tết Nguyên Đán diễn ra khi nào?",
+a:["Đầu năm âm lịch","Tháng 9","Tháng 6"],
+c:0
+}
+
 ]
 
 let current=0
 let score=0
 
-function loadQuiz(){
+function startQuiz(){
+
+current=0
+score=0
+
+go("quiz")
+
+loadQuestion()
+
+}
+
+function loadQuestion(){
 
 const q=quiz[current]
 
 document.getElementById("question").innerText=q.q
 
-const ans=document.getElementById("answers")
-ans.innerHTML=""
+const answers=document.getElementById("answers")
+
+answers.innerHTML=""
 
 q.a.forEach((text,i)=>{
 
 const btn=document.createElement("button")
 
 btn.innerText=text
-btn.onclick=()=>answer(i)
 
-ans.appendChild(btn)
+btn.onclick=()=>selectAnswer(i)
+
+answers.appendChild(btn)
 
 })
 
-document.getElementById("bar").style.width=(current/quiz.length*100)+"%"
+document.getElementById("quizButtons").innerHTML=""
+document.getElementById("quizResult").innerText=""
 
 }
 
-function answer(i){
+function selectAnswer(i){
 
-if(i===quiz[current].c) score++
+const correct=quiz[current].c
+
+if(i===correct){
+score++
+document.getElementById("quizResult").innerText="✅ Đúng!"
+}else{
+document.getElementById("quizResult").innerText="❌ Sai!"
+}
+
+const buttons=document.getElementById("quizButtons")
+
+buttons.innerHTML=""
+
+if(current<quiz.length-1){
+
+const next=document.createElement("button")
+next.innerText="Câu hỏi tiếp theo"
+next.onclick=()=>{
 
 current++
-
-if(current<quiz.length){
-
-loadQuiz()
-
-}else{
-
-document.getElementById("question").innerText="Hoàn thành!"
-document.getElementById("answers").innerHTML=""
-document.getElementById("score").innerText="Bạn đúng "+score+"/"+quiz.length+" câu."
-document.getElementById("bar").style.width="100%"
+loadQuestion()
 
 }
 
+buttons.appendChild(next)
+
 }
 
-document.getElementById("quiz").addEventListener("click",()=>{
-if(current===0) loadQuiz()
-})
+const back=document.createElement("button")
+back.innerText="Quay lại menu"
+back.onclick=()=>go("menu")
+
+buttons.appendChild(back)
+
+}
 
 </script>
 
 </body>
 </html>
 ```
+
