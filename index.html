@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -50,7 +51,7 @@ flex-direction:column;
 padding:60px 20px;
 opacity:0;
 transform:translateY(30px);
-transition:all 0.7s;
+transition:all 0.6s ease;
 }
 
 section.active{
@@ -109,7 +110,7 @@ background:rgba(255,255,255,0.9);
 border-radius:14px;
 padding:30px;
 cursor:pointer;
-transition:0.35s;
+transition:0.3s;
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
@@ -140,6 +141,12 @@ height:100%;
 display:flex;
 z-index:9999;
 pointer-events:none;
+transition:opacity 0.6s ease;
+}
+
+#door.hide{
+opacity:0;
+visibility:hidden;
 }
 
 .door{
@@ -326,18 +333,23 @@ const door = document.getElementById("door");
 
 if(!doorOpened){
 
-door.classList.add("open");
 doorOpened = true;
+door.classList.add("open");
 
-setTimeout(changeSection,1100);
+setTimeout(()=>{
+door.classList.add("hide");
+changeSection(target);
+},1200);
 
 }else{
 
-changeSection();
+changeSection(target);
 
 }
 
-function changeSection(){
+}
+
+function changeSection(target){
 
 document.querySelectorAll("section").forEach(sec=>{
 sec.classList.remove("active");
@@ -352,20 +364,14 @@ behavior:"smooth"
 
 }
 
-}
-
 function answer(choice){
 
 const result=document.getElementById("result");
 
 if(choice==="A"){
-
 result.innerHTML="✅ Chính xác! Phở có nguồn gốc từ miền Bắc.";
-
 }else{
-
 result.innerHTML="❌ Chưa đúng. Đáp án đúng là miền Bắc.";
-
 }
 
 }
@@ -374,3 +380,5 @@ result.innerHTML="❌ Chưa đúng. Đáp án đúng là miền Bắc.";
 
 </body>
 </html>
+```
+
