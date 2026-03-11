@@ -43,41 +43,28 @@ z-index:-1;
 position:fixed;
 font-size:28px;
 opacity:0.25;
-animation:float 18s linear infinite;
+animation:float 20s linear infinite;
 }
 
 @keyframes float{
-
-0%{
-transform:translateY(100vh);
-}
-
-100%{
-transform:translateY(-100vh);
-}
-
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-100vh);}
 }
 
 /* sections */
 
 section{
-
 min-height:100vh;
 display:none;
-
 flex-direction:column;
 justify-content:center;
 align-items:center;
-
 text-align:center;
-
 padding:60px 20px;
 
 opacity:0;
 transform:translateY(40px);
-
-transition:all .7s;
-
+transition:all .6s ease;
 }
 
 section.active{
@@ -104,25 +91,33 @@ font-size:20px;
 line-height:1.6;
 }
 
+/* hint */
+
+.hint{
+margin-top:30px;
+font-size:16px;
+opacity:.8;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:.4}
+50%{opacity:1}
+100%{opacity:.4}
+}
+
 /* buttons */
 
 button{
-
 padding:14px 28px;
 font-size:18px;
-
 border:none;
 border-radius:10px;
-
 background:#8b5a2b;
 color:white;
-
 margin-top:25px;
-
 cursor:pointer;
-
 transition:.3s;
-
 }
 
 button:hover{
@@ -133,68 +128,26 @@ background:#6f431d;
 /* menu */
 
 .menu{
-
 display:flex;
 gap:40px;
 margin-top:40px;
-
 flex-wrap:wrap;
-
 justify-content:center;
-
 }
 
 .card{
-
 width:260px;
-
 background:rgba(255,255,255,0.8);
-backdrop-filter:blur(12px);
-
+backdrop-filter:blur(10px);
 border-radius:18px;
-
 padding:30px;
-
 cursor:pointer;
-
 box-shadow:0 15px 35px rgba(0,0,0,0.25);
-
-transition:.35s;
-
+transition:.3s;
 }
 
 .card:hover{
-
 transform:translateY(-10px) scale(1.05);
-
-}
-
-/* progress */
-
-.progress{
-
-width:300px;
-height:8px;
-
-background:#ddd;
-
-border-radius:10px;
-
-margin:20px auto;
-
-overflow:hidden;
-
-}
-
-.bar{
-
-height:100%;
-width:0%;
-
-background:#8b5a2b;
-
-transition:.4s;
-
 }
 
 /* quiz */
@@ -204,32 +157,42 @@ display:block;
 margin:10px auto;
 }
 
+/* progress */
+
+.progress{
+width:300px;
+height:8px;
+background:#ddd;
+border-radius:10px;
+margin:20px auto;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:#8b5a2b;
+transition:.4s;
+}
+
 /* DOOR */
 
 #door{
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
 z-index:9999;
-
 display:flex;
-
+cursor:pointer;
 }
 
 .door-half{
-
 width:50%;
 height:100%;
-
 background:url("cua@4x.png") center/cover no-repeat;
-
-transition:transform 1.6s ease;
-
+transition:transform 1.4s ease-in-out;
 }
 
 .left{
@@ -252,28 +215,10 @@ transform:translateX(100%) scaleX(-1);
 #door.hide{
 opacity:0;
 pointer-events:none;
-transition:opacity 1s;
-}
-
-/* glow */
-
-.glow{
-
-position:absolute;
-
-width:200px;
-height:200px;
-
-background:radial-gradient(circle,#ffd27a,transparent);
-
-filter:blur(60px);
-
-opacity:.5;
-
+transition:opacity .8s;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -287,10 +232,8 @@ opacity:.5;
 <!-- DOOR -->
 
 <div id="door">
-
 <div class="door-half left"></div>
 <div class="door-half right"></div>
-
 </div>
 
 <!-- HOME -->
@@ -300,16 +243,12 @@ opacity:.5;
 <h1>VietVerse</h1>
 
 <p>
-
 Khám phá thế giới văn hóa Việt Nam theo cách hiện đại dành cho học sinh.
-
 </p>
 
-<button onclick="startSite()">
-
-Bắt đầu khám phá
-
-</button>
+<div class="hint">
+👆 Bấm vào màn hình để khám phá
+</div>
 
 </section>
 
@@ -326,11 +265,7 @@ thông qua trải nghiệm trực quan và quiz tương tác.
 
 </p>
 
-<button onclick="go('menu')">
-
-Tiếp tục
-
-</button>
+<button onclick="go('menu')">Tiếp tục</button>
 
 </section>
 
@@ -343,27 +278,13 @@ Tiếp tục
 <div class="menu">
 
 <div class="card" onclick="go('explore')">
-
 <h2>🧭 Khám phá văn hóa</h2>
-
-<p>
-
-Ẩm thực, lễ hội, trang phục và nhạc cụ.
-
-</p>
-
+<p>Ẩm thực, lễ hội, trang phục và nhạc cụ.</p>
 </div>
 
 <div class="card" onclick="go('quiz')">
-
 <h2>🧠 Quiz văn hóa</h2>
-
-<p>
-
-Kiểm tra hiểu biết của bạn.
-
-</p>
-
+<p>Kiểm tra hiểu biết của bạn.</p>
 </div>
 
 </div>
@@ -411,9 +332,7 @@ Kiểm tra hiểu biết của bạn.
 <div class="quiz">
 
 <h2 id="question"></h2>
-
 <div id="answers"></div>
-
 <p id="score"></p>
 
 </div>
@@ -426,11 +345,11 @@ Kiểm tra hiểu biết của bạn.
 
 let opened=false
 
-function startSite(){
-
 const door=document.getElementById("door")
 
-if(!opened){
+door.addEventListener("click",()=>{
+
+if(opened) return
 
 opened=true
 
@@ -439,14 +358,11 @@ door.classList.add("open")
 setTimeout(()=>{
 
 door.classList.add("hide")
-
 go("intro")
 
-},1600)
+},1400)
 
-}
-
-}
+})
 
 function go(target){
 
@@ -461,13 +377,11 @@ document.getElementById(target).classList.add("active")
 /* quiz */
 
 const quiz=[
-
 {q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
 {q:"Trang phục truyền thống Việt Nam?",a:["Kimono","Áo dài","Hanbok"],c:1},
 {q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Mùa hè","Tháng 9"],c:0},
 {q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn tranh","Đàn bầu","Đàn nguyệt"],c:1},
 {q:"Lễ hội Trung Thu có gì?",a:["Đèn lồng","Hoa mai","Hoa đào"],c:0}
-
 ]
 
 let current=0
@@ -480,7 +394,6 @@ const q=quiz[current]
 document.getElementById("question").innerText=q.q
 
 const ans=document.getElementById("answers")
-
 ans.innerHTML=""
 
 q.a.forEach((text,i)=>{
@@ -488,7 +401,6 @@ q.a.forEach((text,i)=>{
 const btn=document.createElement("button")
 
 btn.innerText=text
-
 btn.onclick=()=>answer(i)
 
 ans.appendChild(btn)
@@ -512,11 +424,8 @@ loadQuiz()
 }else{
 
 document.getElementById("question").innerText="Hoàn thành!"
-
 document.getElementById("answers").innerHTML=""
-
 document.getElementById("score").innerText="Bạn đúng "+score+"/"+quiz.length+" câu."
-
 document.getElementById("bar").style.width="100%"
 
 }
@@ -524,9 +433,7 @@ document.getElementById("bar").style.width="100%"
 }
 
 document.getElementById("quiz").addEventListener("click",()=>{
-
 if(current===0) loadQuiz()
-
 })
 
 </script>
