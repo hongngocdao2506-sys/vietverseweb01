@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -8,9 +7,11 @@
 
 <title>VietVerse – Explore the Viet Side</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* RESET */
 
 *{
 margin:0;
@@ -21,11 +22,11 @@ box-sizing:border-box;
 body{
 font-family:"Be Vietnam Pro",sans-serif;
 background:url("Background web@4x.png") center/cover fixed;
-color:#3a240f;
+color:#3d2410;
 overflow-x:hidden;
 }
 
-/* ===== SECTIONS ===== */
+/* SECTIONS */
 
 section{
 min-height:100vh;
@@ -34,78 +35,83 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:60px 20px;
+padding:60px;
+animation:fade 1s;
 }
 
 section.active{
 display:flex;
 }
 
-/* ===== TITLES ===== */
+@keyframes fade{
+from{opacity:0; transform:translateY(20px)}
+to{opacity:1; transform:translateY(0)}
+}
 
-h1,h2{
+/* TITLES */
+
+h1{
 font-family:"Playfair Display",serif;
-color:#7a3f18;
+font-size:64px;
 margin-bottom:20px;
 }
 
-h1{
-font-size:60px;
+h2{
+font-family:"Playfair Display",serif;
+margin-bottom:20px;
 }
 
-p{
-max-width:720px;
-font-size:18px;
-line-height:1.6;
-}
-
-/* ===== BUTTON ===== */
+/* BUTTON */
 
 button{
-padding:12px 24px;
-background:#8b5a2b;
-color:white;
+padding:14px 26px;
+background:#8b4d22;
 border:none;
-border-radius:8px;
+border-radius:10px;
+color:white;
 font-size:16px;
 cursor:pointer;
 margin:10px;
+transition:0.3s;
 }
 
 button:hover{
-background:#6f431d;
+background:#6b3513;
+transform:scale(1.05);
 }
 
-/* ===== MENU ===== */
+/* MENU */
 
 .menu{
 display:flex;
-gap:30px;
 flex-wrap:wrap;
+gap:30px;
 justify-content:center;
+margin-top:30px;
 }
 
 .card{
 width:240px;
-background:rgba(255,255,255,0.9);
-border-radius:12px;
-padding:25px;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
+background:white;
+padding:30px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 cursor:pointer;
+transition:0.3s;
 }
 
 .card:hover{
-transform:scale(1.05);
+transform:translateY(-10px);
 }
 
-/* ===== QUIZ ===== */
+/* QUIZ */
 
 .quiz button{
 display:block;
 margin:10px auto;
 }
 
-/* ===== DOOR ===== */
+/* DOOR */
 
 #door{
 position:fixed;
@@ -119,7 +125,7 @@ cursor:pointer;
 overflow:hidden;
 }
 
-/* mỗi cánh */
+/* DOOR PANELS */
 
 .door{
 width:50%;
@@ -127,22 +133,18 @@ height:100%;
 background-image:url("cua@4x.png");
 background-size:100% 100%;
 background-repeat:no-repeat;
-transition:transform 1.6s ease;
+transition:transform 1.8s cubic-bezier(.77,0,.18,1);
 }
-
-/* nửa trái */
 
 .left{
 background-position:left center;
 }
 
-/* nửa phải */
-
 .right{
 background-position:right center;
 }
 
-/* animation mở */
+/* OPEN ANIMATION */
 
 #door.open .left{
 transform:translateX(-100%);
@@ -152,7 +154,7 @@ transform:translateX(-100%);
 transform:translateX(100%);
 }
 
-/* text giữa */
+/* TEXT CENTER */
 
 .doorText{
 position:absolute;
@@ -161,25 +163,55 @@ left:50%;
 transform:translate(-50%,-50%);
 text-align:center;
 color:white;
+animation:float 3s ease-in-out infinite;
 }
 
-.doorText p{
+@keyframes float{
+0%{transform:translate(-50%,-50%)}
+50%{transform:translate(-50%,-53%)}
+100%{transform:translate(-50%,-50%)}
+}
+
+.title{
+font-family:"Playfair Display",serif;
+font-size:70px;
+letter-spacing:2px;
+}
+
+.slogan{
 margin-top:10px;
+font-size:22px;
+opacity:0.9;
+}
+
+.note{
+margin-top:20px;
+opacity:0.7;
+}
+
+/* EXPLORE TEXT */
+
+.content{
+max-width:750px;
+line-height:1.6;
 font-size:18px;
 }
 
-/* logo */
+/* FOOTER */
 
-.logo{
-width:160px;
+footer{
+margin-top:40px;
+opacity:0.7;
+font-size:14px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- ===== DOOR ===== -->
+<!-- DOOR -->
 
 <div id="door">
 
@@ -188,51 +220,63 @@ width:160px;
 
 <div class="doorText">
 
-<img src="logo.png" class="logo">
+<div class="title">VietVerse</div>
 
-<p>Chạm vào cánh cửa để bước vào</p>
+<div class="slogan">Explore the Viet Side</div>
+
+<div class="note">Chạm vào màn hình để khám phá</div>
 
 </div>
 
 </div>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 
 <section id="home" class="active">
 
 <h1>VietVerse</h1>
 
-<p>Khám phá văn hóa Việt Nam theo cách hiện đại dành cho học sinh.</p>
+<p class="content">
+VietVerse là nền tảng khám phá văn hóa Việt Nam - "Văn hóa là hồn cốt của dân tộc"
+</p>
 
-<button onclick="go('menu')">Bắt đầu</button>
+<button onclick="go('menu')">Bắt đầu hành trình khám phá</button>
 
 </section>
 
-<!-- ===== MENU ===== -->
+<!-- MENU -->
 
 <section id="menu">
 
-<h1>Bạn muốn khám phá gì?</h1>
+<h1>Bạn lựa chọn khám phá khía cạnh gì?</h1>
 
 <div class="menu">
 
 <div class="card" onclick="go('exploreMenu')">
+
 <h2>🧭 Khám phá văn hóa</h2>
+
+<p>Tìm hiểu các nét đặc trưng của văn hóa Việt.</p>
+
 </div>
 
 <div class="card" onclick="startQuiz()">
+
 <h2>🧠 Quiz văn hóa</h2>
+
+<p>Thử thách kiến thức của bạn về văn hóa Việt Nam.</p>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- ===== EXPLORE MENU ===== -->
+<!-- EXPLORE MENU -->
 
 <section id="exploreMenu">
 
-<h1>Khám phá văn hóa</h1>
+<h1>Chọn lĩnh vực văn hóa</h1>
 
 <div class="menu">
 
@@ -252,23 +296,23 @@ width:160px;
 
 </section>
 
-<!-- ===== EXPLORE CONTENT ===== -->
+<!-- EXPLORE CONTENT -->
 
 <section id="explore">
 
 <h1 id="exploreTitle"></h1>
 
-<p id="exploreText"></p>
+<p id="exploreText" class="content"></p>
 
 <button onclick="go('exploreMenu')">Quay lại</button>
 
 </section>
 
-<!-- ===== QUIZ ===== -->
+<!-- QUIZ -->
 
 <section id="quiz">
 
-<h1>Quiz Văn Hóa</h1>
+<h1>Thử tài khiến thức về Văn Hóa</h1>
 
 <h2 id="question"></h2>
 
@@ -280,9 +324,15 @@ width:160px;
 
 </section>
 
+<footer>
+
+VietVerse © 2026 – Explore the Viet Side
+
+</footer>
+
 <script>
 
-/* ===== DOOR ===== */
+/* DOOR OPEN */
 
 const door=document.getElementById("door")
 
@@ -292,23 +342,21 @@ this.classList.add("open")
 
 setTimeout(()=>{
 this.style.display="none"
-},1600)
+},1800)
 
 }
 
-/* ===== NAVIGATION ===== */
+/* NAVIGATION */
 
 function go(target){
 
-document.querySelectorAll("section").forEach(s=>{
-s.classList.remove("active")
-})
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
 
 document.getElementById(target).classList.add("active")
 
 }
 
-/* ===== EXPLORE ===== */
+/* EXPLORE DATA */
 
 function showExplore(type){
 
@@ -318,27 +366,27 @@ const data={
 
 food:{
 title:"Ẩm thực Việt Nam",
-text:"Ẩm thực Việt Nam nổi tiếng với sự hài hòa giữa các hương vị chua, cay, mặn, ngọt. Những món ăn như phở, bánh mì, bún bò Huế và gỏi cuốn đã trở thành biểu tượng của ẩm thực Việt trên toàn thế giới."
+text:"Ẩm thực Việt Nam nổi tiếng với sự hài hòa giữa các hương vị chua, cay, mặn, ngọt. Các món ăn như phở, bánh mì, bún bò Huế và gỏi cuốn đã trở thành biểu tượng của ẩm thực Việt trên toàn thế giới."
 },
 
 music:{
 title:"Âm nhạc truyền thống",
-text:"Âm nhạc Việt Nam bao gồm nhiều loại hình như quan họ Bắc Ninh, ca trù, cải lương và hát chèo. Các nhạc cụ truyền thống như đàn bầu, đàn tranh và đàn nguyệt tạo nên âm sắc đặc trưng."
+text:"Âm nhạc Việt Nam có nhiều loại hình như quan họ Bắc Ninh, ca trù, cải lương và hát chèo. Những nhạc cụ truyền thống như đàn bầu, đàn tranh và đàn nguyệt tạo nên âm sắc rất đặc trưng."
 },
 
 custom:{
 title:"Phong tục tập quán",
-text:"Phong tục Việt Nam gắn liền với gia đình và cộng đồng. Những dịp quan trọng như Tết Nguyên Đán, lễ Trung Thu và lễ giỗ tổ Hùng Vương thể hiện sự tôn trọng truyền thống."
+text:"Phong tục Việt Nam gắn liền với giá trị gia đình và cộng đồng. Các dịp lễ quan trọng như Tết Nguyên Đán, Trung Thu và Giỗ Tổ Hùng Vương thể hiện truyền thống lâu đời của dân tộc."
 },
 
 clothes:{
 title:"Trang phục truyền thống",
-text:"Áo dài là trang phục truyền thống tiêu biểu của Việt Nam, thể hiện vẻ đẹp thanh lịch và duyên dáng. Ngoài ra mỗi dân tộc ở Việt Nam còn có trang phục riêng độc đáo."
+text:"Áo dài là trang phục truyền thống tiêu biểu của Việt Nam, biểu tượng cho vẻ đẹp thanh lịch và duyên dáng của người Việt."
 },
 
 art:{
-title:"Nghệ thuật truyền thống",
-text:"Việt Nam có nhiều loại hình nghệ thuật dân gian như tranh Đông Hồ, múa rối nước, hát chèo và hát xẩm. Những loại hình này phản ánh đời sống và văn hóa của người Việt."
+title:"Nghệ thuật dân gian",
+text:"Việt Nam có nhiều loại hình nghệ thuật độc đáo như tranh Đông Hồ, múa rối nước, hát chèo và hát xẩm, phản ánh đời sống và văn hóa dân gian."
 }
 
 }
@@ -348,17 +396,19 @@ document.getElementById("exploreText").innerText=data[type].text
 
 }
 
-/* ===== QUIZ ===== */
+/* QUIZ */
 
 const quiz=[
 
 {q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
 
-{q:"Trang phục truyền thống Việt Nam?",a:["Kimono","Áo dài","Hanbok"],c:1},
+{q:"Trang phục truyền thống Việt Nam là gì?",a:["Kimono","Áo dài","Hanbok"],c:1},
 
-{q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],c:0},
+{q:"Nhạc cụ một dây nổi tiếng của Việt Nam?",a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],c:0},
 
-{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Tháng 7","Tháng 9"],c:0}
+{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Tháng 5","Tháng 9"],c:0},
+
+{q:"Lễ hội đèn lồng nổi tiếng ở Việt Nam?",a:["Hội An","Huế","Đà Lạt"],c:0}
 
 ]
 
@@ -404,12 +454,12 @@ function selectAnswer(i){
 
 if(i===quiz[current].c){
 
-document.getElementById("quizResult").innerText="✅ Đúng!"
+document.getElementById("quizResult").innerText="✅ Chính xác!"
 score++
 
 }else{
 
-document.getElementById("quizResult").innerText="❌ Sai!"
+document.getElementById("quizResult").innerText="❌ Chưa đúng"
 
 }
 
@@ -420,6 +470,7 @@ buttons.innerHTML=""
 if(current<quiz.length-1){
 
 const next=document.createElement("button")
+
 next.innerText="Câu hỏi tiếp theo"
 
 next.onclick=()=>{
@@ -436,7 +487,9 @@ buttons.appendChild(next)
 }
 
 const back=document.createElement("button")
+
 back.innerText="Quay lại menu"
+
 back.onclick=()=>go("menu")
 
 buttons.appendChild(back)
@@ -446,5 +499,5 @@ buttons.appendChild(back)
 </script>
 
 </body>
+
 </html>
-```
