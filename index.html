@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VietVerse</title>
+<title>VietVerse – Explore the Viet Side</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -25,7 +25,7 @@ color:#3a240f;
 overflow-x:hidden;
 }
 
-/* sections */
+/* ===== SECTIONS ===== */
 
 section{
 min-height:100vh;
@@ -41,7 +41,7 @@ section.active{
 display:flex;
 }
 
-/* titles */
+/* ===== TITLES ===== */
 
 h1,h2{
 font-family:"Playfair Display",serif;
@@ -54,12 +54,12 @@ font-size:60px;
 }
 
 p{
-max-width:700px;
-line-height:1.6;
+max-width:720px;
 font-size:18px;
+line-height:1.6;
 }
 
-/* buttons */
+/* ===== BUTTON ===== */
 
 button{
 padding:12px 24px;
@@ -76,7 +76,7 @@ button:hover{
 background:#6f431d;
 }
 
-/* cards */
+/* ===== MENU ===== */
 
 .menu{
 display:flex;
@@ -87,9 +87,9 @@ justify-content:center;
 
 .card{
 width:240px;
-padding:25px;
 background:rgba(255,255,255,0.9);
 border-radius:12px;
+padding:25px;
 box-shadow:0 10px 20px rgba(0,0,0,0.2);
 cursor:pointer;
 }
@@ -98,14 +98,14 @@ cursor:pointer;
 transform:scale(1.05);
 }
 
-/* QUIZ */
+/* ===== QUIZ ===== */
 
 .quiz button{
 display:block;
 margin:10px auto;
 }
 
-/* ===== NEW DOOR ===== */
+/* ===== DOOR ===== */
 
 #door{
 position:fixed;
@@ -116,20 +116,33 @@ height:100%;
 display:flex;
 z-index:9999;
 cursor:pointer;
+overflow:hidden;
 }
 
-.panel{
+/* mỗi cánh */
+
+.door{
 width:50%;
 height:100%;
-background:#3b1e0f;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-font-size:28px;
-font-family:"Playfair Display";
-transition:transform 1.5s ease;
+background-image:url("cua@4x.png");
+background-size:100% 100%;
+background-repeat:no-repeat;
+transition:transform 1.6s ease;
 }
+
+/* nửa trái */
+
+.left{
+background-position:left center;
+}
+
+/* nửa phải */
+
+.right{
+background-position:right center;
+}
+
+/* animation mở */
 
 #door.open .left{
 transform:translateX(-100%);
@@ -139,14 +152,26 @@ transform:translateX(-100%);
 transform:translateX(100%);
 }
 
-.hint{
+/* text giữa */
+
+.doorText{
 position:absolute;
-bottom:60px;
-width:100%;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 text-align:center;
 color:white;
+}
+
+.doorText p{
+margin-top:10px;
 font-size:18px;
-opacity:0.9;
+}
+
+/* logo */
+
+.logo{
+width:160px;
 }
 
 </style>
@@ -154,23 +179,24 @@ opacity:0.9;
 
 <body>
 
-<!-- DOOR -->
+<!-- ===== DOOR ===== -->
 
 <div id="door">
 
-<div class="panel left">
-VietVerse
+<div class="door left"></div>
+<div class="door right"></div>
+
+<div class="doorText">
+
+<img src="logo.png" class="logo">
+
+<p>Chạm vào cánh cửa để bước vào</p>
+
 </div>
 
-<div class="panel right">
-Khám phá
 </div>
 
-<div class="hint">Bấm vào màn hình để khám phá</div>
-
-</div>
-
-<!-- HOME -->
+<!-- ===== HOME ===== -->
 
 <section id="home" class="active">
 
@@ -182,31 +208,27 @@ Khám phá
 
 </section>
 
-<!-- MENU -->
+<!-- ===== MENU ===== -->
 
 <section id="menu">
 
-<h1>Bạn muốn làm gì?</h1>
+<h1>Bạn muốn khám phá gì?</h1>
 
 <div class="menu">
 
 <div class="card" onclick="go('exploreMenu')">
-
 <h2>🧭 Khám phá văn hóa</h2>
-
 </div>
 
 <div class="card" onclick="startQuiz()">
-
 <h2>🧠 Quiz văn hóa</h2>
-
 </div>
 
 </div>
 
 </section>
 
-<!-- EXPLORE MENU -->
+<!-- ===== EXPLORE MENU ===== -->
 
 <section id="exploreMenu">
 
@@ -215,9 +237,13 @@ Khám phá
 <div class="menu">
 
 <div class="card" onclick="showExplore('food')">🍜 Ẩm thực</div>
+
 <div class="card" onclick="showExplore('music')">🎵 Âm nhạc</div>
+
 <div class="card" onclick="showExplore('custom')">🎎 Phong tục</div>
+
 <div class="card" onclick="showExplore('clothes')">👘 Trang phục</div>
+
 <div class="card" onclick="showExplore('art')">🎨 Nghệ thuật</div>
 
 </div>
@@ -226,7 +252,7 @@ Khám phá
 
 </section>
 
-<!-- EXPLORE CONTENT -->
+<!-- ===== EXPLORE CONTENT ===== -->
 
 <section id="explore">
 
@@ -238,7 +264,7 @@ Khám phá
 
 </section>
 
-<!-- QUIZ -->
+<!-- ===== QUIZ ===== -->
 
 <section id="quiz">
 
@@ -256,27 +282,21 @@ Khám phá
 
 <script>
 
-/* DOOR */
+/* ===== DOOR ===== */
 
-let opened=false
+const door=document.getElementById("door")
 
-document.getElementById("door").onclick=function(){
-
-if(opened) return
-
-opened=true
+door.onclick=function(){
 
 this.classList.add("open")
 
 setTimeout(()=>{
-
 this.style.display="none"
-
-},1500)
+},1600)
 
 }
 
-/* NAV */
+/* ===== NAVIGATION ===== */
 
 function go(target){
 
@@ -288,7 +308,7 @@ document.getElementById(target).classList.add("active")
 
 }
 
-/* EXPLORE */
+/* ===== EXPLORE ===== */
 
 function showExplore(type){
 
@@ -298,27 +318,27 @@ const data={
 
 food:{
 title:"Ẩm thực Việt Nam",
-text:"Ẩm thực Việt nổi tiếng với sự cân bằng hương vị. Các món như phở, bánh mì, bún bò Huế và gỏi cuốn được yêu thích trên toàn thế giới."
+text:"Ẩm thực Việt Nam nổi tiếng với sự hài hòa giữa các hương vị chua, cay, mặn, ngọt. Những món ăn như phở, bánh mì, bún bò Huế và gỏi cuốn đã trở thành biểu tượng của ẩm thực Việt trên toàn thế giới."
 },
 
 music:{
 title:"Âm nhạc truyền thống",
-text:"Âm nhạc Việt có nhiều loại hình như quan họ, ca trù, cải lương. Các nhạc cụ phổ biến gồm đàn bầu, đàn tranh và đàn nguyệt."
+text:"Âm nhạc Việt Nam bao gồm nhiều loại hình như quan họ Bắc Ninh, ca trù, cải lương và hát chèo. Các nhạc cụ truyền thống như đàn bầu, đàn tranh và đàn nguyệt tạo nên âm sắc đặc trưng."
 },
 
 custom:{
 title:"Phong tục tập quán",
-text:"Phong tục Việt gắn với gia đình và cộng đồng. Tết Nguyên Đán, Trung Thu và lễ giỗ tổ Hùng Vương là những dịp quan trọng."
+text:"Phong tục Việt Nam gắn liền với gia đình và cộng đồng. Những dịp quan trọng như Tết Nguyên Đán, lễ Trung Thu và lễ giỗ tổ Hùng Vương thể hiện sự tôn trọng truyền thống."
 },
 
 clothes:{
 title:"Trang phục truyền thống",
-text:"Áo dài là biểu tượng của sự thanh lịch Việt Nam. Ngoài ra còn có nhiều trang phục dân tộc đa dạng."
+text:"Áo dài là trang phục truyền thống tiêu biểu của Việt Nam, thể hiện vẻ đẹp thanh lịch và duyên dáng. Ngoài ra mỗi dân tộc ở Việt Nam còn có trang phục riêng độc đáo."
 },
 
 art:{
 title:"Nghệ thuật truyền thống",
-text:"Việt Nam có nhiều loại hình nghệ thuật như tranh Đông Hồ, múa rối nước, hát chèo và hát xẩm."
+text:"Việt Nam có nhiều loại hình nghệ thuật dân gian như tranh Đông Hồ, múa rối nước, hát chèo và hát xẩm. Những loại hình này phản ánh đời sống và văn hóa của người Việt."
 }
 
 }
@@ -328,13 +348,17 @@ document.getElementById("exploreText").innerText=data[type].text
 
 }
 
-/* QUIZ */
+/* ===== QUIZ ===== */
 
 const quiz=[
 
 {q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
+
 {q:"Trang phục truyền thống Việt Nam?",a:["Kimono","Áo dài","Hanbok"],c:1},
-{q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],c:0}
+
+{q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],c:0},
+
+{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Tháng 7","Tháng 9"],c:0}
 
 ]
 
