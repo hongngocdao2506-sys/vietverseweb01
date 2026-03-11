@@ -19,18 +19,15 @@ font-family:"Be Vietnam Pro",sans-serif;
 }
 
 body{
-
 background-image:url("Background web@4x.png");
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
-
 color:#3b2a12;
 overflow-x:hidden;
-
 }
 
-/* overlay để chữ dễ đọc */
+/* overlay */
 
 .overlay{
 position:fixed;
@@ -42,193 +39,135 @@ background:rgba(255,255,255,0.45);
 z-index:-1;
 }
 
-/* section */
+/* sections */
 
 section{
-
 min-height:100vh;
 display:none;
-
 justify-content:center;
 align-items:center;
 flex-direction:column;
-
 padding:60px 20px;
-
 opacity:0;
 transform:translateY(30px);
-
-transition:all 0.8s;
-
+transition:all 0.7s;
 }
 
 section.active{
-
 display:flex;
 opacity:1;
 transform:translateY(0);
-
 }
 
-/* title */
+/* text */
 
 h1{
-
 font-size:56px;
 color:#7a3f18;
 margin-bottom:20px;
-
 }
 
 p{
-
 max-width:700px;
 font-size:20px;
 line-height:1.6;
-
 text-align:center;
-
 }
 
 /* button */
 
 button{
-
 padding:14px 28px;
-
 background:#8b5a2b;
 color:white;
-
 border:none;
 border-radius:10px;
-
 font-size:18px;
-
 margin-top:25px;
-
 cursor:pointer;
-
 transition:0.3s;
-
 }
 
 button:hover{
-
 background:#6f431d;
 transform:translateY(-2px);
-
 }
 
-/* MENU */
+/* menu */
 
 .menu{
-
 display:flex;
 gap:40px;
 margin-top:40px;
 flex-wrap:wrap;
 justify-content:center;
-
 }
 
 .card{
-
 width:260px;
-
-background:rgba(255,255,255,0.85);
-
+background:rgba(255,255,255,0.9);
 border-radius:14px;
-
 padding:30px;
-
 cursor:pointer;
-
 transition:0.35s;
-
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
-
 }
 
 .card:hover{
-
 transform:translateY(-8px) scale(1.03);
-
 }
 
 .card h2{
-
 margin-bottom:10px;
 color:#7a3f18;
-
 }
 
 /* quiz */
 
 .quiz button{
-
 display:block;
 margin:10px auto;
-
 }
 
-/* CỬA */
+/* DOOR */
 
 #door{
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
 display:flex;
-
 z-index:9999;
-
 pointer-events:none;
-
 }
 
 .door{
-
 width:50%;
 height:100%;
-
 background-image:url("cua@4x.png");
 background-size:cover;
 background-position:center;
-
 transition:transform 1.2s ease;
-
 }
 
 .leftDoor{
-
 transform:translateX(0);
-
 }
 
 .rightDoor{
-
 transform:translateX(0) scaleX(-1);
-
 }
 
 #door.open .leftDoor{
-
 transform:translateX(-100%);
-
 }
 
 #door.open .rightDoor{
-
 transform:translateX(100%) scaleX(-1);
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -238,10 +177,8 @@ transform:translateX(100%) scaleX(-1);
 <!-- DOOR -->
 
 <div id="door">
-
 <div class="door leftDoor"></div>
 <div class="door rightDoor"></div>
-
 </div>
 
 <!-- HOME -->
@@ -251,15 +188,11 @@ transform:translateX(100%) scaleX(-1);
 <h1>VietVerse</h1>
 
 <p>
-
 Khám phá thế giới văn hóa Việt Nam theo cách hiện đại và trực quan dành cho học sinh.
-
 </p>
 
 <button onclick="openDoor('intro')">
-
 Bắt đầu khám phá
-
 </button>
 
 </section>
@@ -277,19 +210,14 @@ thông qua các nội dung trực quan và trải nghiệm tương tác.
 
 <br><br>
 
-Bạn có thể:
-
-<br>
 🧭 Khám phá văn hóa Việt  
 <br>
-🧠 Kiểm tra hiểu biết qua quiz
+🧠 Thử thách hiểu biết qua quiz
 
 </p>
 
 <button onclick="openDoor('menu')">
-
 Tiếp tục
-
 </button>
 
 </section>
@@ -307,9 +235,7 @@ Tiếp tục
 <h2>🧭 Khám phá văn hóa</h2>
 
 <p>
-
 Tìm hiểu về ẩm thực, lễ hội, trang phục và nhạc cụ truyền thống.
-
 </p>
 
 </div>
@@ -319,9 +245,7 @@ Tìm hiểu về ẩm thực, lễ hội, trang phục và nhạc cụ truyền 
 <h2>🧠 Quiz văn hóa</h2>
 
 <p>
-
 Thử thách hiểu biết của bạn về văn hóa Việt Nam.
-
 </p>
 
 </div>
@@ -329,9 +253,7 @@ Thử thách hiểu biết của bạn về văn hóa Việt Nam.
 </div>
 
 <button onclick="openDoor('home')">
-
 Trang chủ
-
 </button>
 
 </section>
@@ -365,9 +287,7 @@ Tết Nguyên Đán, Trung Thu và nhiều lễ hội truyền thống.
 </p>
 
 <button onclick="openDoor('menu')">
-
 Quay lại
-
 </button>
 
 </section>
@@ -391,34 +311,46 @@ Quay lại
 </div>
 
 <button onclick="openDoor('menu')">
-
 Quay lại
-
 </button>
 
 </section>
 
 <script>
 
+let doorOpened = false;
+
 function openDoor(target){
 
-const door=document.getElementById("door");
+const door = document.getElementById("door");
+
+if(!doorOpened){
 
 door.classList.add("open");
+doorOpened = true;
 
-setTimeout(()=>{
+setTimeout(changeSection,1100);
 
-document.querySelectorAll("section").forEach(s=>{
-s.classList.remove("active");
+}else{
+
+changeSection();
+
+}
+
+function changeSection(){
+
+document.querySelectorAll("section").forEach(sec=>{
+sec.classList.remove("active");
 });
 
 document.getElementById(target).classList.add("active");
 
-door.classList.remove("open");
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-window.scrollTo({top:0,behavior:"smooth"});
-
-},1100);
+}
 
 }
 
@@ -441,5 +373,4 @@ result.innerHTML="❌ Chưa đúng. Đáp án đúng là miền Bắc.";
 </script>
 
 </body>
-
 </html>
