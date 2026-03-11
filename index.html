@@ -8,7 +8,7 @@
 
 <title>VietVerse – Explore the Viet Side</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,10 +16,10 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:"Be Vietnam Pro",sans-serif;
 }
 
 body{
+font-family:"Be Vietnam Pro",sans-serif;
 background:url("Background web@4x.png") center/cover fixed;
 color:#3a240f;
 overflow-x:hidden;
@@ -37,21 +37,47 @@ background:rgba(255,255,255,0.45);
 z-index:-1;
 }
 
+/* floating lotus */
+
+.lotus{
+position:fixed;
+font-size:28px;
+opacity:0.25;
+animation:float 18s linear infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+}
+
+100%{
+transform:translateY(-100vh);
+}
+
+}
+
 /* sections */
 
 section{
+
 min-height:100vh;
 display:none;
+
 flex-direction:column;
 justify-content:center;
 align-items:center;
+
 text-align:center;
+
 padding:60px 20px;
 
 opacity:0;
 transform:translateY(40px);
 
-transition:all 0.7s ease;
+transition:all .7s;
+
 }
 
 section.active{
@@ -60,11 +86,15 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* text */
+/* titles */
+
+h1,h2{
+font-family:"Playfair Display",serif;
+color:#7a3f18;
+}
 
 h1{
-font-size:60px;
-color:#7a3f18;
+font-size:64px;
 margin-bottom:20px;
 }
 
@@ -74,19 +104,25 @@ font-size:20px;
 line-height:1.6;
 }
 
-/* button */
+/* buttons */
 
 button{
+
 padding:14px 28px;
 font-size:18px;
+
 border:none;
 border-radius:10px;
+
 background:#8b5a2b;
 color:white;
+
 margin-top:25px;
+
 cursor:pointer;
 
-transition:0.3s;
+transition:.3s;
+
 }
 
 button:hover{
@@ -97,11 +133,15 @@ background:#6f431d;
 /* menu */
 
 .menu{
+
 display:flex;
 gap:40px;
 margin-top:40px;
+
 flex-wrap:wrap;
+
 justify-content:center;
+
 }
 
 .card{
@@ -109,17 +149,18 @@ justify-content:center;
 width:260px;
 
 background:rgba(255,255,255,0.8);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
 
-border-radius:16px;
+border-radius:18px;
 
 padding:30px;
 
 cursor:pointer;
 
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
 
-transition:0.35s;
+transition:.35s;
+
 }
 
 .card:hover{
@@ -128,7 +169,35 @@ transform:translateY(-10px) scale(1.05);
 
 }
 
-/* QUIZ */
+/* progress */
+
+.progress{
+
+width:300px;
+height:8px;
+
+background:#ddd;
+
+border-radius:10px;
+
+margin:20px auto;
+
+overflow:hidden;
+
+}
+
+.bar{
+
+height:100%;
+width:0%;
+
+background:#8b5a2b;
+
+transition:.4s;
+
+}
+
+/* quiz */
 
 .quiz button{
 display:block;
@@ -138,13 +207,18 @@ margin:10px auto;
 /* DOOR */
 
 #door{
+
 position:fixed;
 top:0;
 left:0;
+
 width:100%;
 height:100%;
+
 z-index:9999;
+
 display:flex;
+
 }
 
 .door-half{
@@ -154,7 +228,7 @@ height:100%;
 
 background:url("cua@4x.png") center/cover no-repeat;
 
-transition:transform 1.5s ease;
+transition:transform 1.6s ease;
 
 }
 
@@ -181,6 +255,23 @@ pointer-events:none;
 transition:opacity 1s;
 }
 
+/* glow */
+
+.glow{
+
+position:absolute;
+
+width:200px;
+height:200px;
+
+background:radial-gradient(circle,#ffd27a,transparent);
+
+filter:blur(60px);
+
+opacity:.5;
+
+}
+
 </style>
 
 </head>
@@ -188,6 +279,10 @@ transition:opacity 1s;
 <body>
 
 <div class="overlay"></div>
+
+<div class="lotus" style="left:10%">🌸</div>
+<div class="lotus" style="left:50%;animation-duration:22s">🌸</div>
+<div class="lotus" style="left:80%;animation-duration:25s">🌸</div>
 
 <!-- DOOR -->
 
@@ -205,11 +300,15 @@ transition:opacity 1s;
 <h1>VietVerse</h1>
 
 <p>
-Khám phá thế giới văn hóa Việt Nam theo cách hiện đại và trực quan dành cho học sinh.
+
+Khám phá thế giới văn hóa Việt Nam theo cách hiện đại dành cho học sinh.
+
 </p>
 
 <button onclick="startSite()">
+
 Bắt đầu khám phá
+
 </button>
 
 </section>
@@ -222,19 +321,15 @@ Bắt đầu khám phá
 
 <p>
 
-VietVerse là nền tảng giúp học sinh khám phá văn hóa Việt Nam
-một cách trực quan và sinh động.
-
-<br><br>
-
-🧭 Khám phá văn hóa  
-<br>
-🧠 Thử thách hiểu biết qua quiz
+VietVerse là nền tảng giúp học sinh khám phá văn hóa Việt
+thông qua trải nghiệm trực quan và quiz tương tác.
 
 </p>
 
 <button onclick="go('menu')">
+
 Tiếp tục
+
 </button>
 
 </section>
@@ -252,7 +347,9 @@ Tiếp tục
 <h2>🧭 Khám phá văn hóa</h2>
 
 <p>
-Ẩm thực, lễ hội, trang phục, nhạc cụ truyền thống.
+
+Ẩm thực, lễ hội, trang phục và nhạc cụ.
+
 </p>
 
 </div>
@@ -262,16 +359,14 @@ Tiếp tục
 <h2>🧠 Quiz văn hóa</h2>
 
 <p>
-Thử thách hiểu biết của bạn về văn hóa Việt Nam.
+
+Kiểm tra hiểu biết của bạn.
+
 </p>
 
 </div>
 
 </div>
-
-<button onclick="go('home')">
-Trang chủ
-</button>
 
 </section>
 
@@ -283,29 +378,23 @@ Trang chủ
 
 <p>
 
-🍜 <b>Ẩm thực</b>  
-Phở, bánh mì, bún bò Huế.
+🍜 Phở – món ăn biểu tượng của Việt Nam  
 
 <br><br>
 
-🎎 <b>Lễ hội</b>  
-Tết Nguyên Đán, Trung Thu.
+👘 Áo dài – trang phục truyền thống  
 
 <br><br>
 
-👘 <b>Trang phục</b>  
-Áo dài, trang phục dân tộc.
+🎎 Tết Nguyên Đán – lễ hội lớn nhất  
 
 <br><br>
 
-🎵 <b>Nhạc cụ</b>  
-Đàn bầu, đàn tranh.
+🎵 Đàn bầu – nhạc cụ độc đáo
 
 </p>
 
-<button onclick="go('menu')">
-Quay lại
-</button>
+<button onclick="go('menu')">Quay lại</button>
 
 </section>
 
@@ -315,21 +404,21 @@ Quay lại
 
 <h1>Quiz Văn Hóa</h1>
 
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
 <div class="quiz">
 
-<h2>Phở có nguồn gốc từ đâu?</h2>
+<h2 id="question"></h2>
 
-<button onclick="answer('A')">A. Miền Bắc</button>
-<button onclick="answer('B')">B. Miền Trung</button>
-<button onclick="answer('C')">C. Miền Nam</button>
+<div id="answers"></div>
 
-<p id="result"></p>
+<p id="score"></p>
 
 </div>
 
-<button onclick="go('menu')">
-Quay lại
-</button>
+<button onclick="go('menu')">Quay lại</button>
 
 </section>
 
@@ -353,7 +442,7 @@ door.classList.add("hide")
 
 go("intro")
 
-},1500)
+},1600)
 
 }
 
@@ -367,28 +456,78 @@ s.classList.remove("active")
 
 document.getElementById(target).classList.add("active")
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
+}
+
+/* quiz */
+
+const quiz=[
+
+{q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
+{q:"Trang phục truyền thống Việt Nam?",a:["Kimono","Áo dài","Hanbok"],c:1},
+{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Mùa hè","Tháng 9"],c:0},
+{q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn tranh","Đàn bầu","Đàn nguyệt"],c:1},
+{q:"Lễ hội Trung Thu có gì?",a:["Đèn lồng","Hoa mai","Hoa đào"],c:0}
+
+]
+
+let current=0
+let score=0
+
+function loadQuiz(){
+
+const q=quiz[current]
+
+document.getElementById("question").innerText=q.q
+
+const ans=document.getElementById("answers")
+
+ans.innerHTML=""
+
+q.a.forEach((text,i)=>{
+
+const btn=document.createElement("button")
+
+btn.innerText=text
+
+btn.onclick=()=>answer(i)
+
+ans.appendChild(btn)
+
 })
+
+document.getElementById("bar").style.width=(current/quiz.length*100)+"%"
 
 }
 
-function answer(choice){
+function answer(i){
 
-const result=document.getElementById("result")
+if(i===quiz[current].c) score++
 
-if(choice==="A"){
+current++
 
-result.innerHTML="✅ Chính xác! Phở có nguồn gốc từ miền Bắc."
+if(current<quiz.length){
+
+loadQuiz()
 
 }else{
 
-result.innerHTML="❌ Chưa đúng. Đáp án đúng là miền Bắc."
+document.getElementById("question").innerText="Hoàn thành!"
+
+document.getElementById("answers").innerHTML=""
+
+document.getElementById("score").innerText="Bạn đúng "+score+"/"+quiz.length+" câu."
+
+document.getElementById("bar").style.width="100%"
 
 }
 
 }
+
+document.getElementById("quiz").addEventListener("click",()=>{
+
+if(current===0) loadQuiz()
+
+})
 
 </script>
 
