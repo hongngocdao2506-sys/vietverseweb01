@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VietVerse – Explore the Viet Side</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Be Vietnam Pro",sans-serif;
+}
+
+body{
+
+background-image:url("Background web@4x.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+color:#3b2a12;
+overflow-x:hidden;
+
+}
+
+/* overlay để chữ dễ đọc */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.45);
+z-index:-1;
+}
+
+/* section */
+
+section{
+
+min-height:100vh;
+display:none;
+
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+padding:60px 20px;
+
+opacity:0;
+transform:translateY(30px);
+
+transition:all 0.8s;
+
+}
+
+section.active{
+
+display:flex;
+opacity:1;
+transform:translateY(0);
+
+}
+
+/* title */
+
+h1{
+
+font-size:56px;
+color:#7a3f18;
+margin-bottom:20px;
+
+}
+
+p{
+
+max-width:700px;
+font-size:20px;
+line-height:1.6;
+
+text-align:center;
+
+}
+
+/* button */
+
+button{
+
+padding:14px 28px;
+
+background:#8b5a2b;
+color:white;
+
+border:none;
+border-radius:10px;
+
+font-size:18px;
+
+margin-top:25px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#6f431d;
+transform:translateY(-2px);
+
+}
+
+/* MENU */
+
+.menu{
+
+display:flex;
+gap:40px;
+margin-top:40px;
+flex-wrap:wrap;
+justify-content:center;
+
+}
+
+.card{
+
+width:260px;
+
+background:rgba(255,255,255,0.85);
+
+border-radius:14px;
+
+padding:30px;
+
+cursor:pointer;
+
+transition:0.35s;
+
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+
+}
+
+.card:hover{
+
+transform:translateY(-8px) scale(1.03);
+
+}
+
+.card h2{
+
+margin-bottom:10px;
+color:#7a3f18;
+
+}
+
+/* quiz */
+
+.quiz button{
+
+display:block;
+margin:10px auto;
+
+}
+
+/* CỬA */
+
+#door{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+
+z-index:9999;
+
+pointer-events:none;
+
+}
+
+.door{
+
+width:50%;
+height:100%;
+
+background-image:url("cua@4x.png");
+background-size:cover;
+background-position:center;
+
+transition:transform 1.2s ease;
+
+}
+
+.leftDoor{
+
+transform:translateX(0);
+
+}
+
+.rightDoor{
+
+transform:translateX(0) scaleX(-1);
+
+}
+
+#door.open .leftDoor{
+
+transform:translateX(-100%);
+
+}
+
+#door.open .rightDoor{
+
+transform:translateX(100%) scaleX(-1);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<!-- DOOR -->
+
+<div id="door">
+
+<div class="door leftDoor"></div>
+<div class="door rightDoor"></div>
+
+</div>
+
+<!-- HOME -->
+
+<section id="home" class="active">
+
+<h1>VietVerse</h1>
+
+<p>
+
+Khám phá thế giới văn hóa Việt Nam theo cách hiện đại và trực quan dành cho học sinh.
+
+</p>
+
+<button onclick="openDoor('intro')">
+
+Bắt đầu khám phá
+
+</button>
+
+</section>
+
+<!-- INTRO -->
+
+<section id="intro">
+
+<h1>Giới thiệu VietVerse</h1>
+
+<p>
+
+VietVerse là nền tảng giúp học sinh tìm hiểu về văn hóa Việt Nam
+thông qua các nội dung trực quan và trải nghiệm tương tác.
+
+<br><br>
+
+Bạn có thể:
+
+<br>
+🧭 Khám phá văn hóa Việt  
+<br>
+🧠 Kiểm tra hiểu biết qua quiz
+
+</p>
+
+<button onclick="openDoor('menu')">
+
+Tiếp tục
+
+</button>
+
+</section>
+
+<!-- MENU -->
+
+<section id="menu">
+
+<h1>Bạn muốn khám phá gì?</h1>
+
+<div class="menu">
+
+<div class="card" onclick="openDoor('explore')">
+
+<h2>🧭 Khám phá văn hóa</h2>
+
+<p>
+
+Tìm hiểu về ẩm thực, lễ hội, trang phục và nhạc cụ truyền thống.
+
+</p>
+
+</div>
+
+<div class="card" onclick="openDoor('quiz')">
+
+<h2>🧠 Quiz văn hóa</h2>
+
+<p>
+
+Thử thách hiểu biết của bạn về văn hóa Việt Nam.
+
+</p>
+
+</div>
+
+</div>
+
+<button onclick="openDoor('home')">
+
+Trang chủ
+
+</button>
+
+</section>
+
+<!-- EXPLORE -->
+
+<section id="explore">
+
+<h1>Khám phá văn hóa Việt</h1>
+
+<p>
+
+🍜 <b>Ẩm thực Việt</b>  
+Phở, bánh mì, bún bò Huế là những món ăn nổi tiếng.
+
+<br><br>
+
+🎎 <b>Lễ hội</b>  
+Tết Nguyên Đán, Trung Thu và nhiều lễ hội truyền thống.
+
+<br><br>
+
+👘 <b>Trang phục</b>  
+Áo dài và các trang phục dân tộc đặc sắc.
+
+<br><br>
+
+🎵 <b>Nhạc cụ</b>  
+Đàn bầu, đàn tranh và đàn nguyệt.
+
+</p>
+
+<button onclick="openDoor('menu')">
+
+Quay lại
+
+</button>
+
+</section>
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+<h1>Quiz Văn Hóa</h1>
+
+<div class="quiz">
+
+<h2>Phở có nguồn gốc từ vùng nào?</h2>
+
+<button onclick="answer('A')">A. Miền Bắc</button>
+<button onclick="answer('B')">B. Miền Trung</button>
+<button onclick="answer('C')">C. Miền Nam</button>
+
+<p id="result"></p>
+
+</div>
+
+<button onclick="openDoor('menu')">
+
+Quay lại
+
+</button>
+
+</section>
+
+<script>
+
+function openDoor(target){
+
+const door=document.getElementById("door");
+
+door.classList.add("open");
+
+setTimeout(()=>{
+
+document.querySelectorAll("section").forEach(s=>{
+s.classList.remove("active");
+});
+
+document.getElementById(target).classList.add("active");
+
+door.classList.remove("open");
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+},1100);
+
+}
+
+function answer(choice){
+
+const result=document.getElementById("result");
+
+if(choice==="A"){
+
+result.innerHTML="✅ Chính xác! Phở có nguồn gốc từ miền Bắc.";
+
+}else{
+
+result.innerHTML="❌ Chưa đúng. Đáp án đúng là miền Bắc.";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
