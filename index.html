@@ -18,12 +18,33 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: "Be Vietnam Pro", sans-serif;
-            background: #f4ece4 url("Background web@4x.png") center/cover fixed no-repeat;
-            color: #3a2412;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        /* Thêm Gradient dự phòng: Màu nâu gỗ chuyển sang màu kem */
+        background: #3a2412 linear-gradient(135deg, #3a2412 0%, #8b4d22 100%);
+        color: #3a2412;
+        overflow-x: hidden;
+        margin: 0;
+    }
+
+    /* Tạo một lớp phủ nền để load ảnh mượt mà hơn */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Chèn ảnh của bạn vào đây */
+        background: url("Background web@4x.png") center/cover fixed no-repeat;
+        z-index: -1;
+        animation: fadeInBg 1s ease-in;
+    }
+
+    @keyframes fadeInBg {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
         /* SECTIONS */
         section {
