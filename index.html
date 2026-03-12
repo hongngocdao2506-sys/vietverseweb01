@@ -1,198 +1,254 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>VietVerse – Explore the Viet Side</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:"Be Vietnam Pro",sans-serif;
-background:url("Background web@4x.png") center/cover fixed;
-color:#3b2a12;
-text-align:center;
-overflow-x:hidden;
+padding:0;
+box-sizing:border-box;
 }
 
-h1,h2{
-font-family:"Playfair Display",serif;
+body{
+font-family:"Be Vietnam Pro",sans-serif;
+background:url("Background web@4x.png") center/cover fixed;
+color:#3a2412;
+overflow-x:hidden;
 }
 
 /* SECTIONS */
 
 section{
-display:none;
 min-height:100vh;
-padding:60px 20px;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:60px;
+animation:fade 1s;
 }
 
-.active{
-display:block;
+section.active{
+display:flex;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* TITLES */
+
+h1{
+font-family:"Playfair Display",serif;
+font-size:60px;
+margin-bottom:20px;
+}
+
+h2{
+font-family:"Playfair Display";
+margin-bottom:15px;
 }
 
 /* BUTTON */
 
 button{
-padding:12px 26px;
-margin:10px;
+padding:14px 28px;
+background:#8b4d22;
 border:none;
-border-radius:8px;
-background:#8b5a2b;
+border-radius:10px;
 color:white;
 font-size:16px;
 cursor:pointer;
+margin:10px;
 }
 
 button:hover{
-background:#6f431d;
+background:#6b3514;
 }
 
-/* CARD */
+/* MENU */
+
+.menu{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+margin-top:30px;
+}
 
 .card{
+width:240px;
 background:white;
-padding:25px;
-margin:15px;
-border-radius:10px;
-display:inline-block;
-width:220px;
+padding:30px;
+border-radius:14px;
+box-shadow:0 12px 30px rgba(0,0,0,0.25);
 cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
 }
 
 /* DOOR */
 
-#doorContainer{
-
+#door{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-z-index:9999;
 display:flex;
+z-index:9999;
 cursor:pointer;
-
 }
 
 .door{
-
 width:50%;
 height:100%;
-
 background-image:url("cua@4x.png");
-background-size:200% 100%;
-background-repeat:no-repeat;
-
-transition:transform 1.4s ease;
-
+background-size:100% 100%;
+transition:transform 1.8s;
 }
 
-/* nửa trái của cửa */
+.left{background-position:left;}
+.right{background-position:right;}
 
-.left{
-background-position:left center;
-}
+#door.open .left{transform:translateX(-100%)}
+#door.open .right{transform:translateX(100%)}
 
-/* nửa phải của cửa */
-
-.right{
-background-position:right center;
-}
-
-.right{
-transform:scaleX(-1);
-}
-
-#doorContainer.open .left{
-transform:translateX(-110%);
-}
-
-#doorContainer.open .right{
-transform:translateX(110%);
-}
-/* TITLE ON DOOR */
-
-#doorTitle{
-
-position:fixed;
+.doorText{
+position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 color:white;
 text-align:center;
-z-index:10000;
-
-transition:opacity 1.2s;
-
 }
 
-#doorContainer.open + #doorTitle{
-opacity:0;
+.title{
+font-size:70px;
+font-family:"Playfair Display";
+}
+
+.slogan{
+font-size:22px;
+margin-top:10px;
+}
+
+.note{
+margin-top:20px;
+opacity:0.7;
+}
+
+/* LANTERNS */
+
+.lantern{
+position:fixed;
+bottom:-100px;
+font-size:28px;
+animation:lantern 12s linear infinite;
+}
+
+@keyframes lantern{
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
+}
+
+/* CONTENT */
+
+.content{
+max-width:750px;
+line-height:1.7;
+font-size:18px;
+}
+
+/* GALLERY */
+
+.gallery{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.gallery div{
+width:200px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* QUIZ */
+
+.quiz button{
+display:block;
+margin:10px auto;
+}
+
+footer{
+margin-top:40px;
+opacity:0.6;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<!-- LANTERNS -->
+
+<div class="lantern" style="left:10%">🏮</div>
+<div class="lantern" style="left:30%">🏮</div>
+<div class="lantern" style="left:60%">🏮</div>
+<div class="lantern" style="left:80%">🏮</div>
 
 <!-- DOOR -->
 
-<div id="doorContainer" onclick="openDoor()">
+<div id="door">
 
 <div class="door left"></div>
 <div class="door right"></div>
 
+<div class="doorText">
+
+<div class="title">VietVerse</div>
+
+<div class="slogan">Explore the Viet Side</div>
+
+<div class="note">Bấm vào màn hình để bắt đầu hành trình văn hóa</div>
+
 </div>
 
-<div id="doorTitle">
-
-<h1 style="font-size:60px;">VietVerse</h1>
-<p>Explore the Viet Side</p>
-<p style="opacity:0.8;">Bấm vào màn hình để khám phá</p>
-
 </div>
-
 
 <!-- HOME -->
 
 <section id="home" class="active">
 
-<h1>VietVerse</h1>
+<h1>Chào mừng đến với VietVerse</h1>
 
-<p>Khám phá thế giới văn hóa Việt Nam theo cách hiện đại.</p>
-
-<button onclick="go('intro')">Bắt đầu</button>
-
-</section>
-
-
-<!-- INTRO -->
-
-<section id="intro">
-
-<h1>Giới thiệu VietVerse</h1>
-
-<p>
-
-VietVerse là không gian khám phá văn hóa Việt Nam được thiết kế dành cho học sinh,
-giúp tiếp cận các giá trị văn hóa truyền thống thông qua trải nghiệm trực quan
-và các hoạt động tương tác.
-
+<p class="content">
+VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại. 
+Tại đây, bạn có thể khám phá những giá trị truyền thống – từ nghệ thuật dân gian đến phong tục tập quán – 
+thông qua những trải nghiệm trực quan và sinh động.
 </p>
 
-<button onclick="go('menu')">Tiếp tục</button>
+<button onclick="go('menu')">Bắt đầu khám phá</button>
 
 </section>
-
 
 <!-- MENU -->
 
@@ -200,373 +256,255 @@ và các hoạt động tương tác.
 
 <h1>Khám phá VietVerse</h1>
 
-<div class="card" onclick="go('explore')">Khám phá văn hóa</div>
+<div class="menu">
 
-<div class="card" onclick="go('regions')">Vòng quanh Việt Nam</div>
+<div class="card" onclick="go('exploreMenu')">
 
-<div class="card" onclick="startQuiz()">Khảo sát kiến thức văn hóa</div>
+<h2>🧭 Khám phá văn hóa</h2>
+<p>Tìm hiểu các lĩnh vực văn hóa Việt.</p>
 
-<div class="card" onclick="go('facts')">Fun Facts</div>
+</div>
 
-<div class="card" onclick="go('scholar')">Thử thách học giả</div>
+<div class="card" onclick="go('map')">
+
+<h2>🗺 Văn hóa vùng miền</h2>
+<p>Khám phá Bắc – Trung – Nam.</p>
+
+</div>
+
+<div class="card" onclick="go('gallery')">
+
+<h2>🎨 Thư viện văn hóa</h2>
+
+</div>
+
+<div class="card" onclick="startQuiz()">
+
+<h2>🧠 Quiz văn hóa</h2>
+
+</div>
+
+<div class="card" onclick="go('survey')">
+
+<h2>📊 Kết quả khảo sát</h2>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- MAP -->
 
-<!-- EXPLORE -->
+<section id="map">
 
-<section id="explore">
+<h1>Bản đồ văn hóa</h1>
 
-<h1>Khám phá văn hóa</h1>
+<button onclick="region('north')">Miền Bắc</button>
+<button onclick="region('central')">Miền Trung</button>
+<button onclick="region('south')">Miền Nam</button>
 
-<div class="card" onclick="showCulture('food')">Ẩm thực</div>
-<div class="card" onclick="showCulture('music')">Âm nhạc</div>
-<div class="card" onclick="showCulture('clothes')">Trang phục</div>
-<div class="card" onclick="showCulture('festival')">Lễ hội</div>
-<div class="card" onclick="showCulture('art')">Nghệ thuật</div>
-
-<p id="cultureContent"></p>
+<p id="regionText" class="content"></p>
 
 <button onclick="go('menu')">Quay lại</button>
 
 </section>
 
+<!-- GALLERY -->
 
-<!-- REGIONS -->
+<section id="gallery">
 
-<section id="regions">
+<h1>Thư viện văn hóa Việt</h1>
 
-<h1>Vòng quanh Việt Nam</h1>
+<div class="gallery">
 
-<div class="card" onclick="showRegion('north')">Bắc</div>
-<div class="card" onclick="showRegion('central')">Trung</div>
-<div class="card" onclick="showRegion('south')">Nam</div>
+<div>🍜 Phở</div>
+<div>🥖 Bánh mì</div>
+<div>👘 Áo dài</div>
+<div>🎭 Múa rối nước</div>
+<div>🖼 Tranh Đông Hồ</div>
 
-<p id="regionContent"></p>
+</div>
 
 <button onclick="go('menu')">Quay lại</button>
 
 </section>
-
 
 <!-- QUIZ -->
 
 <section id="quiz">
 
-<h1>Khảo sát kiến thức văn hóa</h1>
+<h1>Quiz văn hóa</h1>
 
 <h2 id="question"></h2>
 
 <div id="answers"></div>
 
-<p id="progress"></p>
+<p id="quizResult"></p>
 
 </section>
 
+<!-- SURVEY -->
 
-<section id="result">
+<section id="survey">
 
-<h1>Kết quả khảo sát</h1>
+<h1>Kết quả khảo sát học sinh</h1>
 
-<p id="scoreText"></p>
-
-<button onclick="go('menu')">Quay lại trang chủ</button>
-
-</section>
-
-
-<!-- FUN FACTS -->
-
-<section id="facts">
-
-<h1>Fun Facts Văn Hóa</h1>
-
-<p>
-
-Việt Nam có 54 dân tộc.  
-Đàn bầu chỉ có một dây nhưng tạo được nhiều cao độ.  
-Tranh Đông Hồ được in bằng bản khắc gỗ.
-
+<p class="content">
+80% học sinh từng nghe đến văn hóa Việt Nam.  
+50% học sinh từng chủ động tìm hiểu văn hóa Việt qua internet hoặc sách.  
+Điều này cho thấy việc xây dựng một nền tảng số như VietVerse có thể góp phần giúp học sinh tiếp cận văn hóa dân tộc một cách dễ dàng và hấp dẫn hơn.
 </p>
 
 <button onclick="go('menu')">Quay lại</button>
 
 </section>
 
+<footer>
 
-<section id="scholar">
+VietVerse © 2026 – Explore the Viet Side
 
-<h1>Thử thách học giả</h1>
-
-<p>
-
-Hãy thử hoàn thành bài khảo sát văn hóa với điểm số cao nhất.
-
-</p>
-
-<button onclick="startScholarQuiz()">Bắt đầu</button>
-<button onclick="go('menu')">Quay lại</button>
-
-</section>
-
+</footer>
 
 <script>
 
 /* DOOR */
 
-let doorOpened=false;
+const door=document.getElementById("door")
 
-function openDoor(){
+door.onclick=function(){
 
-if(doorOpened) return;
-
-doorOpened=true;
-
-const door=document.getElementById("doorContainer");
-const title=document.getElementById("doorTitle");
-
-door.classList.add("open");
-title.style.opacity="0";
+this.classList.add("open")
 
 setTimeout(()=>{
-door.style.display="none";
-title.style.display="none";
-},1400);
+this.style.display="none"
+},1800)
 
 }
 
+/* NAV */
 
-/* NAVIGATION */
-
-function go(id){
+function go(target){
 
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
 
-document.getElementById(id).classList.add("active")
+document.getElementById(target).classList.add("active")
 
 }
 
+/* REGION */
 
-/* CULTURE */
-
-function showCulture(type){
+function region(r){
 
 const text={
 
-food:"Ẩm thực Việt Nam nổi bật bởi sự hài hòa hương vị, với các món tiêu biểu như phở, bún bò Huế, bánh mì và gỏi cuốn.",
+north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa truyền thống như quan họ, ca trù và những lễ hội lâu đời.",
 
-music:"Âm nhạc truyền thống bao gồm các nhạc cụ như đàn bầu, đàn tranh và các loại hình nghệ thuật như ca trù và quan họ.",
+central:"Miền Trung mang vẻ đẹp trầm mặc với di sản cố đô Huế, nhã nhạc cung đình và các làng nghề truyền thống.",
 
-clothes:"Áo dài được xem là biểu tượng trang phục truyền thống của Việt Nam.",
-
-festival:"Các lễ hội truyền thống như Tết Nguyên Đán và Trung Thu phản ánh đời sống văn hóa lâu đời.",
-
-art:"Nghệ thuật dân gian gồm tranh Đông Hồ, múa rối nước và các loại hình sân khấu truyền thống."
+south:"Miền Nam nổi bật với văn hóa sông nước, đờn ca tài tử và những lễ hội mang đậm tinh thần cộng đồng."
 
 }
 
-document.getElementById("cultureContent").innerText=text[type]
+document.getElementById("regionText").innerText=text[r]
 
 }
-
-
-/* REGIONS */
-
-function showRegion(type){
-
-const text={
-
-north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa lâu đời như quan họ và ca trù.",
-
-central:"Miền Trung nổi bật với cố đô Huế và nhã nhạc cung đình.",
-
-south:"Miền Nam mang nét văn hóa cởi mở với đờn ca tài tử."
-
-}
-
-document.getElementById("regionContent").innerText=text[type]
-
-}
-
 
 /* QUIZ */
 
-/* QUIZ THƯỜNG */
+const quiz=[
 
-const normalQuiz=[
+{ q:"Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a:["Hát xoan","Quan họ","Ca trù","Chèo"], c:1 }, 
 
-{q:"Loại hình nghệ thuật nào của Việt Nam được UNESCO công nhận là Di sản văn hóa phi vật thể năm 2009?",a:["Ca trù","Chèo","Cải lương","Hát xẩm"],c:0},
+{ q:"Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a:["Chèo","Múa rối nước","Tuồng","Cải lương"], c:1 }, 
 
-{q:"Nhạc cụ nào có một dây nhưng tạo được nhiều cao độ?",a:["Đàn tranh","Đàn nguyệt","Đàn bầu","Tỳ bà"],c:2},
+{ q:"Dòng tranh dân gian nổi tiếng với kỹ thuật in mộc bản và màu sắc tự nhiên?", a:["Đông Hồ","Hàng Trống","Kim Hoàng","Sình"], c:0 }, 
 
-{q:"Tranh Đông Hồ được in bằng kỹ thuật nào?",a:["Khắc kim loại","In khắc gỗ","In lụa","Khắc đá"],c:1},
+{ q:"Âm nhạc cung đình triều Nguyễn được gọi là gì?", a:["Ca trù","Nhã nhạc cung đình Huế","Hát văn","Quan họ"], c:1 }, 
 
-{q:"Tục thờ Hùng Vương gắn với địa danh nào?",a:["Huế","Phú Thọ","Hà Nội","Ninh Bình"],c:1},
+{ q:"Nhạc cụ truyền thống chỉ có một dây nhưng tạo được nhiều cao độ?", a:["Đàn tranh","Đàn nguyệt","Đàn bầu","Đàn tỳ bà"], c:2 }, 
 
-{q:"Trang phục áo dài hiện đại được cải tiến bởi ai?",a:["Nguyễn Cát Tường","Lê Phổ","Nguyễn Gia Trí","Trịnh Công Sơn"],c:0},
+{ q:"Nhà thiết kế góp phần cải tiến áo dài Việt Nam vào thập niên 1930?", a:["Cát Tường","Nguyễn Gia Trí","Tô Ngọc Vân","Lê Phổ"], c:0 }, 
 
-{q:"Loại hình sân khấu dân gian phổ biến ở Bắc Bộ?",a:["Tuồng","Chèo","Cải lương","Bài chòi"],c:1},
+{ q:"Phố cổ nào của Việt Nam được UNESCO công nhận là Di sản Thế giới năm 1999?", a:["Huế","Hội An","Hà Nội","Đà Nẵng"], c:1 }, 
 
-{q:"Nhã nhạc cung đình Huế dùng trong bối cảnh nào?",a:["Lễ hội dân gian","Nghi lễ triều đình","Đám cưới","Tín ngưỡng"],c:1},
+{ q:"Lễ hội tưởng nhớ các vua Hùng được tổ chức ở đâu?", a:["Huế","Phú Thọ","Ninh Bình","Quảng Nam"], c:1 }, 
 
-{q:"Bánh chưng tượng trưng cho yếu tố nào?",a:["Trời","Đất","Nước","Mặt trời"],c:1},
+{ q:"Món ăn thường được xem là biểu tượng quốc gia của ẩm thực Việt Nam?", a:["Bún chả","Phở","Bánh xèo","Bún bò Huế"], c:1 }, 
 
-{q:"Lễ hội Trung Thu gắn với hoạt động gì?",a:["Tín ngưỡng","Mùa thu hoạch","Sinh hoạt thiếu nhi","Tôn giáo"],c:2},
+{ q:"Món ăn thể hiện rõ sự giao thoa ẩm thực Việt – Pháp?", a:["Bánh mì","Chả giò","Bún riêu","Bánh cuốn"], c:0 }, 
 
-{q:"Loại hình âm nhạc phổ biến ở Nam Bộ?",a:["Quan họ","Đờn ca tài tử","Ca trù","Hát xoan"],c:1},
+{ q:"Lễ hội Trung Thu của Việt Nam còn được gọi là gì?", a:["Tết thiếu nhi","Tết đoàn viên","Tết trăng","Cả ba"], c:3 }, 
 
-{q:"Tranh Hàng Trống xuất phát từ đâu?",a:["Huế","Hà Nội","Nam Định","Bắc Ninh"],c:1},
+{ q:"Di sản thiên nhiên thế giới nổi tiếng của Việt Nam?", a:["Vịnh Hạ Long","Hồ Ba Bể","Hồ Tây","Sông Hương"], c:0 },
 
-{q:"Làng gốm Bát Tràng nằm ở đâu?",a:["Hà Nội","Huế","Đà Nẵng","Hải Phòng"],c:0},
+{ q:"Nhạc cụ dây truyền thống thường có 16 dây?", a:["Đàn tranh","Đàn bầu","Đàn nguyệt","Đàn đá"], c:0 }, 
 
-{q:"Loại hình rối nổi tiếng của Việt Nam?",a:["Rối dây","Rối bóng","Múa rối nước","Rối cạn"],c:2},
+{ q:"Thành phố được mệnh danh là 'xứ sở sương mù' của Việt Nam?", a:["Đà Lạt","Huế","Sa Pa","Hà Nội"], c:2 }, 
 
-{q:"Tục lì xì mang ý nghĩa gì?",a:["Chúc may mắn","Xua tà","Tưởng nhớ","Tạ ơn"],c:0},
+{ q:"Món ăn đặc trưng của Huế?", a:["Bún bò Huế","Bún chả","Bún cá","Bún riêu"], c:0 }, 
 
-{q:"Quan họ thường hát theo hình thức nào?",a:["Đối đáp","Độc tấu","Hợp xướng","Nhạc kịch"],c:0},
+{ q:"Trang phục truyền thống biểu tượng của phụ nữ Việt Nam?", a:["Áo dài","Kimono","Hanbok","Sari"], c:0 },
 
-{q:"Không gian văn hóa cồng chiêng thuộc vùng nào?",a:["Tây Nguyên","Bắc Bộ","Nam Bộ","Trung Bộ"],c:0},
+{ q:"Loại hình sân khấu truyền thống mang tính bác học?", a:["Tuồng","Chèo","Cải lương","Kịch"], c:0 }, 
 
-{q:"Cải lương phát triển mạnh ở đâu?",a:["Bắc Bộ","Nam Bộ","Trung Bộ","Tây Nguyên"],c:1},
+{ q:"Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a:["Đông Hồ","Hàng Trống","Kim Hoàng","Sình"], c:0 }, 
 
-{q:"Tín ngưỡng Tam phủ gắn với thờ gì?",a:["Phật","Mẫu","Tổ tiên","Thần nông"],c:1},
+{ q:"Thành phố bên dòng sông Hương?", a:["Huế","Hà Nội","Hải Phòng","Đà Nẵng"], c:0 }, 
 
-{q:"Lễ hội gắn với truyền thuyết Sơn Tinh?",a:["Gióng","Đền Hùng","Lim","Chử Đồng Tử"],c:1},
-
-{q:"Tuồng còn được gọi là gì?",a:["Hát bội","Chèo","Xẩm","Cải lương"],c:0}
+{ q:"Loại hình âm nhạc truyền thống miền Nam?", a:["Quan họ","Ca trù","Đờn ca tài tử","Chèo"], c:2 } 
 
 ]
 
-/* QUIZ HỌC GIẢ – KHÓ */
 
-const scholarQuiz=[
-
-{q:"Nhã nhạc cung đình Huế được UNESCO công nhận là di sản vào năm nào?",a:["2001","2003","2005","2008"],c:1},
-
-{q:"Không gian văn hóa Cồng chiêng Tây Nguyên trải dài qua bao nhiêu tỉnh?",a:["3","4","5","6"],c:2},
-
-{q:"Tranh Đông Hồ sử dụng giấy gì?",a:["Giấy dó","Giấy điệp","Giấy tre","Giấy bản"],c:1},
-
-{q:"Ai là người cải cách áo dài Lemur nổi tiếng?",a:["Nguyễn Gia Trí","Nguyễn Cát Tường","Tô Ngọc Vân","Bùi Xuân Phái"],c:1},
-
-{q:"Di sản Hoàng thành Thăng Long được UNESCO công nhận năm nào?",a:["2008","2010","2012","2015"],c:1},
-
-{q:"Loại hình Bài Chòi phát triển mạnh ở vùng nào?",a:["Nam Bộ","Bắc Bộ","Trung Bộ","Tây Nguyên"],c:2},
-
-{q:"Chầu văn gắn với tín ngưỡng nào?",a:["Thờ Thành hoàng","Thờ Mẫu","Thờ Phật","Thờ tổ tiên"],c:1},
-
-{q:"Đờn ca tài tử chịu ảnh hưởng từ dòng nhạc nào?",a:["Nhã nhạc cung đình Huế","Nhạc Trung Hoa","Nhạc phương Tây","Nhạc Chăm"],c:0},
-
-{q:"Quan họ Bắc Ninh thường hát theo hình thức nào?",a:["Độc diễn","Song ca","Đối đáp nam nữ","Hợp xướng"],c:2},
-
-{q:"Lễ hội Gióng được tổ chức ở đâu?",a:["Phú Thọ","Hà Nội","Bắc Ninh","Nam Định"],c:1},
-
-{q:"Làng gốm Bát Tràng xuất hiện từ khoảng thế kỷ nào?",a:["XI","XIII","XV","XVII"],c:1},
-
-{q:"Tranh Hàng Trống chủ yếu phục vụ dịp nào?",a:["Trung thu","Tết Nguyên Đán","Lễ hội Lim","Vu Lan"],c:1},
-
-{q:"Đàn tranh truyền thống thường có bao nhiêu dây?",a:["12","16","20","24"],c:1},
-
-{q:"Loại hình hát Xoan gắn với tỉnh nào?",a:["Bắc Ninh","Phú Thọ","Nam Định","Hà Nội"],c:1},
-
-{q:"Tục thờ Hùng Vương được UNESCO công nhận năm nào?",a:["2010","2012","2014","2016"],c:1},
-
-{q:"Tuồng còn được gọi là gì?",a:["Hát bội","Hát chèo","Hát xẩm","Hát văn"],c:0},
-
-{q:"Múa rối nước ra đời ở vùng nào?",a:["Đồng bằng sông Hồng","Tây Nguyên","Nam Bộ","Miền Trung"],c:0},
-
-{q:"Áo dài truyền thống thường mặc với gì?",a:["Quần lụa","Váy","Khăn choàng","Quần jeans"],c:0},
-
-{q:"Lễ hội Lim gắn với di sản nào?",a:["Chèo","Quan họ","Ca trù","Xẩm"],c:1},
-
-{q:"Không gian văn hóa cồng chiêng thuộc dân tộc nào nổi bật?",a:["Kinh","Tày","Ê Đê","Hoa"],c:2}
-
-]
-
-let quiz=[]
 let current=0
-let score=0
-
-/* QUIZ THƯỜNG */
 
 function startQuiz(){
 
-quiz=[...normalQuiz]
-
-startGame()
-
-}
-
-/* QUIZ HỌC GIẢ */
-
-function startScholarQuiz(){
-
-quiz=[...scholarQuiz]
-
-startGame()
-
-}
-
-function startGame(){
-
-current=0
-score=0
-
-shuffle(quiz)
-
 go("quiz")
 
-showQuestion()
+load()
 
 }
 
-function showQuestion(){
+function load(){
 
-if(current>=quiz.length){
-
-document.getElementById("scoreText").innerText="Bạn đạt "+score+"/"+quiz.length+" điểm."
-
-go("result")
-
-return
-
-}
-
-let q=quiz[current]
+const q=quiz[current]
 
 document.getElementById("question").innerText=q.q
 
-let answersHTML=""
+const answers=document.getElementById("answers")
 
-let options=q.a.map((text,i)=>({text,i}))
+answers.innerHTML=""
 
-shuffle(options)
+q.a.forEach((t,i)=>{
 
-options.forEach(o=>{
-answersHTML+=`<button onclick="answer(${o.i})">${o.text}</button>`
+const btn=document.createElement("button")
+
+btn.innerText=t
+
+btn.onclick=()=>{
+
+if(i===q.c){
+
+document.getElementById("quizResult").innerText="Chính xác!"
+
+}else{
+
+document.getElementById("quizResult").innerText="Chưa đúng."
+
+}
+
+}
+
+answers.appendChild(btn)
+
 })
 
-document.getElementById("answers").innerHTML=answersHTML
-
-document.getElementById("progress").innerText="Câu "+(current+1)+" / "+quiz.length
-
 }
 
-function answer(choice){
+</script>
 
-if(choice===quiz[current].c) score++
-
-current++
-
-showQuestion()
-
-}
-
-function shuffle(array){
-
-for(let i=array.length-1;i>0;i--){
-let j=Math.floor(Math.random()*(i+1))
-[array[i],array[j]]=[array[j],array[i]]
-}
-
-}
+</body>
+</html>
+```
