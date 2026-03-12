@@ -11,56 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        
-        /* --- KHAI BÁO BIẾN MÀU (FIX LỖI HIỂN THỊ) --- */
-        :root {
-            --marigold: #E59D2C;
-            --buff: #F3D58D;
-            --pearl: #EBDDC5;
-            --police-blue: #2E4365;
-            --citrine-brown: #8A3B08;
-            --dark-wood: #3a2412;
-        }
-
-        /* --- PHẦN KHẢO SÁT MÀU DI SẢN --- */
-        .survey-box { 
-            background: rgba(46, 67, 101, 0.9); /* Nền xanh Police Blue */
-            padding: 40px; 
-            border-radius: 20px; 
-            width: 100%; 
-            max-width: 850px; 
-            border: 1px solid #E59D2C; /* Viền vàng Marigold */
-            color: #EBDDC5; /* Chữ Pearl */
-            margin: 0 auto;
-        }
-        .stat-container { display: flex; flex-direction: column; gap: 25px; text-align: left; }
-        .progress-bg { 
-            background: rgba(255,255,255,0.1); 
-            height: 15px; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            margin-top: 8px; 
-        }
-        .stat-bar { 
-            height: 100%; 
-            width: 0%; 
-            transition: width 1.5s ease-out; 
-        }
-        .stat-number { font-weight: bold; }
-
-        /* --- CÁC THIẾT LẬP CÒN LẠI --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "Be Vietnam Pro", sans-serif;
-            background: var(--dark-wood) linear-gradient(135deg, var(--dark-wood) 0%, var(--citrine-brown) 100%);
-            color: var(--pearl);
+            background: #3a2412 linear-gradient(135deg, #3a2412 0%, #8b4d22 100%);
+            color: #3a2412;
             overflow-x: hidden;
         }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url("Background web@4x.png") center/cover fixed no-repeat;
             z-index: -1; animation: fadeInBg 1s ease-in;
-            filter: brightness(0.8);
         }
         @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
 
@@ -72,85 +33,72 @@
         section.active { display: flex; }
         @keyframes fade { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
 
-        h1 { font-family: "Playfair Display", serif; font-size: 60px; margin-bottom: 20px; color: var(--buff); }
-        h2 { font-family: "Playfair Display"; margin-bottom: 15px; color: var(--marigold); }
-
-        /* SỬA MÀU QUIZ ĐỂ NHÌN RÕ TRÊN NỀN GIẤY */
-        #quiz h1 { color: var(--police-blue); }
-        #question { color: var(--police-blue) !important; font-family: "Playfair Display", serif; }
-        #progressText { color: var(--citrine-brown) !important; font-weight: bold; }
-        #quizResult { color: var(--police-blue); }
+        h1 { font-family: "Playfair Display", serif; font-size: 60px; margin-bottom: 20px; }
+        h2 { font-family: "Playfair Display"; margin-bottom: 15px; }
 
         button {
-            padding: 14px 28px; background: var(--marigold); border: none;
-            border-radius: 10px; color: #FFFFFF !important; /* Đổi sang chữ trắng cho dễ đọc trên nền cam */
-            font-size: 16px; font-weight: 600;
+            padding: 14px 28px; background: #8b4d22; border: none;
+            border-radius: 10px; color: white; font-size: 16px;
             cursor: pointer; margin: 10px; transition: 0.3s;
         }
-        button:hover { background: var(--police-blue); color: var(--buff) !important; transform: scale(1.05); }
+        button:hover { background: #6b3514; }
 
         .menu { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 30px; }
-
         .card {
-            width: 240px; 
-            background: var(--police-blue); 
-            padding: 30px; 
-            border-radius: 14px;
-            color: var(--pearl); 
-            border: 3px solid;
-            border-image: linear-gradient(135deg, #fbf5e2 0%, var(--marigold) 20%, var(--buff) 40%, var(--marigold) 60%, #b38b1d 80%, var(--buff) 100%) 1;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); 
-            cursor: pointer; 
-            transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform, box-shadow;
+            width: 240px; background: white; padding: 30px; border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); cursor: pointer; transition: 0.3s;
         }
+        .card:hover { transform: translateY(-10px); }
 
-        .card h2, .card h3 { 
-            font-family: "Playfair Display", serif; 
-            color: var(--buff); 
-            font-weight: 700;
-        }
-
-        .card:hover { 
-            transform: translateY(-10px) scale(1.03); 
-            background: var(--citrine-brown); 
-            box-shadow: 0 20px 40px rgba(229, 157, 44, 0.3); 
-        }
-
+        /* --- PHẦN CỬA FIX THEO Ý BẠN --- */
         #door { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; z-index: 9999; cursor: pointer; background-color: var(--dark-wood); 
+            display: flex; z-index: 9999; cursor: pointer; background-color: #3a2412; 
             overflow: hidden;
         }
         .door { 
             width: 50%; height: 100%; 
-            background-image: url("cua@4x.png"); 
-            background-size: 100% 100%; 
+            background-image: url("cua@4x.png"); /* Dùng chung 1 ảnh */
+            background-size: 100% 100%; /* Mỗi cánh hiện full tấm ảnh */
             background-repeat: no-repeat;
             transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
             will-change: transform;
         }
-        .left { background-position: center; transform: scaleX(-1); }
-        .right { background-position: center; }
+        /* Cánh trái: Lật ngang để đối xứng hoa văn (nếu muốn) */
+        .left { 
+            background-position: center;
+            transform: scaleX(-1); /* Lật ngang để tạo đối xứng cửa đôi */
+        }
+        /* Cánh phải: Giữ nguyên */
+        .right { 
+            background-position: center;
+        }
 
+        /* Hiệu ứng tách đôi */
         #door.open .left { transform: translateX(-100%) scaleX(-1); opacity: 0; }
         #door.open .right { transform: translateX(100%); opacity: 0; }
 
         .doorText { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            color: var(--pearl); text-align: center; width: 100%; pointer-events: none; 
-            text-shadow: 0 4px 15px rgba(0,0,0,0.7); z-index: 10001;
+            color: white; text-align: center; width: 100%; pointer-events: none; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
-        .title { font-size: 70px; font-family: "Playfair Display"; color: var(--marigold); }
+        .title { font-size: 70px; font-family: "Playfair Display"; }
         #door.open .doorText { opacity: 0; transition: 0.5s; }
+        /* --- HẾT PHẦN CỬA --- */
 
+      /* HIỆU ỨNG HOA ĐÀO RƠI */
         .petal {
-            position: fixed; top: -10%;
-            background-color: #ffb7c5; 
-            border-radius: 150% 0 150% 0; 
-            opacity: 0.8; z-index: 1; 
-            pointer-events: none; animation: fall linear infinite;
+            position: fixed;
+            top: -10%;
+            background-color: #ffb7c5; /* Màu hồng nhạt hoa đào */
+            border-radius: 150% 0 150% 0; /* Dáng cánh hoa */
+            opacity: 0.8;
+            z-index: 1; /* Nằm dưới cửa nhưng trên nền */
+            pointer-events: none;
+            animation: fall linear infinite;
         }
+
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
@@ -158,26 +106,10 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-        .content { max-width: 750px; line-height: 1.7; font-size: 18px; color: var(--pearl); }
-        
-        .gallery div { width: 200px; background: var(--police-blue); color: var(--pearl); padding: 20px; border-radius: 12px; border: 1px solid var(--marigold); display: inline-block; margin: 10px; }
-        
-        #exploreDetail { 
-            margin-top: 30px; display: none; 
-            background: rgba(46, 67, 101, 0.95); 
-            padding: 30px; border-radius: 15px; max-width: 800px; 
-            border: 1px solid var(--marigold);
-        }
-        #exploreDetail h2 { color: var(--buff); }
-        
-        #progressContainer { width: 80%; background: var(--dark-wood); height: 12px; border-radius: 6px; margin: 20px auto; overflow: hidden; border: 1px solid var(--marigold); }
-        #progressBar { width: 0%; height: 100%; background: var(--marigold); transition: 0.3s; }
-        
-        footer { margin-top: 40px; opacity: 0.8; padding-bottom: 20px; color: var(--buff); }
-    </style> 
-</head>
-
 <body>
+    <div class="lantern" style="left:10%">🏮</div><div class="lantern" style="left:30%">🏮</div>
+    <div class="lantern" style="left:60%">🏮</div><div class="lantern" style="left:80%">🏮</div>
+
     <div id="door">
         <div class="door left"></div>
         <div class="door right"></div>
@@ -190,33 +122,33 @@
 
     <section id="home" class="active">
         <h1>Chào mừng đến với VietVerse</h1>
-        <p class="content">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện sinh động và gần gũi.</p>
+        <p class="content">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại.</p>
         <button onclick="go('menu')">Bắt đầu khám phá</button>
     </section>
 
     <section id="menu">
         <h1>Khám phá VietVerse</h1>
         <div class="menu">
-            <div class="card" onclick="go('exploreMenu')"><h2>Khám phá văn hóa</h2></div>
-            <div class="card" onclick="go('map')"><h2>Văn hóa vùng miền</h2></div>
-            <div class="card" onclick="go('gallery')"><h2>Thư viện</h2></div>
-            <div class="card" onclick="startQuiz()"><h2>Quiz văn hóa</h2></div>
-            <div class="card" onclick="go('survey')"><h2>Khảo sát</h2></div>
+            <div class="card" onclick="go('exploreMenu')"><h2>🧭 Khám phá văn hóa</h2></div>
+            <div class="card" onclick="go('map')"><h2>🗺 Văn hóa vùng miền</h2></div>
+            <div class="card" onclick="go('gallery')"><h2>🎨 Thư viện</h2></div>
+            <div class="card" onclick="startQuiz()"><h2>🧠 Quiz văn hóa</h2></div>
+            <div class="card" onclick="go('survey')"><h2>📊 Khảo sát</h2></div>
         </div>
     </section>
 
     <section id="exploreMenu">
         <h1>Tinh Hoa Văn Hóa Việt</h1>
         <div class="menu">
-            <div class="card" onclick="showDetail('music')"><h3>Âm nhạc</h3></div>
-            <div class="card" onclick="showDetail('arch')"><h3>Kiến trúc</h3></div>
-            <div class="card" onclick="showDetail('fest')"><h3>Lễ hội</h3></div>
-            <div class="card" onclick="showDetail('garment')"><h3>Trang phục</h3></div>
+            <div class="card" onclick="showDetail('music')"><h3>🎶 Âm nhạc</h3></div>
+            <div class="card" onclick="showDetail('arch')"><h3>🏛️ Kiến trúc</h3></div>
+            <div class="card" onclick="showDetail('fest')"><h3>🎋 Lễ hội</h3></div>
+            <div class="card" onclick="showDetail('garment')"><h3>👘 Trang phục</h3></div>
         </div>
-        <div id="exploreDetail">
-            <h2 id="detailTitle"></h2>
+        <div id="exploreDetail" style="margin-top: 30px; display: none; background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; max-width: 800px;">
+            <h2 id="detailTitle" style="color: #8b4d22;"></h2>
             <p id="detailContent" class="content" style="text-align: left; margin-bottom: 20px;"></p>
-            <button onclick="closeDetail()" style="background: var(--dark-wood); color: var(--pearl);">Đóng</button>
+            <button onclick="closeDetail()" style="background: #3a2412;">Đóng</button>
         </div>
         <button onclick="go('menu')">Quay lại Menu</button>
     </section>
@@ -233,8 +165,8 @@
     <section id="gallery">
         <h1>Thư viện văn hóa Việt</h1>
         <div class="gallery">
-            <div>Phở</div><div>Bánh mì</div><div>Áo dài</div>
-            <div>Múa rối nước</div><div>Tranh Đông Hồ</div>
+            <div>🍜 Phở</div><div>🥖 Bánh mì</div><div>👘 Áo dài</div>
+            <div>🎭 Múa rối nước</div><div>🖼 Tranh Đông Hồ</div>
         </div>
         <button onclick="go('menu')">Quay lại</button>
     </section>
@@ -249,46 +181,53 @@
     </section>
 
     <section id="survey">
-        <h1 style="color: #F3D58D;">Báo Cáo Khảo Sát Học Sinh</h1>
-        <p style="margin-bottom: 30px; color: #EBDDC5;">Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.</p>
-        
-        <div class="survey-box">
-            <h3 style="margin-bottom: 25px; color: #E59D2C; font-size: 24px; font-family: 'Playfair Display';">Mức độ quan tâm đến văn hóa (%)</h3>
-            <div class="stat-container">
+        <h1>Báo Cáo Khảo Sát Học Sinh</h1>
+        <p class="content" style="margin-bottom: 30px;">Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.</p>
+        <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; width: 100%; max-width: 800px; color: #3a2412;">
+            <h3 style="margin-bottom: 25px; color: #8b4d22;">Mức độ quan tâm đến văn hóa (%)</h3>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
                 <div>
-                    <div style="display: flex; justify-content: space-between;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Nhận thức về di sản dân tộc</span>
-                        <span style="color: #E59D2C;"><span class="stat-number" data-target="80">0</span>%</span>
+                        <span style="font-weight: bold;"><span class="stat-number" data-target="80">0</span>%</span>
                     </div>
-                    <div class="progress-bg"><div class="stat-bar" style="background: #E59D2C;"></div></div>
+                    <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
+                        <div class="stat-bar" style="background: #8b4d22; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
+                    </div>
                 </div>
                 <div>
-                    <div style="display: flex; justify-content: space-between;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Yêu thích học qua ứng dụng số</span>
-                        <span style="color: #F3D58D;"><span class="stat-number" data-target="92">0</span>%</span>
+                        <span style="font-weight: bold;"><span class="stat-number" data-target="92">0</span>%</span>
                     </div>
-                    <div class="progress-bg"><div class="stat-bar" style="background: #F3D58D;"></div></div>
+                    <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
+                        <div class="stat-bar" style="background: #a02020; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
+                    </div>
                 </div>
                 <div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>Chủ động tìm hiểu văn hóa ngoài giờ học</span>
-                        <span style="color: #EBDDC5;"><span class="stat-number" data-target="50">0</span>%</span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Chủ động tìm hiểu văn hóa</span>
+                        <span style="font-weight: bold;"><span class="stat-number" data-target="50">0</span>%</span>
                     </div>
-                    <div class="progress-bg"><div class="stat-bar" style="background: #EBDDC5;"></div></div>
+                    <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
+                        <div class="stat-bar" style="background: #3a2412; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
+                    </div>
                 </div>
             </div>
         </div>
         <button onclick="go('menu')" style="margin-top: 40px;">Quay lại Menu chính</button>
     </section>
     
-    <footer style="text-align: center;">VietVerse © 2026</footer>
+    <footer>VietVerse © 2026</footer>
 
     <script>
+        // Logic Cửa
         document.getElementById("door").addEventListener('click', function() {
             this.classList.add("open");
             setTimeout(() => { this.style.display = "none"; }, 1600);
         });
 
+        // Điều hướng
         function go(target) {
             document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
             const targetSection = document.getElementById(target);
@@ -301,19 +240,20 @@
 
         function region(r) {
             const text = {
-                north: "Văn hóa miền Bắc của Việt Nam mang đậm dấu ấn lịch sử lâu đời và truyền thống ngàn năm văn hiến...",
-                central: "Miền Trung Việt Nam là vùng đất giao thoa giữa nhiều nền văn hóa khác nhau...",
-                south: "Văn hóa miền Nam Việt Nam mang đặc trưng phóng khoáng, cởi mở..."
+                north: "Miền Bắc là cái nôi của quan họ, ca trù và những lễ hội lâu đời.",
+                central: "Miền Trung mang vẻ đẹp di sản cố đô Huế và nhã nhạc cung đình.",
+                south: "Miền Nam nổi bật với văn hóa sông nước và đờn ca tài tử."
             };
             document.getElementById("regionText").innerText = text[r];
         }
 
+        // Quiz Logic
         const quiz = [
             { q: "Loại hình hát giao duyên nào là biểu tượng vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
-            { q: "Nghệ thuật sân khấu nào biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
+            { q: "Nghệ thuật sân khấu biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
             { q: "Dòng tranh dân gian nổi tiếng ở Bắc Ninh?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
             { q: "Âm nhạc cung đình triều Nguyễn gọi là gì?", a: ["Ca trù", "Nhã nhạc cung đình Huế", "Hát văn", "Quan họ"], c: 1 },
-            { q: "Nhạc cụ truyền thống nào chỉ có một dây?", a: ["Đàn tranh", "Đàn nguyệt", "Đàn bầu", "Đàn tỳ bà"], c: 2 },
+            { q: "Nhạc cụ truyền thống chỉ có một dây?", a: ["Đàn tranh", "Đàn nguyệt", "Đàn bầu", "Đàn tỳ bà"], c: 2 },
             { q: "Nhà thiết kế cải tiến áo dài những năm 1930?", a: ["Cát Tường", "Nguyễn Gia Trí", "Tô Ngọc Vân", "Lê Phổ"], c: 0 },
             { q: "Phố cổ được UNESCO công nhận năm 1999?", a: ["Huế", "Hội An", "Hà Nội", "Đà Nẵng"], c: 1 },
             { q: "Lễ hội vua Hùng tổ chức ở đâu?", a: ["Huế", "Phú Thọ", "Ninh Bình", "Quảng Nam"], c: 1 },
@@ -324,11 +264,11 @@
             { q: "Đàn tranh thường có bao nhiêu dây?", a: ["16 dây", "1 dây", "2 dây", "4 dây"], c: 0 },
             { q: "Thành phố 'xứ sở sương mù'?", a: ["Đà Lạt", "Huế", "Sa Pa", "Hà Nội"], c: 2 },
             { q: "Món ăn đặc trưng của Huế?", a: ["Bún bò Huế", "Bún chả", "Bún cá", "Bún riêu"], c: 0 },
-            { q: "Trang phục nào là biểu tượng đồng hành cùng người phụ nữ Việt?", a: ["Áo dài", "Kimono", "Hanbok", "Sari"], c: 0 },
+            { q: "Trang phục biểu tượng phụ nữ Việt?", a: ["Áo dài", "Kimono", "Hanbok", "Sari"], c: 0 },
             { q: "Loại hình sân khấu bác học?", a: ["Tuồng", "Chèo", "Cải lương", "Kịch"], c: 0 },
-            { q: "Làng gốm nào nổi tiếng ở Hà Nội?", a: ["Bát Tràng", "Chu Đậu", "Thổ Hà", "Phù Lãng"], c: 0 },
+            { q: "Làng gốm nổi tiếng ở Hà Nội?", a: ["Bát Tràng", "Chu Đậu", "Thổ Hà", "Phù Lãng"], c: 0 },
             { q: "Thành phố bên dòng sông Hương?", a: ["Huế", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 },
-            { q: "Loại hình âm nhạc đặc sắc của miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
+            { q: "Loại hình âm nhạc miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
         ];
 
         let current = 0, score = 0;
@@ -337,3 +277,105 @@
         function load() {
             if (current >= quiz.length) {
                 document.getElementById("question").innerText = "Hoàn thành!";
+                document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Về Menu</button>`;
+                document.getElementById("quizResult").innerText = `Điểm của bạn: ${score}/${quiz.length}`;
+                return;
+            }
+            const q = quiz[current];
+            document.getElementById("progressBar").style.width = (current / quiz.length * 100) + "%";
+            document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
+            document.getElementById("question").innerText = q.q;
+            const ansDiv = document.getElementById("answers");
+            ansDiv.innerHTML = "";
+            document.getElementById("quizResult").innerText = "";
+
+            q.a.forEach((t, i) => {
+                const btn = document.createElement("button");
+                btn.innerText = t;
+                btn.onclick = () => {
+                    const all = ansDiv.querySelectorAll("button");
+                    all.forEach(b => b.disabled = true);
+                    if (i === q.c) {
+                        score++;
+                        btn.style.background = "#2d5a27";
+                        document.getElementById("quizResult").innerText = "Chính xác! 🎉";
+                    } else {
+                        btn.style.background = "#a02020";
+                        document.getElementById("quizResult").innerHTML = `Sai rồi. Đáp án đúng là: <b>${q.a[q.c]}</b>`;
+                    }
+                    setTimeout(() => { current++; load(); }, 2000);
+                };
+                ansDiv.appendChild(btn);
+            });
+        }
+
+        function showDetail(type) {
+            const data = {
+                music: { t: "Âm nhạc", c: "Từ Nhã nhạc cung đình đến Đờn ca tài tử, âm nhạc Việt là tiếng lòng dân tộc." },
+                arch: { t: "Kiến trúc", c: "Mái đình cong vút, chùa Một Cột hay cố đô Huế là minh chứng cho trí tuệ cha ông." },
+                fest: { t: "Lễ hội", c: "Tết Nguyên Đán hay hội Gióng là nơi thắt chặt tình cộng đồng." },
+                garment: { t: "Trang phục", c: "Áo dài, áo tứ thân mang đậm nét duyên dáng Việt Nam." }
+            };
+            document.getElementById("detailTitle").innerText = data[type].t;
+            document.getElementById("detailContent").innerText = data[type].c;
+            document.getElementById("exploreDetail").style.display = "block";
+            setTimeout(() => { document.getElementById("exploreDetail").scrollIntoView({ behavior: 'smooth' }); }, 100);
+        }
+        function closeDetail() { document.getElementById("exploreDetail").style.display = "none"; }
+
+        function animateSurvey() {
+            const bars = document.querySelectorAll('.stat-bar');
+            bars.forEach(bar => bar.style.width = '0%');
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(num => {
+                const target = +num.getAttribute('data-target');
+                let count = 0;
+                const updateCount = () => {
+                    if (count < target) {
+                        count += target / 40;
+                        num.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else { num.innerText = target; }
+                };
+                updateCount();
+            });
+            setTimeout(() => {
+                bars.forEach((bar, index) => {
+                    bar.style.width = numbers[index].getAttribute('data-target') + '%';
+                });
+            }, 100);
+        }
+                // Hàm tạo hiệu ứng hoa đào rơi
+        function createPetals() {
+            const container = document.body;
+            const petalCount = 25; // Số lượng cánh hoa trên màn hình
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                // Các thông số ngẫu nhiên
+                const size = Math.random() * 15 + 10 + "px"; // Kích thước từ 10px - 25px
+                const left = Math.random() * 100 + "vw"; // Vị trí ngang ngẫu nhiên
+                const duration = Math.random() * 5 + 5 + "s"; // Tốc độ rơi từ 5s - 10s
+                const delay = Math.random() * 5 + "s"; // Thời gian chờ bắt đầu ngẫu nhiên
+
+                petal.style.width = size;
+                petal.style.height = size;
+                petal.style.left = left;
+                petal.style.animationDuration = duration;
+                petal.style.animationDelay = delay;
+                
+                // Thêm độ nghiêng ngẫu nhiên cho cánh hoa
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                container.appendChild(petal);
+            }
+        }
+
+        // Chạy hàm tạo hoa đào ngay khi load trang
+        createPetals();
+                    
+    </script>
+</body>
+</html>
