@@ -148,51 +148,61 @@
         <p id="quizResult" style="margin-top: 15px; font-weight: bold;"></p>
     </section>
 
- <section id="survey">
+   <section id="survey">
         <h1>Báo Cáo Khảo Sát Học Sinh</h1>
         <p class="content" style="margin-bottom: 30px;">
-            Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.
+            Dữ liệu được thu thập từ 500 học sinh trung học về mức độ tiếp cận văn hóa số.
         </p>
 
-        <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 800px; color: #3a2412;">
-            <h3 style="margin-bottom: 25px; color: #8b4d22;">Mức độ quan tâm đến văn hóa (%)</h3>
+        <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 800px;">
+            <h3 style="margin-bottom: 25px; color: #8b4d22;">Biểu đồ: Mức độ quan tâm đến văn hóa (%)</h3>
             
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Nhận thức về di sản dân tộc</span>
-                        <span style="font-weight: bold;"><span class="stat-number" data-target="80">0</span>%</span>
+                        <span style="font-weight: bold;">80%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #8b4d22; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div style="background: #8b4d22; width: 80%; height: 100%; border-radius: 10px;"></div>
                     </div>
                 </div>
 
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Yêu thích học qua ứng dụng số</span>
-                        <span style="font-weight: bold;"><span class="stat-number" data-target="92">0</span>%</span>
+                        <span style="font-weight: bold;">92%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #a02020; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div style="background: #a02020; width: 92%; height: 100%; border-radius: 10px;"></div>
                     </div>
                 </div>
 
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Chủ động tìm hiểu văn hóa</span>
-                        <span style="font-weight: bold;"><span class="stat-number" data-target="50">0</span>%</span>
+                        <span style="font-weight: bold;">50%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #3a2412; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div style="background: #3a2412; width: 50%; height: 100%; border-radius: 10px;"></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="menu" style="margin-top: 40px;">
+            <div class="card" style="width: 300px; cursor: default; text-align: left; padding: 20px;">
+                <h4 style="color: #8b4d22;">🔍 Rào cản</h4>
+                <p style="font-size: 14px; margin-top: 10px;">65% học sinh cho rằng phương pháp học truyền thống hiện tại còn khô khan, thiếu tính tương tác.</p>
+            </div>
+            <div class="card" style="width: 300px; cursor: default; text-align: left; padding: 20px;">
+                <h4 style="color: #8b4d22;">💡 Giải pháp</h4>
+                <p style="font-size: 14px; margin-top: 10px;">VietVerse hướng tới hình ảnh hóa 3D và Quiz tương tác để xóa bỏ khoảng cách giữa Gen Z và di sản.</p>
+            </div>
+        </div>
+
         <button onclick="go('menu')" style="margin-top: 40px;">Quay lại Menu</button>
     </section>
-    
     <footer>VietVerse © 2026</footer>
 
     <script>
@@ -203,53 +213,10 @@
         });
 
         // Điều hướng
-       /* NAV - Điều hướng và kích hoạt hiệu ứng khảo sát */
         function go(target) {
             document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-            const targetSection = document.getElementById(target);
-            if (targetSection) {
-                targetSection.classList.add("active");
-                window.scrollTo(0,0);
-            }
-
-            // Nếu vào trang khảo sát, chạy hiệu ứng số và thanh
-            if (target === 'survey') {
-                animateSurvey();
-            }
-        }
-
-        /* HÀM CHẠY HIỆU ỨNG SỐ VÀ BIỂU ĐỒ */
-        function animateSurvey() {
-            // Reset thanh về 0
-            const bars = document.querySelectorAll('.stat-bar');
-            bars.forEach(bar => bar.style.width = '0%');
-
-            // Chạy số
-            const numbers = document.querySelectorAll('.stat-number');
-            numbers.forEach(num => {
-                const target = +num.getAttribute('data-target');
-                let count = 0;
-                const inc = target / 40; 
-
-                const updateCount = () => {
-                    if (count < target) {
-                        count += inc;
-                        num.innerText = Math.ceil(count);
-                        setTimeout(updateCount, 30);
-                    } else {
-                        num.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-
-            // Chạy thanh biểu đồ
-            setTimeout(() => {
-                bars.forEach((bar, index) => {
-                    const targetWidth = numbers[index].getAttribute('data-target');
-                    bar.style.width = targetWidth + '%';
-                });
-            }, 100);
+            document.getElementById(target).classList.add("active");
+            window.scrollTo(0,0);
         }
 
         function region(r) {
