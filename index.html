@@ -333,15 +333,16 @@ thông qua những trải nghiệm trực quan và sinh động.
 <!-- QUIZ -->
 
 <section id="quiz">
-
-<h1>Quiz văn hóa</h1>
-
-<h2 id="question"></h2>
-
-<div id="answers"></div>
-
-<p id="quizResult"></p>
-
+    <h1>Quiz văn hóa</h1>
+    
+    <div id="progressContainer" style="width: 80%; background: #ddd; height: 10px; border-radius: 5px; margin: 20px auto; overflow: hidden;">
+        <div id="progressBar" style="width: 0%; height: 100%; background: #8b4d22; transition: 0.3s;"></div>
+    </div>
+    <p id="progressText" style="font-size: 14px; margin-bottom: 20px;">Câu 1/20</p>
+    
+    <h2 id="question"></h2>
+    <div id="answers"></div>
+    <p id="quizResult"></p>
 </section>
 
 <!-- SURVEY -->
@@ -413,6 +414,7 @@ document.getElementById("regionText").innerText=text[r]
 /* QUIZ */
 
 /* QUIZ */
+/* QUIZ */
 const quiz = [
     { q: "Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
     { q: "Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
@@ -434,61 +436,69 @@ const quiz = [
     { q: "Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
     { q: "Thành phố bên dòng sông Hương?", a: ["Huế", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 },
     { q: "Loại hình âm nhạc truyền thống miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
-]
+];
 
-let current = 0
-let score = 0 // Thêm biến tính điểm nếu cần
+let current = 0;
+let score = 0;
 
 function startQuiz() {
-    current = 0
-    score = 0
-    document.getElementById("quizResult").innerText = ""
-    go("quiz")
-    load()
+    current = 0;
+    score = 0;
+    go("quiz");
+    load();
+}
+
+function updateProgress() {
+    const percent = ((current) / quiz.length) * 100;
+    document.getElementById("progressBar").style.width = percent + "%";
+    document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
 }
 
 function load() {
-    // Kiểm tra nếu đã hết câu hỏi
+    // Nếu hoàn thành hết các câu hỏi
     if (current >= quiz.length) {
-        document.getElementById("question").innerText = "Chúc mừng! Bạn đã hoàn thành Quiz."
-        document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Quay lại Menu</button>`
-        document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`
-        return
+        document.getElementById("progressBar").style.width = "100%";
+        document.getElementById("progressText").innerText = "Hoàn thành!";
+        document.getElementById("question").innerText = "Chúc mừng! Bạn đã hoàn thành Quiz.";
+        document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Quay lại Menu</button>`;
+        document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`;
+        return;
     }
 
-    const q = quiz[current]
-    document.getElementById("question").innerText = q.q
-    const answersContainer = document.getElementById("answers")
-    answersContainer.innerHTML = ""
-    document.getElementById("quizResult").innerText = "" // Xóa thông báo cũ
+    updateProgress();
+    const q = quiz[current];
+    document.getElementById("question").innerText = q.q;
+    const answersContainer = document.getElementById("answers");
+    answersContainer.innerHTML = "";
+    document.getElementById("quizResult").innerText = "";
 
     q.a.forEach((t, i) => {
-        const btn = document.createElement("button")
-        btn.innerText = t
+        const btn = document.createElement("button");
+        btn.innerText = t;
         btn.onclick = () => {
-            // Vô hiệu hóa tất cả nút sau khi bấm để tránh bấm nhiều lần
-            const buttons = answersContainer.querySelectorAll("button");
-            buttons.forEach(b => b.disabled = true);
+            // Khóa các nút để tránh bấm nhiều lần
+            const allBtns = answersContainer.querySelectorAll("button");
+            allBtns.forEach(b => b.disabled = true);
 
             if (i === q.c) {
-                document.getElementById("quizResult").innerText = "Chính xác! 🎉"
-                document.getElementById("quizResult").style.color = "green"
-                score++
+                document.getElementById("quizResult").innerText = "Chính xác! 🎉";
+                document.getElementById("quizResult").style.color = "#2d5a27";
+                score++;
             } else {
-                document.getElementById("quizResult").innerText = "Chưa đúng. Đáp án là: " + q.a[q.c]
-                document.getElementById("quizResult").style.color = "red"
+                document.getElementById("quizResult").innerText = "Chưa đúng. Đáp án là: " + q.a[q.c];
+                document.getElementById("quizResult").style.color = "#a02020";
             }
 
-            // Đợi 1.2 giây rồi tự động chuyển câu tiếp theo
+            // Chờ 1.2s rồi tự động sang câu tiếp theo
             setTimeout(() => {
-                current++
-                load()
-            }, 1200)
-        }
-        answersContainer.appendChild(btn)
-    })
+                current++;
+                load();
+            }, 1200);
+        };
+        answersContainer.appendChild(btn);
+    });
 }
-
+    
 </script>
 
 </body>
