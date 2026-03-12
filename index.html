@@ -50,15 +50,85 @@
         }
         .card:hover { transform: translateY(-10px); }
 
-        /* DOOR */
-        #door { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 9999; cursor: pointer; background-color: #3a2412; }
-        .door { width: 50%; height: 100%; background-image: url("cua@4x.png"); background-size: 200% 100%; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .left { background-position: left center; }
-        .right { background-position: right center; }
-        #door.open .left { transform: translateX(-100%); }
-        #door.open .right { transform: translateX(100%); }
-        .doorText { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; width: 100%; pointer-events: none; }
-        .title { font-size: 70px; font-family: "Playfair Display"; }
+/* CSS CHO PHẦN CỬA MỚI - GIỐNG ẢNH MẪU */
+        #door { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            z-index: 9999; 
+            cursor: pointer; 
+            background: #f4ece4 url("Background web@4x.png") center/cover fixed no-repeat; /* Nền dự phòng */
+            pointer-events: all; /* Đảm bảo luôn click được */
+        }
+
+        .door { 
+            width: 50%; 
+            height: 100%; 
+            background-image: url("cua@4x.png"); /* ĐÂY LÀ FILE ẢNH MỚI BẠN CẦN THAY */
+            background-size: 100% 100%; /* Đảm bảo ảnh cửa full cánh */
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            will-change: transform; /* Tối ưu hiệu năng */
+        }
+
+        .left { 
+            background-position: left center; 
+            transform-origin: left center;
+        }
+        .right { 
+            background-position: right center; 
+            transform-origin: right center;
+        }
+
+        /* Hiệu ứng mở cửa */
+        #door.open .left { 
+            transform: scaleX(0); /* Mở mờ dần sang hai bên */
+            opacity: 0;
+        }
+        #door.open .right { 
+            transform: scaleX(0); 
+            opacity: 0;
+        }
+
+        #door.open .doorText { 
+            opacity: 0; 
+            transition: opacity 0.5s ease; 
+        }
+
+        .doorText { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: #3a2412; /* Màu nâu đậm để nổi trên nền cửa */
+            text-align: center; 
+            width: 100%; 
+            pointer-events: none; /* Click xuyên qua chữ */
+            z-index: 10000;
+        }
+
+        .title { 
+            font-size: 70px; 
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+        }
+
+        .slogan { 
+            font-size: 22px; 
+            margin-top: 10px; 
+            font-weight: 400;
+        }
+
+        .note { 
+            margin-top: 20px; 
+            font-size: 16px;
+            opacity: 0.8; 
+            font-weight: 300;
+        }
 
         /* LANTERNS */
         .lantern { position: fixed; bottom: -100px; font-size: 28px; animation: lantern 12s linear infinite; }
@@ -78,16 +148,15 @@
     <div class="lantern" style="left:10%">🏮</div><div class="lantern" style="left:30%">🏮</div>
     <div class="lantern" style="left:60%">🏮</div><div class="lantern" style="left:80%">🏮</div>
 
-    <div id="door">
+  <div id="door">
         <div class="door left"></div>
         <div class="door right"></div>
         <div class="doorText">
             <div class="title">VietVerse</div>
             <div class="slogan">Explore the Viet Side</div>
-            <div class="note">Bấm vào màn hình để bắt đầu</div>
+            <div class="note">Chạm vào cánh cửa để bước vào</div>
         </div>
-    </div>
-
+    </div> 
     <section id="home" class="active">
         <h1>Chào mừng đến với VietVerse</h1>
         <p class="content">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại.</p>
