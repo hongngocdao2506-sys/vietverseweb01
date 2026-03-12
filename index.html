@@ -287,7 +287,43 @@
             </div>
         </div>
     </section>
+    
+<section id="exploreMenu">
+        <h1>Tinh Hoa Văn Hóa Việt</h1>
+        <p class="content">Hành trình đi xuyên qua những giá trị di sản ngàn năm của dân tộc.</p>
+        
+        <div class="menu">
+            <div class="card" onclick="showDetail('music')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🎶</div>
+                <h2>Âm nhạc</h2>
+                <p>Giai điệu tâm hồn Việt</p>
+            </div>
+            <div class="card" onclick="showDetail('arch')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🏛️</div>
+                <h2>Kiến trúc</h2>
+                <p>Dấu ấn nghìn năm văn hiến</p>
+            </div>
+            <div class="card" onclick="showDetail('fest')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🎋</div>
+                <h2>Lễ hội</h2>
+                <p>Sức sống cộng đồng</p>
+            </div>
+            <div class="card" onclick="showDetail('garment')">
+                <div style="font-size: 40px; margin-bottom: 10px;">👘</div>
+                <h2>Trang phục</h2>
+                <p>Nét duyên dáng dân tộc</p>
+            </div>
+        </div>
+        <div id="exploreDetail" style="margin-top: 30px; display: none; background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h2 id="detailTitle" style="color: #8b4d22;"></h2>
+            <p id="detailContent" class="content" style="text-align: left; margin-bottom: 20px;"></p>
+            <button onclick="closeDetail()" style="background: #3a2412; font-size: 14px; padding: 10px 20px;">Đóng</button>
+        </div>
 
+        <br>
+        <button onclick="go('menu')">Quay lại Menu</button>
+    </section>
+    
     <section id="map">
         <h1>Bản đồ văn hóa</h1>
         <button onclick="region('north')">Miền Bắc</button>
@@ -436,6 +472,40 @@
                 };
                 answers.appendChild(btn);
             });
+        }
+        /* EXPLORE DETAIL LOGIC */
+        function showDetail(type) {
+            const details = {
+                music: {
+                    t: "Âm nhạc truyền thống",
+                    c: "Việt Nam tự hào với hệ thống âm nhạc đa dạng từ Nhã nhạc cung đình Huế trang trọng đến Quan họ Kinh Bắc mượt mà, hay Đờn ca tài tử Nam Bộ phóng khoáng. Mỗi vùng miền đều dùng tiếng đàn, giọng hát để gửi gắm tâm tình với non sông."
+                },
+                arch: {
+                    t: "Kiến trúc đặc trưng",
+                    c: "Kiến trúc Việt là sự kết hợp giữa triết lý nhân sinh và thiên nhiên. Đó là mái đình làng biển cong vút, là Chùa Một Cột trên đài sen, hay những ngôi nhà sàn vững chãi trên rẻo cao, thể hiện sự thích nghi tuyệt vời với khí hậu."
+                },
+                fest: {
+                    t: "Lễ hội dân gian",
+                    c: "Lễ hội là bảo tàng sống của văn hóa. Từ Tết Nguyên Đán thiêng liêng đến hội Gióng hùng tráng hay lễ hội Ka-tê rực rỡ sắc màu, đây là dịp để cộng đồng kết nối, tri ân tổ tiên và cầu mong điều lành."
+                },
+                garment: {
+                    t: "Trang phục di sản",
+                    c: "Ngoài chiếc Áo dài đã trở thành biểu tượng quốc tế, Việt Nam còn có kho tàng trang phục dân tộc phong phú: áo tứ thân mộc mạc, bộ đồ bà ba giản dị hay những tấm thổ cẩm dệt tay tỉ mỉ của đồng bào miền núi."
+                }
+            };
+
+            document.getElementById("detailTitle").innerText = details[type].t;
+            document.getElementById("detailContent").innerText = details[type].c;
+            document.getElementById("exploreDetail").style.display = "block";
+            
+            // Tự động cuộn xuống để người dùng thấy nội dung
+            setTimeout(() => {
+                document.getElementById("exploreDetail").scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function closeDetail() {
+            document.getElementById("exploreDetail").style.display = "none";
         }
     </script>
 </body>
