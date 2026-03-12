@@ -18,11 +18,14 @@ font-family:"Be Vietnam Pro",sans-serif;
 background:url("Background web@4x.png") center/cover fixed;
 color:#3b2a12;
 text-align:center;
+overflow-x:hidden;
 }
 
 h1,h2{
 font-family:"Playfair Display",serif;
 }
+
+/* SECTIONS */
 
 section{
 display:none;
@@ -33,6 +36,8 @@ padding:60px 20px;
 .active{
 display:block;
 }
+
+/* BUTTON */
 
 button{
 padding:12px 26px;
@@ -49,6 +54,8 @@ button:hover{
 background:#6f431d;
 }
 
+/* CARD */
+
 .card{
 background:white;
 padding:25px;
@@ -59,9 +66,62 @@ width:220px;
 cursor:pointer;
 }
 
-.quiz button{
-display:block;
-margin:8px auto;
+/* DOOR */
+
+#doorContainer{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:9999;
+display:flex;
+cursor:pointer;
+
+}
+
+.door{
+
+width:50%;
+height:100%;
+
+background:url("cua@4x.png") center/cover no-repeat;
+
+transition:transform 1.6s ease;
+
+}
+
+.right{
+transform:scaleX(-1);
+}
+
+#doorContainer.open .left{
+transform:translateX(-100%);
+}
+
+#doorContainer.open .right{
+transform:translateX(100%) scaleX(-1);
+}
+
+/* TITLE ON DOOR */
+
+#doorTitle{
+
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+text-align:center;
+z-index:10000;
+
+transition:opacity 1.2s;
+
+}
+
+#doorContainer.open + #doorTitle{
+opacity:0;
 }
 
 </style>
@@ -70,15 +130,34 @@ margin:8px auto;
 
 <body>
 
+
+<!-- DOOR -->
+
+<div id="doorContainer" onclick="openDoor()">
+
+<div class="door left"></div>
+<div class="door right"></div>
+
+</div>
+
+<div id="doorTitle">
+
+<h1 style="font-size:60px;">VietVerse</h1>
+<p>Explore the Viet Side</p>
+<p style="opacity:0.8;">Bấm vào màn hình để khám phá</p>
+
+</div>
+
+
 <!-- HOME -->
 
 <section id="home" class="active">
 
 <h1>VietVerse</h1>
 
-<p>Explore the Viet Side</p>
+<p>Khám phá thế giới văn hóa Việt Nam theo cách hiện đại.</p>
 
-<button onclick="go('intro')">Bắt đầu khám phá</button>
+<button onclick="go('intro')">Bắt đầu</button>
 
 </section>
 
@@ -92,7 +171,8 @@ margin:8px auto;
 <p>
 
 VietVerse là không gian khám phá văn hóa Việt Nam được thiết kế dành cho học sinh,
-giúp tiếp cận văn hóa truyền thống theo cách hiện đại, trực quan và sinh động.
+giúp tiếp cận các giá trị văn hóa truyền thống thông qua trải nghiệm trực quan
+và các hoạt động tương tác.
 
 </p>
 
@@ -116,8 +196,6 @@ giúp tiếp cận văn hóa truyền thống theo cách hiện đại, trực q
 <div class="card" onclick="go('facts')">Fun Facts</div>
 
 <div class="card" onclick="go('scholar')">Thử thách học giả</div>
-
-<button onclick="go('home')">Trang chủ</button>
 
 </section>
 
@@ -173,8 +251,6 @@ giúp tiếp cận văn hóa truyền thống theo cách hiện đại, trực q
 </section>
 
 
-<!-- RESULT -->
-
 <section id="result">
 
 <h1>Kết quả khảo sát</h1>
@@ -194,10 +270,9 @@ giúp tiếp cận văn hóa truyền thống theo cách hiện đại, trực q
 
 <p>
 
-Việt Nam có 54 dân tộc với nhiều bản sắc văn hóa khác nhau.  
-Bánh chưng tượng trưng cho đất, bánh dày tượng trưng cho trời.  
-Đàn bầu chỉ có một dây nhưng có thể tạo nhiều cao độ.  
-Tranh Đông Hồ được in bằng bản khắc gỗ truyền thống.
+Việt Nam có 54 dân tộc.  
+Đàn bầu chỉ có một dây nhưng tạo được nhiều cao độ.  
+Tranh Đông Hồ được in bằng bản khắc gỗ.
 
 </p>
 
@@ -206,20 +281,17 @@ Tranh Đông Hồ được in bằng bản khắc gỗ truyền thống.
 </section>
 
 
-<!-- SCHOLAR -->
-
 <section id="scholar">
 
 <h1>Thử thách học giả</h1>
 
 <p>
 
-Bạn đã thực sự hiểu sâu về văn hóa Việt Nam chưa?  
-Hãy thử hoàn thành bài khảo sát với số điểm cao nhất.
+Hãy thử hoàn thành bài khảo sát văn hóa với điểm số cao nhất.
 
 </p>
 
-<button onclick="startQuiz()">Bắt đầu thử thách</button>
+<button onclick="startQuiz()">Bắt đầu</button>
 
 <button onclick="go('menu')">Quay lại</button>
 
@@ -228,29 +300,46 @@ Hãy thử hoàn thành bài khảo sát với số điểm cao nhất.
 
 <script>
 
-/* NAVIGATION */
+/* DOOR */
 
-function go(id){
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
-document.getElementById(id).classList.add("active")
+function openDoor(){
+
+document.getElementById("doorContainer").classList.add("open")
+
+setTimeout(()=>{
+document.getElementById("doorContainer").style.display="none"
+document.getElementById("doorTitle").style.display="none"
+},1600)
+
 }
 
 
-/* CULTURE CONTENT */
+/* NAVIGATION */
+
+function go(id){
+
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
+
+document.getElementById(id).classList.add("active")
+
+}
+
+
+/* CULTURE */
 
 function showCulture(type){
 
 const text={
 
-food:"Ẩm thực Việt Nam nổi tiếng với sự hài hòa giữa hương vị, màu sắc và dinh dưỡng. Những món ăn tiêu biểu như phở, bún bò Huế, bánh mì hay gỏi cuốn không chỉ phổ biến trong nước mà còn được biết đến rộng rãi trên thế giới.",
+food:"Ẩm thực Việt Nam nổi bật bởi sự hài hòa hương vị, với các món tiêu biểu như phở, bún bò Huế, bánh mì và gỏi cuốn.",
 
-music:"Âm nhạc truyền thống Việt Nam sở hữu nhiều nhạc cụ độc đáo như đàn bầu, đàn tranh và đàn nguyệt. Các loại hình nghệ thuật như ca trù, quan họ hay đờn ca tài tử phản ánh đời sống tinh thần phong phú của người Việt.",
+music:"Âm nhạc truyền thống bao gồm các nhạc cụ như đàn bầu, đàn tranh và các loại hình nghệ thuật như ca trù và quan họ.",
 
-clothes:"Áo dài là biểu tượng trang phục truyền thống của Việt Nam. Bên cạnh đó còn có áo tứ thân, khăn vấn và nhiều loại trang phục đặc trưng của các dân tộc thiểu số.",
+clothes:"Áo dài được xem là biểu tượng trang phục truyền thống của Việt Nam.",
 
-festival:"Các lễ hội truyền thống như Tết Nguyên Đán, Trung Thu hay lễ hội Đền Hùng thể hiện tín ngưỡng, lịch sử và đời sống văn hóa của người Việt qua nhiều thế hệ.",
+festival:"Các lễ hội truyền thống như Tết Nguyên Đán và Trung Thu phản ánh đời sống văn hóa lâu đời.",
 
-art:"Nghệ thuật truyền thống Việt Nam bao gồm tranh Đông Hồ, tranh Hàng Trống, múa rối nước và nhiều loại hình sân khấu dân gian như chèo, tuồng."
+art:"Nghệ thuật dân gian gồm tranh Đông Hồ, múa rối nước và các loại hình sân khấu truyền thống."
 
 }
 
@@ -265,11 +354,11 @@ function showRegion(type){
 
 const text={
 
-north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa lâu đời với các di sản như quan họ Bắc Ninh, ca trù và nghệ thuật chèo.",
+north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa lâu đời như quan họ và ca trù.",
 
-central:"Miền Trung nổi bật với cố đô Huế, nhã nhạc cung đình và nhiều lễ hội mang dấu ấn lịch sử.",
+central:"Miền Trung nổi bật với cố đô Huế và nhã nhạc cung đình.",
 
-south:"Miền Nam mang nét văn hóa cởi mở, phóng khoáng với các loại hình nghệ thuật như đờn ca tài tử và nền ẩm thực phong phú."
+south:"Miền Nam mang nét văn hóa cởi mở với đờn ca tài tử."
 
 }
 
@@ -321,7 +410,6 @@ const quiz=[
 {q:"Lễ hội gắn với truyền thuyết Sơn Tinh?",a:["Gióng","Đền Hùng","Lim","Chử Đồng Tử"],c:1},
 
 {q:"Tuồng còn được gọi là gì?",a:["Hát bội","Chèo","Xẩm","Cải lương"],c:0}
-
 ]
 
 let current=0
@@ -344,8 +432,7 @@ function showQuestion(){
 
 if(current>=quiz.length){
 
-document.getElementById("scoreText").innerText=
-"Bạn đạt "+score+"/"+quiz.length+" điểm."
+document.getElementById("scoreText").innerText="Bạn đạt "+score+"/"+quiz.length+" điểm."
 
 go("result")
 
@@ -369,8 +456,7 @@ answersHTML+=`<button onclick="answer(${o.i})">${o.text}</button>`
 
 document.getElementById("answers").innerHTML=answersHTML
 
-document.getElementById("progress").innerText=
-"Câu "+(current+1)+" / "+quiz.length
+document.getElementById("progress").innerText="Câu "+(current+1)+" / "+quiz.length
 
 }
 
