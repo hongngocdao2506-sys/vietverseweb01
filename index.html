@@ -412,95 +412,81 @@ document.getElementById("regionText").innerText=text[r]
 
 /* QUIZ */
 
-const quiz=[
-
-{ q:"Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a:["Hát xoan","Quan họ","Ca trù","Chèo"], c:1 }, 
-
-{ q:"Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a:["Chèo","Múa rối nước","Tuồng","Cải lương"], c:1 }, 
-
-{ q:"Dòng tranh dân gian nổi tiếng với kỹ thuật in mộc bản và màu sắc tự nhiên?", a:["Đông Hồ","Hàng Trống","Kim Hoàng","Sình"], c:0 }, 
-
-{ q:"Âm nhạc cung đình triều Nguyễn được gọi là gì?", a:["Ca trù","Nhã nhạc cung đình Huế","Hát văn","Quan họ"], c:1 }, 
-
-{ q:"Nhạc cụ truyền thống chỉ có một dây nhưng tạo được nhiều cao độ?", a:["Đàn tranh","Đàn nguyệt","Đàn bầu","Đàn tỳ bà"], c:2 }, 
-
-{ q:"Nhà thiết kế góp phần cải tiến áo dài Việt Nam vào thập niên 1930?", a:["Cát Tường","Nguyễn Gia Trí","Tô Ngọc Vân","Lê Phổ"], c:0 }, 
-
-{ q:"Phố cổ nào của Việt Nam được UNESCO công nhận là Di sản Thế giới năm 1999?", a:["Huế","Hội An","Hà Nội","Đà Nẵng"], c:1 }, 
-
-{ q:"Lễ hội tưởng nhớ các vua Hùng được tổ chức ở đâu?", a:["Huế","Phú Thọ","Ninh Bình","Quảng Nam"], c:1 }, 
-
-{ q:"Món ăn thường được xem là biểu tượng quốc gia của ẩm thực Việt Nam?", a:["Bún chả","Phở","Bánh xèo","Bún bò Huế"], c:1 }, 
-
-{ q:"Món ăn thể hiện rõ sự giao thoa ẩm thực Việt – Pháp?", a:["Bánh mì","Chả giò","Bún riêu","Bánh cuốn"], c:0 }, 
-
-{ q:"Lễ hội Trung Thu của Việt Nam còn được gọi là gì?", a:["Tết thiếu nhi","Tết đoàn viên","Tết trăng","Cả ba"], c:3 }, 
-
-{ q:"Di sản thiên nhiên thế giới nổi tiếng của Việt Nam?", a:["Vịnh Hạ Long","Hồ Ba Bể","Hồ Tây","Sông Hương"], c:0 },
-
-{ q:"Nhạc cụ dây truyền thống thường có 16 dây?", a:["Đàn tranh","Đàn bầu","Đàn nguyệt","Đàn đá"], c:0 }, 
-
-{ q:"Thành phố được mệnh danh là 'xứ sở sương mù' của Việt Nam?", a:["Đà Lạt","Huế","Sa Pa","Hà Nội"], c:2 }, 
-
-{ q:"Món ăn đặc trưng của Huế?", a:["Bún bò Huế","Bún chả","Bún cá","Bún riêu"], c:0 }, 
-
-{ q:"Trang phục truyền thống biểu tượng của phụ nữ Việt Nam?", a:["Áo dài","Kimono","Hanbok","Sari"], c:0 },
-
-{ q:"Loại hình sân khấu truyền thống mang tính bác học?", a:["Tuồng","Chèo","Cải lương","Kịch"], c:0 }, 
-
-{ q:"Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a:["Đông Hồ","Hàng Trống","Kim Hoàng","Sình"], c:0 }, 
-
-{ q:"Thành phố bên dòng sông Hương?", a:["Huế","Hà Nội","Hải Phòng","Đà Nẵng"], c:0 }, 
-
-{ q:"Loại hình âm nhạc truyền thống miền Nam?", a:["Quan họ","Ca trù","Đờn ca tài tử","Chèo"], c:2 } 
-
+/* QUIZ */
+const quiz = [
+    { q: "Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
+    { q: "Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
+    { q: "Dòng tranh dân gian nổi tiếng với kỹ thuật in mộc bản và màu sắc tự nhiên?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
+    { q: "Âm nhạc cung đình triều Nguyễn được gọi là gì?", a: ["Ca trù", "Nhã nhạc cung đình Huế", "Hát văn", "Quan họ"], c: 1 },
+    { q: "Nhạc cụ truyền thống chỉ có một dây nhưng tạo được nhiều cao độ?", a: ["Đàn tranh", "Đàn nguyệt", "Đàn bầu", "Đàn tỳ bà"], c: 2 },
+    { q: "Nhà thiết kế góp phần cải tiến áo dài Việt Nam vào thập niên 1930?", a: ["Cát Tường", "Nguyễn Gia Trí", "Tô Ngọc Vân", "Lê Phổ"], c: 0 },
+    { q: "Phố cổ nào của Việt Nam được UNESCO công nhận là Di sản Thế giới năm 1999?", a: ["Huế", "Hội An", "Hà Nội", "Đà Nẵng"], c: 1 },
+    { q: "Lễ hội tưởng nhớ các vua Hùng được tổ chức ở đâu?", a: ["Huế", "Phú Thọ", "Ninh Bình", "Quảng Nam"], c: 1 },
+    { q: "Món ăn thường được xem là biểu tượng quốc gia của ẩm thực Việt Nam?", a: ["Bún chả", "Phở", "Bánh xèo", "Bún bò Huế"], c: 1 },
+    { q: "Món ăn thể hiện rõ sự giao thoa ẩm thực Việt – Pháp?", a: ["Bánh mì", "Chả giò", "Bún riêu", "Bánh cuốn"], c: 0 },
+    { q: "Lễ hội Trung Thu của Việt Nam còn được gọi là gì?", a: ["Tết thiếu nhi", "Tết đoàn viên", "Tết trăng", "Cả ba"], c: 3 },
+    { q: "Di sản thiên nhiên thế giới nổi tiếng của Việt Nam?", a: ["Vịnh Hạ Long", "Hồ Ba Bể", "Hồ Tây", "Sông Hương"], c: 0 },
+    { q: "Nhạc cụ dây truyền thống thường có 16 dây?", a: ["Đàn tranh", "Đàn bầu", "Đàn nguyệt", "Đàn đá"], c: 0 },
+    { q: "Thành phố được mệnh danh là 'xứ sở sương mù' của Việt Nam?", a: ["Đà Lạt", "Huế", "Sa Pa", "Hà Nội"], c: 2 },
+    { q: "Món ăn đặc trưng của Huế?", a: ["Bún bò Huế", "Bún chả", "Bún cá", "Bún riêu"], c: 0 },
+    { q: "Trang phục truyền thống biểu tượng của phụ nữ Việt Nam?", a: ["Áo dài", "Kimono", "Hanbok", "Sari"], c: 0 },
+    { q: "Loại hình sân khấu truyền thống mang tính bác học?", a: ["Tuồng", "Chèo", "Cải lương", "Kịch"], c: 0 },
+    { q: "Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
+    { q: "Thành phố bên dòng sông Hương?", a: ["Huế", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 },
+    { q: "Loại hình âm nhạc truyền thống miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
 ]
 
+let current = 0
+let score = 0 // Thêm biến tính điểm nếu cần
 
-let current=0
-
-function startQuiz(){
-
-go("quiz")
-
-load()
-
+function startQuiz() {
+    current = 0
+    score = 0
+    document.getElementById("quizResult").innerText = ""
+    go("quiz")
+    load()
 }
 
-function load(){
+function load() {
+    // Kiểm tra nếu đã hết câu hỏi
+    if (current >= quiz.length) {
+        document.getElementById("question").innerText = "Chúc mừng! Bạn đã hoàn thành Quiz."
+        document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Quay lại Menu</button>`
+        document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`
+        return
+    }
 
-const q=quiz[current]
+    const q = quiz[current]
+    document.getElementById("question").innerText = q.q
+    const answersContainer = document.getElementById("answers")
+    answersContainer.innerHTML = ""
+    document.getElementById("quizResult").innerText = "" // Xóa thông báo cũ
 
-document.getElementById("question").innerText=q.q
+    q.a.forEach((t, i) => {
+        const btn = document.createElement("button")
+        btn.innerText = t
+        btn.onclick = () => {
+            // Vô hiệu hóa tất cả nút sau khi bấm để tránh bấm nhiều lần
+            const buttons = answersContainer.querySelectorAll("button");
+            buttons.forEach(b => b.disabled = true);
 
-const answers=document.getElementById("answers")
+            if (i === q.c) {
+                document.getElementById("quizResult").innerText = "Chính xác! 🎉"
+                document.getElementById("quizResult").style.color = "green"
+                score++
+            } else {
+                document.getElementById("quizResult").innerText = "Chưa đúng. Đáp án là: " + q.a[q.c]
+                document.getElementById("quizResult").style.color = "red"
+            }
 
-answers.innerHTML=""
-
-q.a.forEach((t,i)=>{
-
-const btn=document.createElement("button")
-
-btn.innerText=t
-
-btn.onclick=()=>{
-
-if(i===q.c){
-
-document.getElementById("quizResult").innerText="Chính xác!"
-
-}else{
-
-document.getElementById("quizResult").innerText="Chưa đúng."
-
-}
-
-}
-
-answers.appendChild(btn)
-
-})
-
+            // Đợi 1.2 giây rồi tự động chuyển câu tiếp theo
+            setTimeout(() => {
+                current++
+                load()
+            }, 1200)
+        }
+        answersContainer.appendChild(btn)
+    })
 }
 
 </script>
