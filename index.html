@@ -304,8 +304,7 @@ Hãy thử hoàn thành bài khảo sát văn hóa với điểm số cao nhất
 
 </p>
 
-<button onclick="startQuiz()">Bắt đầu</button>
-
+<button onclick="startScholarQuiz()">Bắt đầu</button>
 <button onclick="go('menu')">Quay lại</button>
 
 </section>
@@ -392,7 +391,9 @@ document.getElementById("regionContent").innerText=text[type]
 
 /* QUIZ */
 
-const quiz=[
+/* QUIZ THƯỜNG */
+
+const normalQuiz=[
 
 {q:"Loại hình nghệ thuật nào của Việt Nam được UNESCO công nhận là Di sản văn hóa phi vật thể năm 2009?",a:["Ca trù","Chèo","Cải lương","Hát xẩm"],c:0},
 
@@ -433,12 +434,80 @@ const quiz=[
 {q:"Lễ hội gắn với truyền thuyết Sơn Tinh?",a:["Gióng","Đền Hùng","Lim","Chử Đồng Tử"],c:1},
 
 {q:"Tuồng còn được gọi là gì?",a:["Hát bội","Chèo","Xẩm","Cải lương"],c:0}
+
 ]
 
+/* QUIZ HỌC GIẢ – KHÓ */
+
+const scholarQuiz=[
+
+{q:"Nhã nhạc cung đình Huế được UNESCO công nhận là di sản vào năm nào?",a:["2001","2003","2005","2008"],c:1},
+
+{q:"Không gian văn hóa Cồng chiêng Tây Nguyên trải dài qua bao nhiêu tỉnh?",a:["3","4","5","6"],c:2},
+
+{q:"Tranh Đông Hồ sử dụng giấy gì?",a:["Giấy dó","Giấy điệp","Giấy tre","Giấy bản"],c:1},
+
+{q:"Ai là người cải cách áo dài Lemur nổi tiếng?",a:["Nguyễn Gia Trí","Nguyễn Cát Tường","Tô Ngọc Vân","Bùi Xuân Phái"],c:1},
+
+{q:"Di sản Hoàng thành Thăng Long được UNESCO công nhận năm nào?",a:["2008","2010","2012","2015"],c:1},
+
+{q:"Loại hình Bài Chòi phát triển mạnh ở vùng nào?",a:["Nam Bộ","Bắc Bộ","Trung Bộ","Tây Nguyên"],c:2},
+
+{q:"Chầu văn gắn với tín ngưỡng nào?",a:["Thờ Thành hoàng","Thờ Mẫu","Thờ Phật","Thờ tổ tiên"],c:1},
+
+{q:"Đờn ca tài tử chịu ảnh hưởng từ dòng nhạc nào?",a:["Nhã nhạc cung đình Huế","Nhạc Trung Hoa","Nhạc phương Tây","Nhạc Chăm"],c:0},
+
+{q:"Quan họ Bắc Ninh thường hát theo hình thức nào?",a:["Độc diễn","Song ca","Đối đáp nam nữ","Hợp xướng"],c:2},
+
+{q:"Lễ hội Gióng được tổ chức ở đâu?",a:["Phú Thọ","Hà Nội","Bắc Ninh","Nam Định"],c:1},
+
+{q:"Làng gốm Bát Tràng xuất hiện từ khoảng thế kỷ nào?",a:["XI","XIII","XV","XVII"],c:1},
+
+{q:"Tranh Hàng Trống chủ yếu phục vụ dịp nào?",a:["Trung thu","Tết Nguyên Đán","Lễ hội Lim","Vu Lan"],c:1},
+
+{q:"Đàn tranh truyền thống thường có bao nhiêu dây?",a:["12","16","20","24"],c:1},
+
+{q:"Loại hình hát Xoan gắn với tỉnh nào?",a:["Bắc Ninh","Phú Thọ","Nam Định","Hà Nội"],c:1},
+
+{q:"Tục thờ Hùng Vương được UNESCO công nhận năm nào?",a:["2010","2012","2014","2016"],c:1},
+
+{q:"Tuồng còn được gọi là gì?",a:["Hát bội","Hát chèo","Hát xẩm","Hát văn"],c:0},
+
+{q:"Múa rối nước ra đời ở vùng nào?",a:["Đồng bằng sông Hồng","Tây Nguyên","Nam Bộ","Miền Trung"],c:0},
+
+{q:"Áo dài truyền thống thường mặc với gì?",a:["Quần lụa","Váy","Khăn choàng","Quần jeans"],c:0},
+
+{q:"Lễ hội Lim gắn với di sản nào?",a:["Chèo","Quan họ","Ca trù","Xẩm"],c:1},
+
+{q:"Không gian văn hóa cồng chiêng thuộc dân tộc nào nổi bật?",a:["Kinh","Tày","Ê Đê","Hoa"],c:2}
+
+]
+
+let quiz=[]
 let current=0
 let score=0
 
+/* QUIZ THƯỜNG */
+
 function startQuiz(){
+
+quiz=[...normalQuiz]
+
+startGame()
+
+}
+
+/* QUIZ HỌC GIẢ */
+
+function startScholarQuiz(){
+
+quiz=[...scholarQuiz]
+
+startGame()
+
+}
+
+function startGame(){
 
 current=0
 score=0
@@ -501,8 +570,3 @@ let j=Math.floor(Math.random()*(i+1))
 }
 
 }
-
-</script>
-
-</body>
-</html>
