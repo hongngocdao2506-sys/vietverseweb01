@@ -1,506 +1,421 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VietVerse – Explore the Viet Side</title>
 
-<title>VietVerse – Explore the Viet Side</title>
+    <link rel="preload" as="image" href="Background web@4x.png">
+    <link rel="preload" as="image" href="cua@4x.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        body {
+            font-family: "Be Vietnam Pro", sans-serif;
+            background: #f4ece4 url("Background web@4x.png") center/cover fixed no-repeat;
+            color: #3a2412;
+            overflow-x: hidden;
+        }
 
-body{
-font-family:"Be Vietnam Pro",sans-serif;
-background:url("Background web@4x.png") center/cover fixed;
-color:#3a2412;
-overflow-x:hidden;
-}
+        /* SECTIONS */
+        section {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            animation: fade 1s;
+        }
 
-/* SECTIONS */
+        section.active {
+            display: flex;
+        }
 
-section{
-min-height:100vh;
-display:none;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:60px;
-animation:fade 1s;
-}
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(20px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
 
-section.active{
-display:flex;
-}
+        /* TITLES */
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
 
-@keyframes fade{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
-}
+        h2 {
+            font-family: "Playfair Display";
+            margin-bottom: 15px;
+        }
 
-/* TITLES */
+        /* BUTTON */
+        button {
+            padding: 14px 28px;
+            background: #8b4d22;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
 
-h1{
-font-family:"Playfair Display",serif;
-font-size:60px;
-margin-bottom:20px;
-}
+        button:hover {
+            background: #6b3514;
+        }
 
-h2{
-font-family:"Playfair Display";
-margin-bottom:15px;
-}
+        /* MENU */
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
 
-/* BUTTON */
+        .card {
+            width: 240px;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-button{
-padding:14px 28px;
-background:#8b4d22;
-border:none;
-border-radius:10px;
-color:white;
-font-size:16px;
-cursor:pointer;
-margin:10px;
-}
+        .card:hover {
+            transform: translateY(-10px);
+        }
 
-button:hover{
-background:#6b3514;
-}
+        /* DOOR FIX */
+        #door {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex; /* Hiện ngay lập tức */
+            z-index: 9999;
+            cursor: pointer;
+            background-color: #3a2412; /* Nền dự phòng */
+        }
 
-/* MENU */
+        .door {
+            width: 50%;
+            height: 100%;
+            background-image: url("cua@4x.png");
+            background-size: 200% 100%; /* Căn chỉnh ảnh cửa */
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
 
-.menu{
-display:flex;
-flex-wrap:wrap;
-gap:30px;
-justify-content:center;
-margin-top:30px;
-}
+        .left { background-position: left center; }
+        .right { background-position: right center; }
 
-.card{
-width:240px;
-background:white;
-padding:30px;
-border-radius:14px;
-box-shadow:0 12px 30px rgba(0,0,0,0.25);
-cursor:pointer;
-transition:0.3s;
-}
+        #door.open .left { transform: translateX(-100%); }
+        #door.open .right { transform: translateX(100%); }
+        #door.open .doorText { opacity: 0; transition: 0.5s; }
 
-.card:hover{
-transform:translateY(-10px);
-}
+        .doorText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+        }
 
-/* DOOR */
+        .title {
+            font-size: 70px;
+            font-family: "Playfair Display";
+        }
 
-#door{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-z-index:9999;
-cursor:pointer;
-}
+        .slogan {
+            font-size: 22px;
+            margin-top: 10px;
+        }
 
-.door{
-width:50%;
-height:100%;
-background-image:url("cua@4x.png");
-background-size:100% 100%;
-transition:transform 1.8s;
-}
+        .note {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
 
-.left{background-position:left;}
-.right{background-position:right;}
+        /* LANTERNS */
+        .lantern {
+            position: fixed;
+            bottom: -100px;
+            font-size: 28px;
+            animation: lantern 12s linear infinite;
+        }
 
-#door.open .left{transform:translateX(-100%)}
-#door.open .right{transform:translateX(100%)}
+        @keyframes lantern {
+            0% { transform: translateY(0) }
+            100% { transform: translateY(-120vh) }
+        }
 
-.doorText{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-color:white;
-text-align:center;
-}
+        /* CONTENT */
+        .content {
+            max-width: 750px;
+            line-height: 1.7;
+            font-size: 18px;
+        }
 
-.title{
-font-size:70px;
-font-family:"Playfair Display";
-}
+        /* GALLERY */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
 
-.slogan{
-font-size:22px;
-margin-top:10px;
-}
+        .gallery div {
+            width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
 
-.note{
-margin-top:20px;
-opacity:0.7;
-}
+        /* QUIZ */
+        .quiz button {
+            display: block;
+            margin: 10px auto;
+        }
 
-/* LANTERNS */
+        /* PROGRESS BAR */
+        #progressContainer {
+            width: 80%;
+            background: #ddd;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        #progressBar {
+            width: 0%;
+            height: 100%;
+            background: #8b4d22;
+            transition: 0.3s;
+        }
 
-.lantern{
-position:fixed;
-bottom:-100px;
-font-size:28px;
-animation:lantern 12s linear infinite;
-}
-
-@keyframes lantern{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
-}
-
-/* CONTENT */
-
-.content{
-max-width:750px;
-line-height:1.7;
-font-size:18px;
-}
-
-/* GALLERY */
-
-.gallery{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-justify-content:center;
-}
-
-.gallery div{
-width:200px;
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* QUIZ */
-
-.quiz button{
-display:block;
-margin:10px auto;
-}
-
-footer{
-margin-top:40px;
-opacity:0.6;
-}
-
-</style>
+        footer {
+            margin-top: 40px;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- LANTERNS -->
+    <div class="lantern" style="left:10%">🏮</div>
+    <div class="lantern" style="left:30%">🏮</div>
+    <div class="lantern" style="left:60%">🏮</div>
+    <div class="lantern" style="left:80%">🏮</div>
 
-<div class="lantern" style="left:10%">🏮</div>
-<div class="lantern" style="left:30%">🏮</div>
-<div class="lantern" style="left:60%">🏮</div>
-<div class="lantern" style="left:80%">🏮</div>
-
-<!-- DOOR -->
-
-<div id="door">
-
-<div class="door left"></div>
-<div class="door right"></div>
-
-<div class="doorText">
-
-<div class="title">VietVerse</div>
-
-<div class="slogan">Explore the Viet Side</div>
-
-<div class="note">Bấm vào màn hình để bắt đầu hành trình văn hóa</div>
-
-</div>
-
-</div>
-
-<!-- HOME -->
-
-<section id="home" class="active">
-
-<h1>Chào mừng đến với VietVerse</h1>
-
-<p class="content">
-VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại. 
-Tại đây, bạn có thể khám phá những giá trị truyền thống – từ nghệ thuật dân gian đến phong tục tập quán – 
-thông qua những trải nghiệm trực quan và sinh động.
-</p>
-
-<button onclick="go('menu')">Bắt đầu khám phá</button>
-
-</section>
-
-<!-- MENU -->
-
-<section id="menu">
-
-<h1>Khám phá VietVerse</h1>
-
-<div class="menu">
-
-<div class="card" onclick="go('exploreMenu')">
-
-<h2>🧭 Khám phá văn hóa</h2>
-<p>Tìm hiểu các lĩnh vực văn hóa Việt.</p>
-
-</div>
-
-<div class="card" onclick="go('map')">
-
-<h2>🗺 Văn hóa vùng miền</h2>
-<p>Khám phá Bắc – Trung – Nam.</p>
-
-</div>
-
-<div class="card" onclick="go('gallery')">
-
-<h2>🎨 Thư viện văn hóa</h2>
-
-</div>
-
-<div class="card" onclick="startQuiz()">
-
-<h2>🧠 Quiz văn hóa</h2>
-
-</div>
-
-<div class="card" onclick="go('survey')">
-
-<h2>📊 Kết quả khảo sát</h2>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- MAP -->
-
-<section id="map">
-
-<h1>Bản đồ văn hóa</h1>
-
-<button onclick="region('north')">Miền Bắc</button>
-<button onclick="region('central')">Miền Trung</button>
-<button onclick="region('south')">Miền Nam</button>
-
-<p id="regionText" class="content"></p>
-
-<button onclick="go('menu')">Quay lại</button>
-
-</section>
-
-<!-- GALLERY -->
-
-<section id="gallery">
-
-<h1>Thư viện văn hóa Việt</h1>
-
-<div class="gallery">
-
-<div>🍜 Phở</div>
-<div>🥖 Bánh mì</div>
-<div>👘 Áo dài</div>
-<div>🎭 Múa rối nước</div>
-<div>🖼 Tranh Đông Hồ</div>
-
-</div>
-
-<button onclick="go('menu')">Quay lại</button>
-
-</section>
-
-<!-- QUIZ -->
-
-<section id="quiz">
-    <h1>Quiz văn hóa</h1>
-    
-    <div id="progressContainer" style="width: 80%; background: #ddd; height: 10px; border-radius: 5px; margin: 20px auto; overflow: hidden;">
-        <div id="progressBar" style="width: 0%; height: 100%; background: #8b4d22; transition: 0.3s;"></div>
+    <div id="door">
+        <div class="door left"></div>
+        <div class="door right"></div>
+        <div class="doorText">
+            <div class="title">VietVerse</div>
+            <div class="slogan">Explore the Viet Side</div>
+            <div class="note">Bấm vào màn hình để bắt đầu hành trình văn hóa</div>
+        </div>
     </div>
-    <p id="progressText" style="font-size: 14px; margin-bottom: 20px;">Câu 1/20</p>
-    
-    <h2 id="question"></h2>
-    <div id="answers"></div>
-    <p id="quizResult"></p>
-</section>
 
-<!-- SURVEY -->
+    <section id="home" class="active">
+        <h1>Chào mừng đến với VietVerse</h1>
+        <p class="content">
+            VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại. <br>
+            Tại đây, bạn có thể khám phá những giá trị truyền thống – từ nghệ thuật dân gian đến phong tục tập quán – <br>
+            thông qua những trải nghiệm trực quan và sinh động.
+        </p>
+        <button onclick="go('menu')">Bắt đầu khám phá</button>
+    </section>
 
-<section id="survey">
+    <section id="menu">
+        <h1>Khám phá VietVerse</h1>
+        <div class="menu">
+            <div class="card" onclick="go('exploreMenu')">
+                <h2>🧭 Khám phá văn hóa</h2>
+                <p>Tìm hiểu các lĩnh vực văn hóa Việt.</p>
+            </div>
+            <div class="card" onclick="go('map')">
+                <h2>🗺 Văn hóa vùng miền</h2>
+                <p>Khám phá Bắc – Trung – Nam.</p>
+            </div>
+            <div class="card" onclick="go('gallery')">
+                <h2>🎨 Thư viện văn hóa</h2>
+            </div>
+            <div class="card" onclick="startQuiz()">
+                <h2>🧠 Quiz văn hóa</h2>
+            </div>
+            <div class="card" onclick="go('survey')">
+                <h2>📊 Kết quả khảo sát</h2>
+            </div>
+        </div>
+    </section>
 
-<h1>Kết quả khảo sát học sinh</h1>
+    <section id="map">
+        <h1>Bản đồ văn hóa</h1>
+        <button onclick="region('north')">Miền Bắc</button>
+        <button onclick="region('central')">Miền Trung</button>
+        <button onclick="region('south')">Miền Nam</button>
+        <p id="regionText" class="content"></p>
+        <button onclick="go('menu')">Quay lại</button>
+    </section>
 
-<p class="content">
-80% học sinh từng nghe đến văn hóa Việt Nam.  
-50% học sinh từng chủ động tìm hiểu văn hóa Việt qua internet hoặc sách.  
-Điều này cho thấy việc xây dựng một nền tảng số như VietVerse có thể góp phần giúp học sinh tiếp cận văn hóa dân tộc một cách dễ dàng và hấp dẫn hơn.
-</p>
+    <section id="gallery">
+        <h1>Thư viện văn hóa Việt</h1>
+        <div class="gallery">
+            <div>🍜 Phở</div>
+            <div>🥖 Bánh mì</div>
+            <div>👘 Áo dài</div>
+            <div>🎭 Múa rối nước</div>
+            <div>🖼 Tranh Đông Hồ</div>
+        </div>
+        <button onclick="go('menu')">Quay lại</button>
+    </section>
 
-<button onclick="go('menu')">Quay lại</button>
+    <section id="quiz">
+        <h1>Quiz văn hóa</h1>
+        <div id="progressContainer">
+            <div id="progressBar"></div>
+        </div>
+        <p id="progressText" style="font-size: 14px; margin-bottom: 20px;">Câu 1/20</p>
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+        <p id="quizResult"></p>
+    </section>
 
-</section>
+    <section id="survey">
+        <h1>Kết quả khảo sát học sinh</h1>
+        <p class="content">
+            80% học sinh từng nghe đến văn hóa Việt Nam. <br>
+            50% học sinh từng chủ động tìm hiểu văn hóa Việt qua internet hoặc sách. <br>
+            Điều này cho thấy việc xây dựng một nền tảng số như VietVerse có thể góp phần giúp học sinh tiếp cận văn hóa dân tộc một cách dễ dàng và hấp dẫn hơn.
+        </p>
+        <button onclick="go('menu')">Quay lại</button>
+    </section>
 
-<footer>
+    <footer>
+        VietVerse © 2026 – Explore the Viet Side
+    </footer>
 
-VietVerse © 2026 – Explore the Viet Side
+    <script>
+        /* DOOR FIX: Mở ngay khi click */
+        const door = document.getElementById("door");
+        door.addEventListener('click', function() {
+            this.classList.add("open");
+            setTimeout(() => {
+                this.style.display = "none";
+            }, 1600);
+        });
 
-</footer>
+        /* NAV */
+        function go(target) {
+            document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+            const el = document.getElementById(target);
+            if(el) el.classList.add("active");
+        }
 
-<script>
+        /* REGION */
+        function region(r) {
+            const text = {
+                north: "Miền Bắc là cái nôi của nhiều giá trị văn hóa truyền thống như quan họ, ca trù và những lễ hội lâu đời.",
+                central: "Miền Trung mang vẻ đẹp trầm mặc với di sản cố đô Huế, nhã nhạc cung đình và các làng nghề truyền thống.",
+                south: "Miền Nam nổi bật với văn hóa sông nước, đờn ca tài tử và những lễ hội mang đậm tinh thần cộng đồng."
+            };
+            document.getElementById("regionText").innerText = text[r];
+        }
 
-/* DOOR */
+        /* QUIZ */
+        const quiz = [
+            { q: "Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
+            { q: "Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
+            { q: "Dòng tranh dân gian nổi tiếng với kỹ thuật in mộc bản và màu sắc tự nhiên?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
+            { q: "Âm nhạc cung đình triều Nguyễn được gọi là gì?", a: ["Ca trù", "Nhã nhạc cung đình Huế", "Hát văn", "Quan họ"], c: 1 },
+            { q: "Nhạc cụ truyền thống chỉ có một dây nhưng tạo được nhiều cao độ?", a: ["Đàn tranh", "Đàn nguyệt", "Đàn bầu", "Đàn tỳ bà"], c: 2 },
+            { q: "Nhà thiết kế góp phần cải tiến áo dài Việt Nam vào thập niên 1930?", a: ["Cát Tường", "Nguyễn Gia Trí", "Tô Ngọc Vân", "Lê Phổ"], c: 0 },
+            { q: "Phố cổ nào của Việt Nam được UNESCO công nhận là Di sản Thế giới năm 1999?", a: ["Huế", "Hội An", "Hà Nội", "Đà Nẵng"], c: 1 },
+            { q: "Lễ hội tưởng nhớ các vua Hùng được tổ chức ở đâu?", a: ["Huế", "Phú Thọ", "Ninh Bình", "Quảng Nam"], c: 1 },
+            { q: "Món ăn thường được xem là biểu tượng quốc gia của ẩm thực Việt Nam?", a: ["Bún chả", "Phở", "Bánh xèo", "Bún bò Huế"], c: 1 },
+            { q: "Món ăn thể hiện rõ sự giao thoa ẩm thực Việt – Pháp?", a: ["Bánh mì", "Chả giò", "Bún riêu", "Bánh cuốn"], c: 0 },
+            { q: "Lễ hội Trung Thu của Việt Nam còn được gọi là gì?", a: ["Tết thiếu nhi", "Tết đoàn viên", "Tết trăng", "Cả ba"], c: 3 },
+            { q: "Di sản thiên nhiên thế giới nổi tiếng của Việt Nam?", a: ["Vịnh Hạ Long", "Hồ Ba Bể", "Hồ Tây", "Sông Hương"], c: 0 },
+            { q: "Nhạc cụ dây truyền thống thường có 16 dây?", a: ["Đàn tranh", "Đàn bầu", "Đàn nguyệt", "Đàn đá"], c: 0 },
+            { q: "Thành phố được mệnh danh là 'xứ sở sương mù' của Việt Nam?", a: ["Đà Lạt", "Huế", "Sa Pa", "Hà Nội"], c: 2 },
+            { q: "Món ăn đặc trưng của Huế?", a: ["Bún bò Huế", "Bún chả", "Bún cá", "Bún riêu"], c: 0 },
+            { q: "Trang phục truyền thống biểu tượng của phụ nữ Việt Nam?", a: ["Áo dài", "Kimono", "Hanbok", "Sari"], c: 0 },
+            { q: "Loại hình sân khấu truyền thống mang tính bác học?", a: ["Tuồng", "Chèo", "Cải lương", "Kịch"], c: 0 },
+            { q: "Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
+            { q: "Thành phố bên dòng sông Hương?", a: ["Huế", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 },
+            { q: "Loại hình âm nhạc truyền thống miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
+        ];
 
-const door=document.getElementById("door")
+        let current = 0;
+        let score = 0;
 
-door.onclick=function(){
+        function startQuiz() {
+            current = 0;
+            score = 0;
+            go("quiz");
+            load();
+        }
 
-this.classList.add("open")
-
-setTimeout(()=>{
-this.style.display="none"
-},1800)
-
-}
-
-/* NAV */
-
-function go(target){
-
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
-
-document.getElementById(target).classList.add("active")
-
-}
-
-/* REGION */
-
-function region(r){
-
-const text={
-
-north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa truyền thống như quan họ, ca trù và những lễ hội lâu đời.",
-
-central:"Miền Trung mang vẻ đẹp trầm mặc với di sản cố đô Huế, nhã nhạc cung đình và các làng nghề truyền thống.",
-
-south:"Miền Nam nổi bật với văn hóa sông nước, đờn ca tài tử và những lễ hội mang đậm tinh thần cộng đồng."
-
-}
-
-document.getElementById("regionText").innerText=text[r]
-
-}
-
-/* QUIZ */
-
-/* QUIZ */
-/* QUIZ */
-const quiz = [
-    { q: "Trong kho tàng âm nhạc dân gian Việt Nam, loại hình hát giao duyên nào được xem là biểu tượng của văn hóa vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
-    { q: "Loại hình nghệ thuật sân khấu dân gian nào của Việt Nam được biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
-    { q: "Dòng tranh dân gian nổi tiếng với kỹ thuật in mộc bản và màu sắc tự nhiên?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
-    { q: "Âm nhạc cung đình triều Nguyễn được gọi là gì?", a: ["Ca trù", "Nhã nhạc cung đình Huế", "Hát văn", "Quan họ"], c: 1 },
-    { q: "Nhạc cụ truyền thống chỉ có một dây nhưng tạo được nhiều cao độ?", a: ["Đàn tranh", "Đàn nguyệt", "Đàn bầu", "Đàn tỳ bà"], c: 2 },
-    { q: "Nhà thiết kế góp phần cải tiến áo dài Việt Nam vào thập niên 1930?", a: ["Cát Tường", "Nguyễn Gia Trí", "Tô Ngọc Vân", "Lê Phổ"], c: 0 },
-    { q: "Phố cổ nào của Việt Nam được UNESCO công nhận là Di sản Thế giới năm 1999?", a: ["Huế", "Hội An", "Hà Nội", "Đà Nẵng"], c: 1 },
-    { q: "Lễ hội tưởng nhớ các vua Hùng được tổ chức ở đâu?", a: ["Huế", "Phú Thọ", "Ninh Bình", "Quảng Nam"], c: 1 },
-    { q: "Món ăn thường được xem là biểu tượng quốc gia của ẩm thực Việt Nam?", a: ["Bún chả", "Phở", "Bánh xèo", "Bún bò Huế"], c: 1 },
-    { q: "Món ăn thể hiện rõ sự giao thoa ẩm thực Việt – Pháp?", a: ["Bánh mì", "Chả giò", "Bún riêu", "Bánh cuốn"], c: 0 },
-    { q: "Lễ hội Trung Thu của Việt Nam còn được gọi là gì?", a: ["Tết thiếu nhi", "Tết đoàn viên", "Tết trăng", "Cả ba"], c: 3 },
-    { q: "Di sản thiên nhiên thế giới nổi tiếng của Việt Nam?", a: ["Vịnh Hạ Long", "Hồ Ba Bể", "Hồ Tây", "Sông Hương"], c: 0 },
-    { q: "Nhạc cụ dây truyền thống thường có 16 dây?", a: ["Đàn tranh", "Đàn bầu", "Đàn nguyệt", "Đàn đá"], c: 0 },
-    { q: "Thành phố được mệnh danh là 'xứ sở sương mù' của Việt Nam?", a: ["Đà Lạt", "Huế", "Sa Pa", "Hà Nội"], c: 2 },
-    { q: "Món ăn đặc trưng của Huế?", a: ["Bún bò Huế", "Bún chả", "Bún cá", "Bún riêu"], c: 0 },
-    { q: "Trang phục truyền thống biểu tượng của phụ nữ Việt Nam?", a: ["Áo dài", "Kimono", "Hanbok", "Sari"], c: 0 },
-    { q: "Loại hình sân khấu truyền thống mang tính bác học?", a: ["Tuồng", "Chèo", "Cải lương", "Kịch"], c: 0 },
-    { q: "Làng tranh dân gian nổi tiếng ở Bắc Ninh?", a: ["Đông Hồ", "Hàng Trống", "Kim Hoàng", "Sình"], c: 0 },
-    { q: "Thành phố bên dòng sông Hương?", a: ["Huế", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 },
-    { q: "Loại hình âm nhạc truyền thống miền Nam?", a: ["Quan họ", "Ca trù", "Đờn ca tài tử", "Chèo"], c: 2 }
-];
-
-let current = 0;
-let score = 0;
-
-function startQuiz() {
-    current = 0;
-    score = 0;
-    go("quiz");
-    load();
-}
-
-function updateProgress() {
-    const percent = ((current) / quiz.length) * 100;
-    document.getElementById("progressBar").style.width = percent + "%";
-    document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
-}
-
-function load() {
-    // Nếu hoàn thành hết các câu hỏi
-    if (current >= quiz.length) {
-        document.getElementById("progressBar").style.width = "100%";
-        document.getElementById("progressText").innerText = "Hoàn thành!";
-        document.getElementById("question").innerText = "Chúc mừng! Bạn đã hoàn thành Quiz.";
-        document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Quay lại Menu</button>`;
-        document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`;
-        return;
-    }
-
-    updateProgress();
-    const q = quiz[current];
-    document.getElementById("question").innerText = q.q;
-    const answersContainer = document.getElementById("answers");
-    answersContainer.innerHTML = "";
-    document.getElementById("quizResult").innerText = "";
-
-    q.a.forEach((t, i) => {
-        const btn = document.createElement("button");
-        btn.innerText = t;
-        btn.onclick = () => {
-            // Khóa các nút để tránh bấm nhiều lần
-            const allBtns = answersContainer.querySelectorAll("button");
-            allBtns.forEach(b => b.disabled = true);
-
-            if (i === q.c) {
-                document.getElementById("quizResult").innerText = "Chính xác! 🎉";
-                document.getElementById("quizResult").style.color = "#2d5a27";
-                score++;
-            } else {
-                document.getElementById("quizResult").innerText = "Chưa đúng. Đáp án là: " + q.a[q.c];
-                document.getElementById("quizResult").style.color = "#a02020";
+        function load() {
+            if (current >= quiz.length) {
+                document.getElementById("progressBar").style.width = "100%";
+                document.getElementById("progressText").innerText = "Hoàn thành!";
+                document.getElementById("question").innerText = "Chúc mừng! Bạn đã hoàn thành Quiz.";
+                document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Quay lại Menu</button>`;
+                document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`;
+                return;
             }
 
-            // Chờ 1.2s rồi tự động sang câu tiếp theo
-            setTimeout(() => {
-                current++;
-                load();
-            }, 1200);
-        };
-        answersContainer.appendChild(btn);
-    });
-}
-    
-</script>
+            const percent = (current / quiz.length) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+            document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
 
+            const q = quiz[current];
+            document.getElementById("question").innerText = q.q;
+            const answers = document.getElementById("answers");
+            answers.innerHTML = "";
+            document.getElementById("quizResult").innerText = "";
+
+            q.a.forEach((t, i) => {
+                const btn = document.createElement("button");
+                btn.innerText = t;
+                btn.onclick = () => {
+                    const allBtns = answers.querySelectorAll("button");
+                    allBtns.forEach(b => b.disabled = true);
+
+                    if (i === q.c) {
+                        document.getElementById("quizResult").innerText = "Chính xác!";
+                        score++;
+                    } else {
+                        document.getElementById("quizResult").innerText = "Chưa đúng.";
+                    }
+
+                    setTimeout(() => {
+                        current++;
+                        load();
+                    }, 1200);
+                };
+                answers.appendChild(btn);
+            });
+        }
+    </script>
 </body>
 </html>
-```
