@@ -87,19 +87,24 @@
         #door.open .doorText { opacity: 0; transition: 0.5s; }
         /* --- HẾT PHẦN CỬA --- */
 
-        /* LANTERNS */
-        .lantern { position: fixed; bottom: -100px; font-size: 28px; animation: lantern 12s linear infinite; }
-        @keyframes lantern { 0% { transform: translateY(0) } 100% { transform: translateY(-120vh) } }
+      /* HIỆU ỨNG HOA ĐÀO RƠI */
+        .petal {
+            position: fixed;
+            top: -10%;
+            background-color: #ffb7c5; /* Màu hồng nhạt hoa đào */
+            border-radius: 150% 0 150% 0; /* Dáng cánh hoa */
+            opacity: 0.8;
+            z-index: 1; /* Nằm dưới cửa nhưng trên nền */
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
 
-        .content { max-width: 750px; line-height: 1.7; font-size: 18px; }
-        .gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .gallery div { width: 200px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
-
-        #progressContainer { width: 80%; background: #ddd; height: 10px; border-radius: 5px; margin: 20px auto; overflow: hidden; }
-        #progressBar { width: 0%; height: 100%; background: #8b4d22; transition: 0.3s; }
-        footer { margin-top: 40px; opacity: 0.6; padding-bottom: 20px;}
-    </style>
-</head>
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
 
 <body>
     <div class="lantern" style="left:10%">🏮</div><div class="lantern" style="left:30%">🏮</div>
@@ -340,6 +345,37 @@
                 });
             }, 100);
         }
+                // Hàm tạo hiệu ứng hoa đào rơi
+        function createPetals() {
+            const container = document.body;
+            const petalCount = 25; // Số lượng cánh hoa trên màn hình
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                // Các thông số ngẫu nhiên
+                const size = Math.random() * 15 + 10 + "px"; // Kích thước từ 10px - 25px
+                const left = Math.random() * 100 + "vw"; // Vị trí ngang ngẫu nhiên
+                const duration = Math.random() * 5 + 5 + "s"; // Tốc độ rơi từ 5s - 10s
+                const delay = Math.random() * 5 + "s"; // Thời gian chờ bắt đầu ngẫu nhiên
+
+                petal.style.width = size;
+                petal.style.height = size;
+                petal.style.left = left;
+                petal.style.animationDuration = duration;
+                petal.style.animationDelay = delay;
+                
+                // Thêm độ nghiêng ngẫu nhiên cho cánh hoa
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                container.appendChild(petal);
+            }
+        }
+
+        // Chạy hàm tạo hoa đào ngay khi load trang
+        createPetals();
+                    
     </script>
 </body>
 </html>
