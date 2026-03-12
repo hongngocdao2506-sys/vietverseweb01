@@ -86,10 +86,24 @@ cursor:pointer;
 width:50%;
 height:100%;
 
-background:url("cua@4x.png") center/cover no-repeat;
+background-image:url("cua@4x.png");
+background-size:200% 100%;
+background-repeat:no-repeat;
 
-transition:transform 1.6s ease;
+transition:transform 1.4s ease;
 
+}
+
+/* nửa trái của cửa */
+
+.left{
+background-position:left center;
+}
+
+/* nửa phải của cửa */
+
+.right{
+background-position:right center;
 }
 
 .right{
@@ -97,13 +111,12 @@ transform:scaleX(-1);
 }
 
 #doorContainer.open .left{
-transform:translateX(-100%);
+transform:translateX(-110%);
 }
 
 #doorContainer.open .right{
-transform:translateX(100%) scaleX(-1);
+transform:translateX(110%);
 }
-
 /* TITLE ON DOOR */
 
 #doorTitle{
@@ -302,14 +315,24 @@ Hãy thử hoàn thành bài khảo sát văn hóa với điểm số cao nhất
 
 /* DOOR */
 
+let doorOpened=false;
+
 function openDoor(){
 
-document.getElementById("doorContainer").classList.add("open")
+if(doorOpened) return;
+
+doorOpened=true;
+
+const door=document.getElementById("doorContainer");
+const title=document.getElementById("doorTitle");
+
+door.classList.add("open");
+title.style.opacity="0";
 
 setTimeout(()=>{
-document.getElementById("doorContainer").style.display="none"
-document.getElementById("doorTitle").style.display="none"
-},1600)
+door.style.display="none";
+title.style.display="none";
+},1400);
 
 }
 
