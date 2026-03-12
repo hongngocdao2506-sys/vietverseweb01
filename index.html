@@ -50,85 +50,42 @@
         }
         .card:hover { transform: translateY(-10px); }
 
-/* CSS CHO PHẦN CỬA MỚI - GIỐNG ẢNH MẪU */
+        /* --- PHẦN CỬA FIX THEO Ý BẠN --- */
         #door { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            display: flex; 
-            z-index: 9999; 
-            cursor: pointer; 
-            background: #f4ece4 url("Background web@4x.png") center/cover fixed no-repeat; /* Nền dự phòng */
-            pointer-events: all; /* Đảm bảo luôn click được */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            display: flex; z-index: 9999; cursor: pointer; background-color: #3a2412; 
+            overflow: hidden;
         }
-
         .door { 
-            width: 50%; 
-            height: 100%; 
-            background-image: url("cua@4x.png"); /* ĐÂY LÀ FILE ẢNH MỚI BẠN CẦN THAY */
-            background-size: 100% 100%; /* Đảm bảo ảnh cửa full cánh */
-            background-position: center;
+            width: 50%; height: 100%; 
+            background-image: url("cua@4x.png"); /* Dùng chung 1 ảnh */
+            background-size: 100% 100%; /* Mỗi cánh hiện full tấm ảnh */
             background-repeat: no-repeat;
-            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            will-change: transform; /* Tối ưu hiệu năng */
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
+            will-change: transform;
         }
-
+        /* Cánh trái: Lật ngang để đối xứng hoa văn (nếu muốn) */
         .left { 
-            background-position: left center; 
-            transform-origin: left center;
+            background-position: center;
+            transform: scaleX(-1); /* Lật ngang để tạo đối xứng cửa đôi */
         }
+        /* Cánh phải: Giữ nguyên */
         .right { 
-            background-position: right center; 
-            transform-origin: right center;
+            background-position: center;
         }
 
-        /* Hiệu ứng mở cửa */
-        #door.open .left { 
-            transform: scaleX(0); /* Mở mờ dần sang hai bên */
-            opacity: 0;
-        }
-        #door.open .right { 
-            transform: scaleX(0); 
-            opacity: 0;
-        }
-
-        #door.open .doorText { 
-            opacity: 0; 
-            transition: opacity 0.5s ease; 
-        }
+        /* Hiệu ứng tách đôi */
+        #door.open .left { transform: translateX(-100%) scaleX(-1); opacity: 0; }
+        #door.open .right { transform: translateX(100%); opacity: 0; }
 
         .doorText { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            color: #3a2412; /* Màu nâu đậm để nổi trên nền cửa */
-            text-align: center; 
-            width: 100%; 
-            pointer-events: none; /* Click xuyên qua chữ */
-            z-index: 10000;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            color: white; text-align: center; width: 100%; pointer-events: none; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
-
-        .title { 
-            font-size: 70px; 
-            font-family: "Playfair Display", serif;
-            font-weight: 700;
-        }
-
-        .slogan { 
-            font-size: 22px; 
-            margin-top: 10px; 
-            font-weight: 400;
-        }
-
-        .note { 
-            margin-top: 20px; 
-            font-size: 16px;
-            opacity: 0.8; 
-            font-weight: 300;
-        }
+        .title { font-size: 70px; font-family: "Playfair Display"; }
+        #door.open .doorText { opacity: 0; transition: 0.5s; }
+        /* --- HẾT PHẦN CỬA --- */
 
         /* LANTERNS */
         .lantern { position: fixed; bottom: -100px; font-size: 28px; animation: lantern 12s linear infinite; }
@@ -148,15 +105,16 @@
     <div class="lantern" style="left:10%">🏮</div><div class="lantern" style="left:30%">🏮</div>
     <div class="lantern" style="left:60%">🏮</div><div class="lantern" style="left:80%">🏮</div>
 
-  <div id="door">
+    <div id="door">
         <div class="door left"></div>
         <div class="door right"></div>
         <div class="doorText">
             <div class="title">VietVerse</div>
             <div class="slogan">Explore the Viet Side</div>
-            <div class="note">Chạm vào cánh cửa để bước vào</div>
+            <div class="note" style="margin-top: 20px; font-style: italic;">Chạm vào màn hình để bắt đầu</div>
         </div>
-    </div> 
+    </div>
+
     <section id="home" class="active">
         <h1>Chào mừng đến với VietVerse</h1>
         <p class="content">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại.</p>
@@ -217,15 +175,11 @@
         <p id="quizResult" style="margin-top: 15px; font-weight: bold;"></p>
     </section>
 
-  <section id="survey">
+    <section id="survey">
         <h1>Báo Cáo Khảo Sát Học Sinh</h1>
-        <p class="content" style="margin-bottom: 30px;">
-            Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.
-        </p>
-
-        <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 800px; color: #3a2412;">
+        <p class="content" style="margin-bottom: 30px;">Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.</p>
+        <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; width: 100%; max-width: 800px; color: #3a2412;">
             <h3 style="margin-bottom: 25px; color: #8b4d22;">Mức độ quan tâm đến văn hóa (%)</h3>
-            
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
@@ -233,74 +187,51 @@
                         <span style="font-weight: bold;"><span class="stat-number" data-target="80">0</span>%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #8b4d22; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div class="stat-bar" style="background: #8b4d22; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
                     </div>
                 </div>
-
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Yêu thích học qua ứng dụng số</span>
                         <span style="font-weight: bold;"><span class="stat-number" data-target="92">0</span>%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #a02020; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div class="stat-bar" style="background: #a02020; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
                     </div>
                 </div>
-
                 <div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Chủ động tìm hiểu văn hóa</span>
                         <span style="font-weight: bold;"><span class="stat-number" data-target="50">0</span>%</span>
                     </div>
                     <div style="background: #ddd; height: 15px; border-radius: 10px; overflow: hidden;">
-                        <div class="stat-bar" style="background: #3a2412; width: 0%; height: 100%; border-radius: 10px; transition: width 1.5s ease-out;"></div>
+                        <div class="stat-bar" style="background: #3a2412; width: 0%; height: 100%; transition: width 1.5s ease-out;"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="menu" style="margin-top: 40px;">
-            <div class="card" style="width: 340px; cursor: default; text-align: left; padding: 25px;">
-                <h4 style="color: #8b4d22; font-size: 20px;">🔍 Rào cản</h4>
-                <p style="font-size: 15px; margin-top: 12px; line-height: 1.6;">
-                    65% học sinh cho rằng phương pháp học truyền thống hiện tại còn khô khan, thiếu tính tương tác và hình ảnh minh họa sinh động.
-                </p>
-            </div>
-            <div class="card" style="width: 340px; cursor: default; text-align: left; padding: 25px;">
-                <h4 style="color: #a02020; font-size: 20px;">💡 Giải pháp</h4>
-                <p style="font-size: 15px; margin-top: 12px; line-height: 1.6;">
-                    VietVerse hướng tới việc số hóa di sản, sử dụng Quiz tương tác và thư viện hình ảnh để xóa bỏ khoảng cách giữa Gen Z và văn hóa dân tộc.
-                </p>
-            </div>
-        </div>
-
         <button onclick="go('menu')" style="margin-top: 40px;">Quay lại Menu chính</button>
     </section>
     
     <footer>VietVerse © 2026</footer>
 
     <script>
-        // Cửa
+        // Logic Cửa
         document.getElementById("door").addEventListener('click', function() {
             this.classList.add("open");
             setTimeout(() => { this.style.display = "none"; }, 1600);
         });
 
         // Điều hướng
-       // Điều hướng
-function go(target) {
-    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    const targetSection = document.getElementById(target);
-    if (targetSection) {
-        targetSection.classList.add("active");
-        window.scrollTo(0,0);
-    }
-
-    // THÊM DÒNG NÀY: Nếu vào trang khảo sát, chạy hiệu ứng số và thanh
-    if (target === 'survey') {
-        animateSurvey();
-    }
-}
+        function go(target) {
+            document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+            const targetSection = document.getElementById(target);
+            if (targetSection) {
+                targetSection.classList.add("active");
+                window.scrollTo(0,0);
+            }
+            if (target === 'survey') { animateSurvey(); }
+        }
 
         function region(r) {
             const text = {
@@ -311,7 +242,7 @@ function go(target) {
             document.getElementById("regionText").innerText = text[r];
         }
 
-        // Quiz Logic (Đã fix hiển thị đáp án đúng)
+        // Quiz Logic
         const quiz = [
             { q: "Loại hình hát giao duyên nào là biểu tượng vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
             { q: "Nghệ thuật sân khấu biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
@@ -373,7 +304,6 @@ function go(target) {
             });
         }
 
-        // Explore Detail
         function showDetail(type) {
             const data = {
                 music: { t: "Âm nhạc", c: "Từ Nhã nhạc cung đình đến Đờn ca tài tử, âm nhạc Việt là tiếng lòng dân tộc." },
@@ -387,40 +317,29 @@ function go(target) {
             setTimeout(() => { document.getElementById("exploreDetail").scrollIntoView({ behavior: 'smooth' }); }, 100);
         }
         function closeDetail() { document.getElementById("exploreDetail").style.display = "none"; }
-        /* HÀM CHẠY HIỆU ỨNG SỐ VÀ BIỂU ĐỒ TRONG SURVEY */
-function animateSurvey() {
-    // 1. Reset các thanh về 0% để mỗi lần bấm vào đều thấy hiệu ứng chạy lại
-    const bars = document.querySelectorAll('.stat-bar');
-    bars.forEach(bar => bar.style.width = '0%');
 
-    // 2. Chạy hiệu ứng nhảy số
-    const numbers = document.querySelectorAll('.stat-number');
-    numbers.forEach(num => {
-        const target = +num.getAttribute('data-target');
-        let count = 0;
-        const speed = target / 40; // Điều chỉnh tốc độ nhanh chậm ở đây
-
-        const updateCount = () => {
-            if (count < target) {
-                count += speed;
-                num.innerText = Math.ceil(count);
-                setTimeout(updateCount, 30);
-            } else {
-                num.innerText = target;
-            }
-        };
-        updateCount();
-    });
-
-    // 3. Chạy hiệu ứng thanh biểu đồ dài ra
-    setTimeout(() => {
-        bars.forEach((bar, index) => {
-            const targetWidth = numbers[index].getAttribute('data-target');
-            bar.style.width = targetWidth + '%';
-        });
-    }, 100);
-}
-        
+        function animateSurvey() {
+            const bars = document.querySelectorAll('.stat-bar');
+            bars.forEach(bar => bar.style.width = '0%');
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(num => {
+                const target = +num.getAttribute('data-target');
+                let count = 0;
+                const updateCount = () => {
+                    if (count < target) {
+                        count += target / 40;
+                        num.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else { num.innerText = target; }
+                };
+                updateCount();
+            });
+            setTimeout(() => {
+                bars.forEach((bar, index) => {
+                    bar.style.width = numbers[index].getAttribute('data-target') + '%';
+                });
+            }, 100);
+        }
     </script>
 </body>
 </html>
