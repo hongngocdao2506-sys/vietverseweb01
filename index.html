@@ -287,6 +287,43 @@
             </div>
         </div>
     </section>
+
+    <section id="exploreMenu">
+        <h1>Tinh Hoa Văn Hóa Việt</h1>
+        <p class="content">Hành trình đi xuyên qua những giá trị di sản ngàn năm của dân tộc.</p>
+        
+        <div class="menu">
+            <div class="card" onclick="showDetail('music')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🎶</div>
+                <h2>Âm nhạc</h2>
+                <p>Giai điệu tâm hồn Việt</p>
+            </div>
+            <div class="card" onclick="showDetail('arch')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🏛️</div>
+                <h2>Kiến trúc</h2>
+                <p>Dấu ấn nghìn năm văn hiến</p>
+            </div>
+            <div class="card" onclick="showDetail('fest')">
+                <div style="font-size: 40px; margin-bottom: 10px;">🎋</div>
+                <h2>Lễ hội</h2>
+                <p>Sức sống cộng đồng</p>
+            </div>
+            <div class="card" onclick="showDetail('garment')">
+                <div style="font-size: 40px; margin-bottom: 10px;">👘</div>
+                <h2>Trang phục</h2>
+                <p>Nét duyên dáng dân tộc</p>
+            </div>
+        </div>
+
+        <div id="exploreDetail" style="margin-top: 30px; display: none; background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); color: #3a2412;">
+            <h2 id="detailTitle" style="color: #8b4d22;"></h2>
+            <p id="detailContent" class="content" style="text-align: left; margin-bottom: 20px;"></p>
+            <button onclick="closeDetail()" style="background: #3a2412; font-size: 14px; padding: 10px 20px;">Đóng nội dung</button>
+        </div>
+
+        <br>
+        <button onclick="go('menu')">Quay lại Menu</button>
+    </section>
     
 <section id="exploreMenu">
         <h1>Tinh Hoa Văn Hóa Việt</h1>
@@ -431,7 +468,7 @@
             load();
         }
 
-        function load() {
+       function load() {
             if (current >= quiz.length) {
                 document.getElementById("progressBar").style.width = "100%";
                 document.getElementById("progressText").innerText = "Hoàn thành!";
@@ -440,6 +477,45 @@
                 document.getElementById("quizResult").innerText = `Kết quả: ${score}/${quiz.length}`;
                 return;
             }
+
+            const percent = (current / quiz.length) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+            document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
+
+            const q = quiz[current];
+            document.getElementById("question").innerText = q.q;
+            const answers = document.getElementById("answers");
+            answers.innerHTML = "";
+            document.getElementById("quizResult").innerText = "";
+
+            q.a.forEach((t, i) => {
+                const btn = document.createElement("button");
+                btn.innerText = t;
+                btn.onclick = () => {
+                    const allBtns = answers.querySelectorAll("button");
+                    allBtns.forEach(b => b.disabled = true);
+
+                    const resultEl = document.getElementById("quizResult");
+                    if (i === q.c) {
+                        resultEl.innerText = "Chính xác! 🎉";
+                        resultEl.style.color = "#2d5a27";
+                        score++;
+                        btn.style.background = "#2d5a27";
+                    } else {
+                        // Hiển thị "Chưa chính xác" và hiện đáp án đúng
+                        resultEl.innerHTML = `Chưa chính xác. <br> Đáp án đúng là: <strong>${q.a[q.c]}</strong>`;
+                        resultEl.style.color = "#a02020";
+                        btn.style.background = "#a02020";
+                    }
+
+                    setTimeout(() => {
+                        current++;
+                        load();
+                    }, 2000); // Chờ 2 giây để người dùng xem đáp án
+                };
+                answers.appendChild(btn);
+            });
+        }
 
             const percent = (current / quiz.length) * 100;
             document.getElementById("progressBar").style.width = percent + "%";
@@ -507,6 +583,24 @@
         function closeDetail() {
             document.getElementById("exploreDetail").style.display = "none";
         }
+/* LOGIC CHO PHẦN KHÁM PHÁ VĂN HÓA */
+        function showDetail(type) {
+            const details = {
+                music: { t: "Âm nhạc truyền thống", c: "Việt Nam có hệ thống âm nhạc đa dạng từ Nhã nhạc cung đình Huế trang trọng đến Quan họ Kinh Bắc mượt mà, hay Đờn ca tài tử Nam Bộ phóng khoáng." },
+                arch: { t: "Kiến trúc đặc trưng", c: "Kiến trúc Việt là sự kết hợp giữa triết lý nhân sinh và thiên nhiên như mái đình làng biển cong vút hay Chùa Một Cột trên đài sen." },
+                fest: { t: "Lễ hội dân gian", c: "Lễ hội là bảo tàng sống của văn hóa như Tết Nguyên Đán thiêng liêng, hội Gióng hùng tráng hay lễ hội Ka-tê rực rỡ." },
+                garment: { t: "Trang phục di sản", c: "Ngoài Áo dài biểu tượng, Việt Nam còn có áo tứ thân mộc mạc, bộ đồ bà ba giản dị hay những tấm thổ cẩm dệt tay tỉ mỉ." }
+            };
+            document.getElementById("detailTitle").innerText = details[type].t;
+            document.getElementById("detailContent").innerText = details[type].c;
+            document.getElementById("exploreDetail").style.display = "block";
+            setTimeout(() => { document.getElementById("exploreDetail").scrollIntoView({ behavior: 'smooth' }); }, 100);
+        }
+
+        function closeDetail() {
+            document.getElementById("exploreDetail").style.display = "none";
+        }
+        
     </script>
 </body>
 </html>
