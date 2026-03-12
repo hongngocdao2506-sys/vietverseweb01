@@ -12,11 +12,7 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:"Be Vietnam Pro",sans-serif;
@@ -38,9 +34,7 @@ padding:60px;
 animation:fade 1s;
 }
 
-section.active{
-display:flex;
-}
+section.active{display:flex;}
 
 @keyframes fade{
 from{opacity:0;transform:translateY(20px)}
@@ -73,9 +67,7 @@ cursor:pointer;
 margin:10px;
 }
 
-button:hover{
-background:#6b3514;
-}
+button:hover{background:#6b3514;}
 
 /* MENU */
 
@@ -97,9 +89,7 @@ cursor:pointer;
 transition:0.3s;
 }
 
-.card:hover{
-transform:translateY(-10px);
-}
+.card:hover{transform:translateY(-10px);}
 
 /* DOOR */
 
@@ -135,6 +125,7 @@ left:50%;
 transform:translate(-50%,-50%);
 color:white;
 text-align:center;
+transition:opacity 1.8s ease;
 }
 
 .title{
@@ -142,15 +133,9 @@ font-size:70px;
 font-family:"Playfair Display";
 }
 
-.slogan{
-font-size:22px;
-margin-top:10px;
-}
+.slogan{font-size:22px;margin-top:10px;}
 
-.note{
-margin-top:20px;
-opacity:0.7;
-}
+.note{margin-top:20px;opacity:0.7;}
 
 /* LANTERNS */
 
@@ -208,14 +193,10 @@ opacity:0.6;
 
 <body>
 
-<!-- LANTERNS -->
-
 <div class="lantern" style="left:10%">🏮</div>
 <div class="lantern" style="left:30%">🏮</div>
 <div class="lantern" style="left:60%">🏮</div>
 <div class="lantern" style="left:80%">🏮</div>
-
-<!-- DOOR -->
 
 <div id="door">
 
@@ -225,32 +206,25 @@ opacity:0.6;
 <div class="doorText">
 
 <div class="title">VietVerse</div>
-
 <div class="slogan">Explore the Viet Side</div>
-
 <div class="note">Bấm vào màn hình để bắt đầu hành trình văn hóa</div>
 
 </div>
 
 </div>
 
-<!-- HOME -->
-
 <section id="home" class="active">
 
 <h1>Chào mừng đến với VietVerse</h1>
 
 <p class="content">
-VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại. 
-Tại đây, bạn có thể khám phá những giá trị truyền thống – từ nghệ thuật dân gian đến phong tục tập quán – 
-thông qua những trải nghiệm trực quan và sinh động.
+VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện sinh động, gần gũi
+giúp thế hệ trẻ khám phá di sản dân tộc một cách sinh động và đầy cảm hứng.
 </p>
 
 <button onclick="go('menu')">Bắt đầu khám phá</button>
 
 </section>
-
-<!-- MENU -->
 
 <section id="menu">
 
@@ -259,42 +233,28 @@ thông qua những trải nghiệm trực quan và sinh động.
 <div class="menu">
 
 <div class="card" onclick="go('exploreMenu')">
-
 <h2>🧭 Khám phá văn hóa</h2>
-<p>Tìm hiểu các lĩnh vực văn hóa Việt.</p>
-
 </div>
 
 <div class="card" onclick="go('map')">
-
 <h2>🗺 Văn hóa vùng miền</h2>
-<p>Khám phá Bắc – Trung – Nam.</p>
-
 </div>
 
 <div class="card" onclick="go('gallery')">
-
 <h2>🎨 Thư viện văn hóa</h2>
-
 </div>
 
 <div class="card" onclick="startQuiz()">
-
 <h2>🧠 Quiz văn hóa</h2>
-
 </div>
 
 <div class="card" onclick="go('survey')">
-
 <h2>📊 Kết quả khảo sát</h2>
-
 </div>
 
 </div>
 
 </section>
-
-<!-- MAP -->
 
 <section id="map">
 
@@ -310,11 +270,9 @@ thông qua những trải nghiệm trực quan và sinh động.
 
 </section>
 
-<!-- GALLERY -->
-
 <section id="gallery">
 
-<h1>Thư viện văn hóa Việt</h1>
+<h1>Thư viện văn hóa</h1>
 
 <div class="gallery">
 
@@ -330,11 +288,9 @@ thông qua những trải nghiệm trực quan và sinh động.
 
 </section>
 
-<!-- QUIZ -->
-
 <section id="quiz">
 
-<h1>Quiz văn hóa</h1>
+<h1>Quiz văn hóa Việt</h1>
 
 <h2 id="question"></h2>
 
@@ -342,18 +298,18 @@ thông qua những trải nghiệm trực quan và sinh động.
 
 <p id="quizResult"></p>
 
-</section>
+<button id="nextBtn" onclick="nextQuestion()">Câu hỏi tiếp theo</button>
 
-<!-- SURVEY -->
+</section>
 
 <section id="survey">
 
-<h1>Kết quả khảo sát học sinh</h1>
+<h1>Kết quả khảo sát</h1>
 
 <p class="content">
-80% học sinh từng nghe đến văn hóa Việt Nam.  
+80% học sinh từng nghe về văn hóa Việt Nam.  
 50% học sinh từng chủ động tìm hiểu văn hóa Việt qua internet hoặc sách.  
-Điều này cho thấy việc xây dựng một nền tảng số như VietVerse có thể góp phần giúp học sinh tiếp cận văn hóa dân tộc một cách dễ dàng và hấp dẫn hơn.
+Điều này cho thấy việc xây dựng một nền tảng số như VietVerse có thể giúp học sinh tiếp cận văn hóa dân tộc dễ dàng hơn.
 </p>
 
 <button onclick="go('menu')">Quay lại</button>
@@ -376,6 +332,8 @@ door.onclick=function(){
 
 this.classList.add("open")
 
+document.querySelector(".doorText").style.opacity="0"
+
 setTimeout(()=>{
 this.style.display="none"
 },1800)
@@ -397,46 +355,61 @@ document.getElementById(target).classList.add("active")
 function region(r){
 
 const text={
-
-north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa truyền thống như quan họ, ca trù và những lễ hội lâu đời.",
-
-central:"Miền Trung mang vẻ đẹp trầm mặc với di sản cố đô Huế, nhã nhạc cung đình và các làng nghề truyền thống.",
-
-south:"Miền Nam nổi bật với văn hóa sông nước, đờn ca tài tử và những lễ hội mang đậm tinh thần cộng đồng."
-
+north:"Miền Bắc là cái nôi của nhiều giá trị văn hóa truyền thống như quan họ và ca trù.",
+central:"Miền Trung mang vẻ đẹp trầm mặc với di sản cố đô Huế và nhã nhạc cung đình.",
+south:"Miền Nam nổi bật với văn hóa sông nước và đờn ca tài tử."
 }
 
 document.getElementById("regionText").innerText=text[r]
 
 }
 
-/* QUIZ */
+/* QUIZ 20 QUESTIONS */
 
 const quiz=[
 
 {q:"Trang phục truyền thống Việt Nam?",a:["Áo dài","Kimono","Hanbok"],c:0},
-
 {q:"Nhạc cụ một dây của Việt Nam?",a:["Đàn bầu","Đàn tranh","Đàn nguyệt"],c:0},
-
-{q:"Lễ hội đèn lồng nổi tiếng ở đâu?",a:["Hội An","Huế","Đà Lạt"],c:0}
+{q:"Phở có nguồn gốc từ đâu?",a:["Miền Bắc","Miền Trung","Miền Nam"],c:0},
+{q:"Tết Nguyên Đán diễn ra khi nào?",a:["Đầu năm âm lịch","Tháng 5","Tháng 9"],c:0},
+{q:"Lễ hội đèn lồng nổi tiếng?",a:["Hội An","Huế","Đà Lạt"],c:0},
+{q:"Món ăn kẹp bánh nổi tiếng?",a:["Bánh mì","Pizza","Burger"],c:0},
+{q:"Nhạc cụ dây nhiều dây?",a:["Đàn tranh","Đàn bầu","Trống"],c:0},
+{q:"Tranh dân gian nổi tiếng?",a:["Đông Hồ","Mona Lisa","Ukiyo-e"],c:0},
+{q:"Nghệ thuật múa trên nước?",a:["Múa rối nước","Ballet","Opera"],c:0},
+{q:"Thủ đô Việt Nam?",a:["Hà Nội","Huế","Sài Gòn"],c:0},
+{q:"Lễ hội Trung Thu còn gọi là?",a:["Tết thiếu nhi","Tết trăng","Tết lồng đèn"],c:1},
+{q:"Món bún nổi tiếng Huế?",a:["Bún bò Huế","Bún chả","Bún riêu"],c:0},
+{q:"Loại nhạc miền Nam?",a:["Đờn ca tài tử","Quan họ","Ca trù"],c:0},
+{q:"Trang phục truyền thống nữ?",a:["Áo dài","Kimono","Sari"],c:0},
+{q:"Nhạc cụ gảy?",a:["Đàn tranh","Trống","Kèn"],c:0},
+{q:"Thành phố nổi tiếng đèn lồng?",a:["Hội An","Huế","Đà Nẵng"],c:0},
+{q:"Món cuốn nổi tiếng?",a:["Gỏi cuốn","Taco","Sushi"],c:0},
+{q:"Lễ hội lớn nhất Việt Nam?",a:["Tết Nguyên Đán","Halloween","Noel"],c:0},
+{q:"Tranh dân gian Việt?",a:["Đông Hồ","Van Gogh","Picasso"],c:0},
+{q:"Nhạc cung đình Huế?",a:["Nhã nhạc","Jazz","Rock"],c:0}
 
 ]
 
 let current=0
+let score=0
 
 function startQuiz(){
 
+current=0
+score=0
+
 go("quiz")
 
-load()
+loadQuestion()
 
 }
 
-function load(){
+function loadQuestion(){
 
 const q=quiz[current]
 
-document.getElementById("question").innerText=q.q
+document.getElementById("question").innerText=(current+1)+"/20: "+q.q
 
 const answers=document.getElementById("answers")
 
@@ -452,11 +425,12 @@ btn.onclick=()=>{
 
 if(i===q.c){
 
-document.getElementById("quizResult").innerText="Chính xác!"
+score++
+document.getElementById("quizResult").innerText="✅ Chính xác!"
 
 }else{
 
-document.getElementById("quizResult").innerText="Chưa đúng."
+document.getElementById("quizResult").innerText="❌ Chưa đúng"
 
 }
 
@@ -465,6 +439,28 @@ document.getElementById("quizResult").innerText="Chưa đúng."
 answers.appendChild(btn)
 
 })
+
+}
+
+function nextQuestion(){
+
+current++
+
+if(current<quiz.length){
+
+document.getElementById("quizResult").innerText=""
+
+loadQuestion()
+
+}else{
+
+document.getElementById("question").innerText="Hoàn thành Quiz"
+
+document.getElementById("answers").innerHTML=""
+
+document.getElementById("quizResult").innerText="Điểm của bạn: "+score+"/20"
+
+}
 
 }
 
