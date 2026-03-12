@@ -44,13 +44,35 @@
         button:hover { background: #6b3514; }
 
         .menu { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 30px; }
-        .card {
-            width: 240px; background: white; padding: 30px; border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); cursor: pointer; transition: 0.3s;
-        }
-        .card:hover { transform: translateY(-10px); }
 
-        /* --- PHẦN CỬA FIX THEO Ý BẠN --- */
+        /* --- CARD VĂN HÓA (NỀN NÂU, VIỀN VÀNG) --- */
+        .card {
+            width: 240px; 
+            background: #5d341a; /* Nâu gỗ đậm */
+            padding: 30px; 
+            border-radius: 14px;
+            color: white; 
+            border: 3px solid;
+            /* Hiệu ứng viền vàng kim loại */
+            border-image: linear-gradient(135deg, #fbf5e2 0%, #e8ba40 20%, #ffdf60 40%, #e8ba40 60%, #b38b1d 80%, #ffdf60 100%) 1;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); 
+            cursor: pointer; 
+            transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, box-shadow;
+        }
+
+        .card h2, .card h3 { 
+            font-family: "Playfair Display", serif; 
+            color: white; 
+            font-weight: 700;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px) scale(1.03); 
+            box-shadow: 0 20px 40px rgba(232, 186, 64, 0.3); 
+        }
+
+        /* --- PHẦN CỬA --- */
         #door { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             display: flex; z-index: 9999; cursor: pointer; background-color: #3a2412; 
@@ -58,47 +80,34 @@
         }
         .door { 
             width: 50%; height: 100%; 
-            background-image: url("cua@4x.png"); /* Dùng chung 1 ảnh */
-            background-size: 100% 100%; /* Mỗi cánh hiện full tấm ảnh */
+            background-image: url("cua@4x.png"); 
+            background-size: 100% 100%; 
             background-repeat: no-repeat;
             transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
             will-change: transform;
         }
-        /* Cánh trái: Lật ngang để đối xứng hoa văn (nếu muốn) */
-        .left { 
-            background-position: center;
-            transform: scaleX(-1); /* Lật ngang để tạo đối xứng cửa đôi */
-        }
-        /* Cánh phải: Giữ nguyên */
-        .right { 
-            background-position: center;
-        }
+        .left { background-position: center; transform: scaleX(-1); }
+        .right { background-position: center; }
 
-        /* Hiệu ứng tách đôi */
         #door.open .left { transform: translateX(-100%) scaleX(-1); opacity: 0; }
         #door.open .right { transform: translateX(100%); opacity: 0; }
 
         .doorText { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             color: white; text-align: center; width: 100%; pointer-events: none; 
-            text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.7); z-index: 10001;
         }
         .title { font-size: 70px; font-family: "Playfair Display"; }
         #door.open .doorText { opacity: 0; transition: 0.5s; }
-        /* --- HẾT PHẦN CỬA --- */
 
-      /* HIỆU ỨNG HOA ĐÀO RƠI */
+        /* --- HOA ĐÀO RƠI --- */
         .petal {
-            position: fixed;
-            top: -10%;
-            background-color: #ffb7c5; /* Màu hồng nhạt hoa đào */
-            border-radius: 150% 0 150% 0; /* Dáng cánh hoa */
-            opacity: 0.8;
-            z-index: 1; /* Nằm dưới cửa nhưng trên nền */
-            pointer-events: none;
-            animation: fall linear infinite;
+            position: fixed; top: -10%;
+            background-color: #ffb7c5; 
+            border-radius: 150% 0 150% 0; 
+            opacity: 0.8; z-index: 1; 
+            pointer-events: none; animation: fall linear infinite;
         }
-
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
@@ -106,10 +115,15 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-<body>
-    <div class="lantern" style="left:10%">🏮</div><div class="lantern" style="left:30%">🏮</div>
-    <div class="lantern" style="left:60%">🏮</div><div class="lantern" style="left:80%">🏮</div>
+        .content { max-width: 750px; line-height: 1.7; font-size: 18px; }
+        .gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .gallery div { width: 200px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+        #progressContainer { width: 80%; background: #ddd; height: 10px; border-radius: 5px; margin: 20px auto; overflow: hidden; }
+        #progressBar { width: 0%; height: 100%; background: #8b4d22; transition: 0.3s; }
+        footer { margin-top: 40px; opacity: 0.6; padding-bottom: 20px; color: white; }
+    </style> </head>
 
+<body>
     <div id="door">
         <div class="door left"></div>
         <div class="door right"></div>
@@ -121,13 +135,13 @@
     </div>
 
     <section id="home" class="active">
-        <h1>Chào mừng đến với VietVerse</h1>
-        <p class="content">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại.</p>
+        <h1 style="color: white;">Chào mừng đến với VietVerse</h1>
+        <p class="content" style="color: white;">VietVerse là không gian số nơi tinh hoa văn hóa Việt Nam được tái hiện bằng công nghệ hiện đại.</p>
         <button onclick="go('menu')">Bắt đầu khám phá</button>
     </section>
 
     <section id="menu">
-        <h1>Khám phá VietVerse</h1>
+        <h1 style="color: white;">Khám phá VietVerse</h1>
         <div class="menu">
             <div class="card" onclick="go('exploreMenu')"><h2>🧭 Khám phá văn hóa</h2></div>
             <div class="card" onclick="go('map')"><h2>🗺 Văn hóa vùng miền</h2></div>
@@ -138,7 +152,7 @@
     </section>
 
     <section id="exploreMenu">
-        <h1>Tinh Hoa Văn Hóa Việt</h1>
+        <h1 style="color: white;">Tinh Hoa Văn Hóa Việt</h1>
         <div class="menu">
             <div class="card" onclick="showDetail('music')"><h3>🎶 Âm nhạc</h3></div>
             <div class="card" onclick="showDetail('arch')"><h3>🏛️ Kiến trúc</h3></div>
@@ -154,16 +168,16 @@
     </section>
 
     <section id="map">
-        <h1>Bản đồ văn hóa</h1>
+        <h1 style="color: white;">Bản đồ văn hóa</h1>
         <button onclick="region('north')">Miền Bắc</button>
         <button onclick="region('central')">Miền Trung</button>
         <button onclick="region('south')">Miền Nam</button>
-        <p id="regionText" class="content" style="margin-top: 20px;"></p>
+        <p id="regionText" class="content" style="margin-top: 20px; color: white;"></p>
         <button onclick="go('menu')">Quay lại</button>
     </section>
 
     <section id="gallery">
-        <h1>Thư viện văn hóa Việt</h1>
+        <h1 style="color: white;">Thư viện văn hóa Việt</h1>
         <div class="gallery">
             <div>🍜 Phở</div><div>🥖 Bánh mì</div><div>👘 Áo dài</div>
             <div>🎭 Múa rối nước</div><div>🖼 Tranh Đông Hồ</div>
@@ -172,17 +186,17 @@
     </section>
 
     <section id="quiz">
-        <h1>Quiz văn hóa</h1>
+        <h1 style="color: white;">Quiz văn hóa</h1>
         <div id="progressContainer"><div id="progressBar"></div></div>
-        <p id="progressText">Câu 1/20</p>
-        <h2 id="question"></h2>
+        <p id="progressText" style="color: white;">Câu 1/20</p>
+        <h2 id="question" style="color: white;"></h2>
         <div id="answers"></div>
-        <p id="quizResult" style="margin-top: 15px; font-weight: bold;"></p>
+        <p id="quizResult" style="margin-top: 15px; font-weight: bold; color: white;"></p>
     </section>
 
     <section id="survey">
-        <h1>Báo Cáo Khảo Sát Học Sinh</h1>
-        <p class="content" style="margin-bottom: 30px;">Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.</p>
+        <h1 style="color: white;">Báo Cáo Khảo Sát Học Sinh</h1>
+        <p class="content" style="margin-bottom: 30px; color: white;">Dữ liệu thu thập từ 500 học sinh về mức độ tiếp cận văn hóa số.</p>
         <div style="background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; width: 100%; max-width: 800px; color: #3a2412;">
             <h3 style="margin-bottom: 25px; color: #8b4d22;">Mức độ quan tâm đến văn hóa (%)</h3>
             <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -218,7 +232,7 @@
         <button onclick="go('menu')" style="margin-top: 40px;">Quay lại Menu chính</button>
     </section>
     
-    <footer>VietVerse © 2026</footer>
+    <footer style="color: white; text-align: center;">VietVerse © 2026</footer>
 
     <script>
         // Logic Cửa
@@ -240,14 +254,14 @@
 
         function region(r) {
             const text = {
-                north: "Miền Bắc là cái nôi của quan họ, ca trù và những lễ hội lâu đời.",
-                central: "Miền Trung mang vẻ đẹp di sản cố đô Huế và nhã nhạc cung đình.",
-                south: "Miền Nam nổi bật với văn hóa sông nước và đờn ca tài tử."
+                north: "Văn hóa miền Bắc của Việt Nam mang đậm dấu ấn lịch sử lâu đời và truyền thống ngàn năm văn hiến. Đây là vùng đất gắn liền với nhiều triều đại phong kiến và các trung tâm văn hóa cổ, tiêu biểu như thủ đô Hà Nội. Con người miền Bắc thường được biết đến với tính cách trầm tĩnh, lịch sự và coi trọng lễ nghĩa trong giao tiếp. Văn hóa ẩm thực miền Bắc cũng rất tinh tế, thiên về hương vị thanh nhẹ, không quá cay hay quá ngọt, nổi bật với các món như Phở, Bún chả hay Bánh cuốn. Ngoài ra, miền Bắc còn nổi tiếng với các loại hình nghệ thuật dân gian đặc sắc như Hát quan họ và Ca trù, thể hiện đời sống tinh thần phong phú của người dân. Những phong tục truyền thống, lễ hội làng và các giá trị gia đình cũng được gìn giữ rất chặt chẽ, tạo nên bản sắc văn hóa đặc trưng của vùng đất này.",
+                central: "Miền Trung Việt Nam là vùng đất giao thoa giữa nhiều nền văn hóa khác nhau, chịu ảnh hưởng sâu sắc của lịch sử và điều kiện tự nhiên khắc nghiệt. Nơi đây từng là trung tâm của triều đại Triều Nguyễn với kinh đô đặt tại Huế, vì vậy văn hóa miền Trung mang đậm nét cung đình và truyền thống. Người miền Trung thường được nhận xét là cần cù, chịu khó và giàu tình nghĩa. Ẩm thực miền Trung nổi bật bởi hương vị đậm đà, cay nồng, phản ánh phần nào khí hậu khắc nghiệt của vùng đất này. Những món ăn nổi tiếng có thể kể đến như Bún bò Huế, Mì Quảng và Cao lầu. Bên cạnh đó, miền Trung còn sở hữu nhiều di sản văn hóa và kiến trúc đặc sắc như Phố cổ Hội An và Quần thể di tích Cố đô Huế, góp phần làm phong phú thêm bức tranh văn hóa của Việt Nam.",
+                south: "Văn hóa miền Nam Việt Nam mang đặc trưng phóng khoáng, cởi mở và giàu tính giao lưu do ảnh hưởng của quá trình khai phá và hội nhập với nhiều nền văn hóa khác nhau. Trung tâm kinh tế và văn hóa lớn của miền Nam là Thành phố Hồ Chí Minh, nơi hội tụ nhiều phong cách sống hiện đại và năng động. Con người miền Nam thường được biết đến với tính cách thân thiện, hào sảng và dễ gần. Ẩm thực miền Nam có xu hướng đậm vị ngọt và sử dụng nhiều nguyên liệu phong phú từ sông nước, tiêu biểu như Hủ tiếu, Cá kho tộ và Bánh xèo. Ngoài ra, đời sống văn hóa của người dân miền Nam còn gắn liền với những nét đặc trưng của vùng sông nước như chợ nổi, đờn ca tài tử và các lễ hội truyền thống, tạo nên một bản sắc văn hóa vừa giản dị vừa sinh động của vùng đất phương Nam."
             };
             document.getElementById("regionText").innerText = text[r];
         }
 
-        // Quiz Logic
+        // Quiz và Survey Logic (giữ nguyên của bạn)
         const quiz = [
             { q: "Loại hình hát giao duyên nào là biểu tượng vùng Kinh Bắc?", a: ["Hát xoan", "Quan họ", "Ca trù", "Chèo"], c: 1 },
             { q: "Nghệ thuật sân khấu biểu diễn trên mặt nước?", a: ["Chèo", "Múa rối nước", "Tuồng", "Cải lương"], c: 1 },
@@ -311,10 +325,10 @@
 
         function showDetail(type) {
             const data = {
-                music: { t: "Âm nhạc", c: "Từ Nhã nhạc cung đình đến Đờn ca tài tử, âm nhạc Việt là tiếng lòng dân tộc." },
-                arch: { t: "Kiến trúc", c: "Mái đình cong vút, chùa Một Cột hay cố đô Huế là minh chứng cho trí tuệ cha ông." },
-                fest: { t: "Lễ hội", c: "Tết Nguyên Đán hay hội Gióng là nơi thắt chặt tình cộng đồng." },
-                garment: { t: "Trang phục", c: "Áo dài, áo tứ thân mang đậm nét duyên dáng Việt Nam." }
+                music: { t: "Âm nhạc", c: "Âm nhạc trong văn hóa Việt Nam rất đa dạng và phản ánh rõ đời sống tinh thần của người dân qua từng vùng miền. Từ lâu, âm nhạc dân gian đã gắn bó chặt chẽ với sinh hoạt cộng đồng, lao động và các nghi lễ truyền thống. Nhiều loại hình âm nhạc đặc sắc đã được hình thành và phát triển qua nhiều thế hệ như Hát quan họ ở miền Bắc, Ca trù với lối hát tinh tế, hay Đờn ca tài tử ở Nam Bộ. Những loại hình này không chỉ mang giá trị nghệ thuật cao mà còn thể hiện tình cảm, tâm tư và bản sắc văn hóa của người Việt qua lời ca và giai điệu." },
+                arch: { t: "Kiến trúc", c: "Kiến trúc truyền thống Việt Nam thể hiện sự hài hòa giữa con người với thiên nhiên và phản ánh tư tưởng, lối sống của xã hội qua từng thời kỳ. Các công trình kiến trúc cổ thường được xây dựng bằng những vật liệu quen thuộc như gỗ, gạch, ngói và được trang trí bằng nhiều họa tiết tinh xảo. Nhiều công trình tiêu biểu vẫn còn được bảo tồn đến ngày nay như Chùa Một Cột tại Hà Nội, hay Kinh thành Huế ở Huế. Những công trình này không chỉ có giá trị lịch sử mà còn thể hiện tài năng sáng tạo và thẩm mỹ của người Việt." },
+                fest: { t: "Lễ hội", c: "Lễ hội là một phần quan trọng trong đời sống văn hóa của người Việt Nam, thường gắn liền với tín ngưỡng dân gian, lịch sử và các truyền thống lâu đời. Hàng năm, nhiều lễ hội được tổ chức để tưởng nhớ các nhân vật lịch sử, cầu mong may mắn và gắn kết cộng đồng. Một số lễ hội nổi tiếng có thể kể đến như Lễ hội Chùa Hương, Hội Lim và Lễ hội Đền Hùng. Trong các dịp lễ hội, người dân thường tham gia các hoạt động như rước kiệu, biểu diễn nghệ thuật dân gian và trò chơi truyền thống, tạo nên không khí vui tươi và đậm đà bản sắc dân tộc." },
+                garment: { t: "Trang phục", c: "Trang phục truyền thống Việt Nam thể hiện vẻ đẹp duyên dáng, tinh tế và mang nhiều ý nghĩa văn hóa. Trong đó, Áo dài được xem là biểu tượng nổi bật của vẻ đẹp phụ nữ Việt Nam với thiết kế thanh lịch và mềm mại. Bên cạnh đó, trang phục Áo tứ thân và Áo bà ba cũng là những loại trang phục quen thuộc trong đời sống truyền thống ở các vùng miền. Những bộ trang phục này không chỉ phục vụ nhu cầu sinh hoạt hằng ngày mà còn thể hiện nét đẹp văn hóa, phong tục và bản sắc riêng của người Việt." }
             };
             document.getElementById("detailTitle").innerText = data[type].t;
             document.getElementById("detailContent").innerText = data[type].c;
@@ -345,37 +359,27 @@
                 });
             }, 100);
         }
-                // Hàm tạo hiệu ứng hoa đào rơi
+
         function createPetals() {
             const container = document.body;
-            const petalCount = 25; // Số lượng cánh hoa trên màn hình
-
+            const petalCount = 25;
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
-                
-                // Các thông số ngẫu nhiên
-                const size = Math.random() * 15 + 10 + "px"; // Kích thước từ 10px - 25px
-                const left = Math.random() * 100 + "vw"; // Vị trí ngang ngẫu nhiên
-                const duration = Math.random() * 5 + 5 + "s"; // Tốc độ rơi từ 5s - 10s
-                const delay = Math.random() * 5 + "s"; // Thời gian chờ bắt đầu ngẫu nhiên
-
+                const size = Math.random() * 15 + 10 + "px";
+                const left = Math.random() * 100 + "vw";
+                const duration = Math.random() * 5 + 5 + "s";
+                const delay = Math.random() * 5 + "s";
                 petal.style.width = size;
                 petal.style.height = size;
                 petal.style.left = left;
                 petal.style.animationDuration = duration;
                 petal.style.animationDelay = delay;
-                
-                // Thêm độ nghiêng ngẫu nhiên cho cánh hoa
                 petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-
                 container.appendChild(petal);
             }
         }
-
-        // Chạy hàm tạo hoa đào ngay khi load trang
         createPetals();
-                    
     </script>
 </body>
 </html>
