@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
+        
         /* --- KHAI BÁO BIẾN MÀU (FIX LỖI HIỂN THỊ) --- */
         :root {
             --marigold: #E59D2C;
@@ -21,7 +22,7 @@
             --dark-wood: #3a2412;
         }
 
-        /* --- PHẦN KHẢO SÁT MÀU DI SẢN (ĐÃ ĐƯA VÀO ĐÚNG THẺ STYLE) --- */
+        /* --- PHẦN KHẢO SÁT MÀU DI SẢN --- */
         .survey-box { 
             background: rgba(46, 67, 101, 0.9); /* Nền xanh Police Blue */
             padding: 40px; 
@@ -74,12 +75,19 @@
         h1 { font-family: "Playfair Display", serif; font-size: 60px; margin-bottom: 20px; color: var(--buff); }
         h2 { font-family: "Playfair Display"; margin-bottom: 15px; color: var(--marigold); }
 
+        /* SỬA MÀU QUIZ ĐỂ NHÌN RÕ TRÊN NỀN GIẤY */
+        #quiz h1 { color: var(--police-blue); }
+        #question { color: var(--police-blue) !important; font-family: "Playfair Display", serif; }
+        #progressText { color: var(--citrine-brown) !important; font-weight: bold; }
+        #quizResult { color: var(--police-blue); }
+
         button {
             padding: 14px 28px; background: var(--marigold); border: none;
-            border-radius: 10px; color: var(--dark-wood); font-size: 16px; font-weight: 600;
+            border-radius: 10px; color: #FFFFFF !important; /* Đổi sang chữ trắng cho dễ đọc trên nền cam */
+            font-size: 16px; font-weight: 600;
             cursor: pointer; margin: 10px; transition: 0.3s;
         }
-        button:hover { background: var(--buff); transform: scale(1.05); }
+        button:hover { background: var(--police-blue); color: var(--buff) !important; transform: scale(1.05); }
 
         .menu { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 30px; }
 
@@ -329,89 +337,3 @@
         function load() {
             if (current >= quiz.length) {
                 document.getElementById("question").innerText = "Hoàn thành!";
-                document.getElementById("answers").innerHTML = `<button onclick="go('menu')">Về Menu</button>`;
-                document.getElementById("quizResult").innerText = `Điểm của bạn: ${score}/${quiz.length}`;
-                return;
-            }
-            const q = quiz[current];
-            document.getElementById("progressBar").style.width = (current / quiz.length * 100) + "%";
-            document.getElementById("progressText").innerText = `Câu ${current + 1}/${quiz.length}`;
-            document.getElementById("question").innerText = q.q;
-            const ansDiv = document.getElementById("answers");
-            ansDiv.innerHTML = "";
-            document.getElementById("quizResult").innerText = "";
-
-            q.a.forEach((t, i) => {
-                const btn = document.createElement("button");
-                btn.innerText = t;
-                btn.onclick = () => {
-                    const all = ansDiv.querySelectorAll("button");
-                    all.forEach(b => b.disabled = true);
-                    if (i === q.c) {
-                        score++;
-                        btn.style.background = "#2d5a27";
-                        btn.style.color = "white";
-                        document.getElementById("quizResult").innerText = "Chính xác! 🎉";
-                    } else {
-                        btn.style.background = "#a02020";
-                        btn.style.color = "white";
-                        document.getElementById("quizResult").innerHTML = `Sai rồi. Đáp án đúng là: <b>${q.a[q.c]}</b>`;
-                    }
-                    setTimeout(() => { current++; load(); }, 2000);
-                };
-                ansDiv.appendChild(btn);
-            });
-        }
-
-        function showDetail(type) {
-            const data = {
-                music: { t: "Âm nhạc", c: "Âm nhạc trong văn hóa Việt Nam rất đa dạng và phản ánh rõ đời sống tinh thần của người dân qua từng vùng miền. Từ lâu, âm nhạc dân gian đã gắn bó chặt chẽ với sinh hoạt cộng đồng, lao động và các nghi lễ truyền thống. Nhiều loại hình âm nhạc đặc sắc đã được hình thành và phát triển qua nhiều thế hệ như Hát quan họ ở miền Bắc, Ca trù với lối hát tinh tế, hay Đờn ca tài tử ở Nam Bộ. Những loại hình này không chỉ mang giá trị nghệ thuật cao mà còn thể hiện tình cảm, tâm tư và bản sắc văn hóa của người Việt qua lời ca và giai điệu." },
-                arch: { t: "Kiến trúc", c: "Kiến trúc truyền thống Việt Nam thể hiện sự hài hòa giữa con người với thiên nhiên và phản ánh tư tưởng, lối sống của xã hội qua từng thời kỳ. Các công trình kiến trúc cổ thường được xây dựng bằng những vật liệu quen thuộc như gỗ, gạch, ngói và được trang trí bằng nhiều họa tiết tinh xảo. Nhiều công trình tiêu biểu vẫn còn được bảo tồn đến ngày nay như Chùa Một Cột tại Hà Nội, hay Kinh thành Huế ở Huế. Những công trình này không chỉ có giá trị lịch sử mà còn thể hiện tài năng sáng tạo và thẩm mỹ của người Việt." },
-                fest: { t: "Lễ hội", c: "Lễ hội là một phần quan trọng trong đời sống văn hóa của người Việt Nam, thường gắn liền với tín ngưỡng dân gian, lịch sử và các truyền thống lâu đời. Hàng năm, nhiều lễ hội được tổ chức để tưởng nhớ các nhân vật lịch sử, cầu mong may mắn và gắn kết cộng đồng. Một số lễ hội nổi tiếng có thể kể đến như Lễ hội Chùa Hương, Hội Lim và Lễ hội Đền Hùng. Trong các dịp lễ hội, người dân thường tham gia các hoạt động như rước kiệu, biểu diễn nghệ thuật dân gian và trò chơi truyền thống, tạo nên không khí vui tươi và đậm đà bản sắc dân tộc." },
-                garment: { t: "Trang phục", c: "Trang phục truyền thống Việt Nam thể hiện vẻ đẹp duyên dáng, tinh tế và mang nhiều ý nghĩa văn hóa. Trong đó, Áo dài được xem là biểu tượng nổi bật của vẻ đẹp phụ nữ Việt Nam với thiết kế thanh lịch và mềm mại. Bên cạnh đó, trang phục Áo tứ thân và Áo bà ba cũng là những loại trang phục quen thuộc trong đời sống truyền thống ở các vùng miền. Những bộ trang phục này không chỉ phục vụ nhu cầu sinh hoạt hằng ngày mà còn thể hiện nét đẹp văn hóa, phong tục và bản sắc riêng của người Việt." }
-            };
-            document.getElementById("detailTitle").innerText = data[type].t;
-            document.getElementById("detailContent").innerText = data[type].c;
-            document.getElementById("exploreDetail").style.display = "block";
-            setTimeout(() => { document.getElementById("exploreDetail").scrollIntoView({ behavior: 'smooth' }); }, 100);
-        }
-        function closeDetail() { document.getElementById("exploreDetail").style.display = "none"; }
-
-        function animateSurvey() {
-            const bars = document.querySelectorAll('.stat-bar');
-            const numbers = document.querySelectorAll('.stat-number');
-            bars.forEach(bar => bar.style.width = '0%');
-            numbers.forEach((num, index) => {
-                const target = +num.getAttribute('data-target');
-                let count = 0;
-                const updateCount = () => {
-                    if (count < target) {
-                        count += target / 50;
-                        num.innerText = Math.ceil(count);
-                        setTimeout(updateCount, 25);
-                    } else { 
-                        num.innerText = target; 
-                        bars[index].style.width = target + '%';
-                    }
-                };
-                updateCount();
-            });
-        }
-
-        function createPetals() {
-            for (let i = 0; i < 25; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                const size = Math.random() * 15 + 10 + "px";
-                petal.style.width = size;
-                petal.style.height = size;
-                petal.style.left = Math.random() * 100 + "vw";
-                petal.style.animationDuration = Math.random() * 5 + 5 + "s";
-                petal.style.animationDelay = Math.random() * 5 + "s";
-                document.body.appendChild(petal);
-            }
-        }
-        createPetals();
-    </script>
-</body>
-</html>
