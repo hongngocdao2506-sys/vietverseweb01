@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VietVerse – Khám Phá Văn Hóa Việt</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Srisakdi:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -25,7 +25,7 @@
             box-sizing: border-box;
         }
 
-        body {
+body {
             background-image: url("Background web@4x.png");
             background-color: #eaddcf; 
             background-size: cover;
@@ -33,50 +33,70 @@
             background-attachment: fixed;
             color: var(--mau-nau);
             overflow-x: hidden;
-            font-family: 'Srisakdi', cursive;
-            font-weight: 700;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(245, 236, 227, 0.85); 
-            z-index: -1;
+            /* Thay đổi thành font Lora */
+            font-family: 'Lora', serif;
+            font-weight: 400;
         }
 
         h1, h2, h3 {
-            font-family: 'Lobster', cursive;
+            /* Thay đổi thành font Italianno */
+            font-family: 'Italianno', cursive;
             color: var(--mau-do);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: 400;
         }
 
         h1 {
-            font-size: 64px;
-            margin-bottom: 20px;
+            /* Tăng size lên 80px vì Italianno khá thanh mảnh */
+            font-size: 80px;
+            margin-bottom: 10px;
             text-align: center;
+        }
+
+        .card h2 {
+            /* Tăng size h2 lên một chút cho cân đối */
+            font-size: 46px;
+            margin-bottom: 10px;
         }
 
         p {
             max-width: 800px;
-            font-size: 24px; 
+            /* Lora to và rõ hơn Srisakdi nên ta chỉnh size vừa phải lại */
+            font-size: 20px; 
             line-height: 1.6;
             text-align: center;
         }
 
-        section {
-            min-height: 100vh;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 60px 20px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s;
+        button {
+            padding: 12px 30px;
+            background: var(--mau-do);
+            color: var(--mau-be);
+            border: 2px solid var(--mau-nau);
+            border-radius: 8px;
+            /* Nút bấm nên dùng Lora in đậm để người dùng dễ thao tác */
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
+
+        input, select {
+            padding: 10px;
+            /* Đổi sang font Lora cho các ô nhập liệu của Khảo sát */
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            border: 1px solid var(--mau-nau);
+            border-radius: 5px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        /* Chỉnh lại size chữ to nhất lúc vừa mở cửa cho đẹp */
+        .door-content h1 { color: var(--mau-vang); font-size: 110px; margin-bottom: 5px; }
+        .door-content p { color: var(--mau-trang); font-size: 22px; }
 
         section.active {
             display: flex;
@@ -178,26 +198,48 @@
             margin: 10px 0;
         }
 
-       /* --- HIỆU ỨNG CỬA CHUYỂN CẢNH --- */
+     /* --- HIỆU ỨNG CỬA CHÀO MỪNG (Chỉ dùng 1 lần) --- */
         #door {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             display: flex;
             z-index: 9999;
-            pointer-events: none;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--mau-nau);
         }
 
         .door {
+            position: absolute;
+            top: 0;
             width: 50%; height: 100%;
             background-image: url("cua@4x.png");
-            background-color: var(--mau-nau);
             background-size: cover;
             background-position: center;
-            /* Chỉnh thời gian transition xuống 1s để mượt và nhanh hơn */
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-            border-right: 2px solid #333;
+            transition: transform 1.5s ease-in-out; /* Thời gian cửa mở sang 2 bên */
         }
+
+        .leftDoor { left: 0; transform: translateX(0); border-right: 2px solid #111; }
+        .rightDoor { right: 0; transform: translateX(0) scaleX(-1); border-left: 2px solid #111; }
+
+        /* Khi có class "open", 2 cánh cửa sẽ trượt sang 2 mép màn hình */
+        #door.open .leftDoor { transform: translateX(-100%); }
+        #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
+
+        /* Nội dung chữ và nút bấm nằm đè lên trên cánh cửa */
+        .door-content {
+            position: relative;
+            z-index: 10000;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6); /* Nền đen mờ để chữ nổi bật */
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid var(--mau-vang);
+        }
+        
+        .door-content h1 { color: var(--mau-vang); font-size: 80px; margin-bottom: 10px; }
+        .door-content p { color: var(--mau-trang); font-size: 26px; }
 
         /* Trạng thái mặc định: CỬA MỞ (nằm giấu ở 2 mép màn hình) */
         .leftDoor { transform: translateX(-100%); }
@@ -234,13 +276,49 @@
     <div id="door">
         <div class="door leftDoor"></div>
         <div class="door rightDoor"></div>
+        <div class="door-content">
+            <h1>VietVerse</h1>
+            <p>Khám phá chiều sâu văn hóa Việt Nam</p>
+            <button onclick="batDauVaoWeb()">Khai mở cánh cửa</button>
+        </div>
     </div>
 
-    <section id="home" class="active">
-        <h1>VietVerse</h1>
-        <p>Khám phá chiều sâu văn hóa Việt Nam qua lăng kính hiện đại, cổ kính và đầy tự hào.</p>
-        <button onclick="openDoor('menu')">Khai mở cánh cửa</button>
-    </section>
+    <section id="menu" class="active">
+        <h1>Bản Đồ VietVerse</h1>
+        <div class="grid-container">
+            ```
+*(Lưu ý: Bạn nhớ thêm chữ `class="active"` vào thẻ `<section id="menu">` giống như code mẫu ở trên nhé).*
+
+### 3. Thay đổi phần Javascript
+Cuối cùng, kéo xuống thẻ `<script>` ở cuối file. Thay thế hàm `openDoor(target)` cũ bằng 2 hàm mới này:
+
+```javascript
+        // --- HÀM 1: CHỈ DÙNG MỞ CỬA LÚC VỪA VÀO WEB ---
+        function batDauVaoWeb() {
+            const door = document.getElementById("door");
+            
+            // Kéo 2 cánh cửa sang 2 bên
+            door.classList.add("open"); 
+            
+            // Đợi 1.5 giây cho cửa mở khuất tầm nhìn rồi ẩn nó đi hoàn toàn để không cản trở thao tác
+            setTimeout(() => {
+                door.style.display = 'none';
+            }, 1500);
+        }
+
+        // --- HÀM 2: CHUYỂN PHÒNG BÌNH THƯỜNG (Không có cửa nữa) ---
+        function openDoor(target) {
+            // Tắt tất cả các phòng
+            document.querySelectorAll("section").forEach(s => {
+                s.classList.remove("active");
+            });
+            
+            // Bật phòng được chọn (hiệu ứng mờ dần nhờ CSS cũ của bạn)
+            document.getElementById(target).classList.add("active");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            
+            if(target === 'quiz') startQuiz();
+        }
 
     <section id="menu">
         <h1>Bản Đồ VietVerse</h1>
