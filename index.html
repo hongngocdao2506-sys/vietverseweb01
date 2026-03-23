@@ -39,7 +39,6 @@ body {
         }
 
         h1, h2, h3 {
-            /* Thay đổi thành font Italianno */
             font-family: 'Italianno', cursive;
             color: var(--mau-do);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -47,21 +46,18 @@ body {
         }
 
         h1 {
-            /* Tăng size lên 80px vì Italianno khá thanh mảnh */
             font-size: 80px;
             margin-bottom: 10px;
             text-align: center;
         }
 
         .card h2 {
-            /* Tăng size h2 lên một chút cho cân đối */
             font-size: 46px;
             margin-bottom: 10px;
         }
 
         p {
             max-width: 800px;
-            /* Lora to và rõ hơn Srisakdi nên ta chỉnh size vừa phải lại */
             font-size: 20px; 
             line-height: 1.6;
             text-align: center;
@@ -73,7 +69,6 @@ body {
             color: var(--mau-be);
             border: 2px solid var(--mau-nau);
             border-radius: 8px;
-            /* Nút bấm nên dùng Lora in đậm để người dùng dễ thao tác */
             font-family: 'Lora', serif;
             font-weight: 700;
             font-size: 18px;
@@ -85,7 +80,6 @@ body {
 
         input, select {
             padding: 10px;
-            /* Đổi sang font Lora cho các ô nhập liệu của Khảo sát */
             font-family: 'Lora', serif;
             font-size: 16px;
             border: 1px solid var(--mau-nau);
@@ -94,7 +88,6 @@ body {
             margin: 10px 0;
         }
         
-        /* Chỉnh lại size chữ to nhất lúc vừa mở cửa cho đẹp */
         .door-content h1 { color: var(--mau-vang); font-size: 110px; margin-bottom: 5px; }
         .door-content p { color: var(--mau-trang); font-size: 22px; }
 
@@ -196,9 +189,8 @@ body {
             border-radius: 5px;
             width: 100%;
             margin: 10px 0;
+            
         }
-
-     /* --- HIỆU ỨNG CỬA CHÀO MỪNG (Chỉ dùng 1 lần) --- */
         #door {
             position: fixed;
             top: 0; left: 0;
@@ -207,7 +199,6 @@ body {
             z-index: 9999;
             justify-content: center;
             align-items: center;
-            background-color: var(--mau-nau);
         }
 
         .door {
@@ -215,40 +206,36 @@ body {
             top: 0;
             width: 50%; height: 100%;
             background-image: url("cua@4x.png");
+            background-color: var(--mau-nau); 
             background-size: cover;
             background-position: center;
-            transition: transform 1.5s ease-in-out; /* Thời gian cửa mở sang 2 bên */
+            transition: transform 1.5s ease-in-out; 
         }
 
         .leftDoor { left: 0; transform: translateX(0); border-right: 2px solid #111; }
         .rightDoor { right: 0; transform: translateX(0) scaleX(-1); border-left: 2px solid #111; }
 
-        /* Khi có class "open", 2 cánh cửa sẽ trượt sang 2 mép màn hình */
         #door.open .leftDoor { transform: translateX(-100%); }
         #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
 
-        /* Nội dung chữ và nút bấm nằm đè lên trên cánh cửa */
         .door-content {
             position: relative;
             z-index: 10000;
             text-align: center;
-            background: rgba(0, 0, 0, 0.6); /* Nền đen mờ để chữ nổi bật */
+            background: rgba(0, 0, 0, 0.6); 
             padding: 40px;
             border-radius: 15px;
             border: 2px solid var(--mau-vang);
+            transition: opacity 0.5s; 
+        }
+
+        #door.open .door-content {
+            opacity: 0; 
+            pointer-events: none;
         }
         
-        .door-content h1 { color: var(--mau-vang); font-size: 80px; margin-bottom: 10px; }
-        .door-content p { color: var(--mau-trang); font-size: 26px; }
-
-        /* Trạng thái mặc định: CỬA MỞ (nằm giấu ở 2 mép màn hình) */
-        .leftDoor { transform: translateX(-100%); }
-        .rightDoor { transform: translateX(100%) scaleX(-1); border-left: 2px solid #333; border-right: none;}
-
-        /* Khi có class "close": CỬA ĐÓNG LẠI (chạm nhau ở giữa) */
-        #door.close .leftDoor { transform: translateX(0); }
-        #door.close .rightDoor { transform: translateX(0) scaleX(-1); }
-
+        .door-content h1 { color: var(--mau-vang); font-size: 110px; margin-bottom: 5px; }
+        .door-content p { color: var(--mau-trang); font-size: 22px; }
         .petal {
             position: absolute;
             width: 16px;
@@ -297,23 +284,18 @@ Cuối cùng, kéo xuống thẻ `<script>` ở cuối file. Thay thế hàm `op
         function batDauVaoWeb() {
             const door = document.getElementById("door");
             
-            // Kéo 2 cánh cửa sang 2 bên
             door.classList.add("open"); 
             
-            // Đợi 1.5 giây cho cửa mở khuất tầm nhìn rồi ẩn nó đi hoàn toàn để không cản trở thao tác
             setTimeout(() => {
                 door.style.display = 'none';
             }, 1500);
         }
 
-        // --- HÀM 2: CHUYỂN PHÒNG BÌNH THƯỜNG (Không có cửa nữa) ---
         function openDoor(target) {
-            // Tắt tất cả các phòng
             document.querySelectorAll("section").forEach(s => {
                 s.classList.remove("active");
             });
-            
-            // Bật phòng được chọn (hiệu ứng mờ dần nhờ CSS cũ của bạn)
+
             document.getElementById(target).classList.add("active");
             window.scrollTo({ top: 0, behavior: "smooth" });
             
@@ -480,27 +462,24 @@ Cuối cùng, kéo xuống thẻ `<script>` ở cuối file. Thay thế hàm `op
     </section>
 
     <script>
-// --- LOGIC CHUYỂN TRANG CÓ CỬA ĐÓNG/MỞ ---
+
         function openDoor(target) {
             const door = document.getElementById("door");
             
-            // Bước 1: Kéo cửa đóng lại để che màn hình cũ
             door.classList.add("close");
-
-            // Bước 2: Đợi 1 giây để cửa đóng vào khớp nhau, sau đó âm thầm đổi nội dung
             setTimeout(() => {
-                // Tắt tất cả các phòng hiện tại
+  
                 document.querySelectorAll("section").forEach(s => {
                     s.classList.remove("active");
                 });
-                // Bật phòng người dùng muốn tới
+   
                 document.getElementById(target).classList.add("active");
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 
-                // Khởi động lại quiz nếu vô phòng quiz
+
                 if(target === 'quiz') startQuiz();
 
-                // Bước 3: Đổi nội dung xong thì kéo cửa mở ra lại
+                
                 door.classList.remove("close");
             }, 1000); // 1000ms (1 giây) khớp với thời gian transition trong CSS
         }
