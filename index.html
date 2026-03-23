@@ -12,10 +12,10 @@
 
     <style>
         :root {
-            --mau-do: #8b1c1c;      /* Đỏ sậm cổ kính */
-            --mau-nau: #5c3a21;     /* Nâu gỗ */
-            --mau-be: #f5ece3;      /* Be sáng */
-            --mau-vang: #d4a373;    /* Vàng nhạt */
+            --mau-do: #8b1c1c;      
+            --mau-nau: #5c3a21;     
+            --mau-be: #f5ece3;      
+            --mau-vang: #d4a373;    
             --mau-trang: #ffffff;
         }
 
@@ -112,7 +112,8 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
-        input, select {
+        /* Thêm style cho thẻ textarea */
+        input, select, textarea {
             padding: 10px;
             font-family: 'Lora', serif;
             font-size: 16px;
@@ -120,7 +121,12 @@
             border: 1px solid var(--mau-nau);
             border-radius: 5px;
             width: 100%;
-            margin: 10px 0;
+            margin: 8px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        textarea {
+            resize: vertical;
         }
 
         .grid-container {
@@ -180,14 +186,13 @@
             width: 100%;
         }
 
-        /* --- CSS CHO CÁI CỬA TRƠN (KHÔNG CHỮ) --- */
         #door {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            display: flex; /* Giúp 2 cánh cửa tự chia đôi màn hình */
+            display: flex; 
             z-index: 9999;
-            cursor: pointer; /* Hiển thị biểu tượng bàn tay để biết có thể click */
+            cursor: pointer; 
         }
 
         .door {
@@ -196,16 +201,14 @@
             background-color: var(--mau-nau); 
             background-size: cover;
             background-position: center;
-            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1); /* Hiệu ứng gia tốc mượt mà */
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
         }
 
         .leftDoor { transform: translateX(0); border-right: 2px solid #111; }
         .rightDoor { transform: translateX(0) scaleX(-1); border-left: 2px solid #111; }
 
-        /* Khi được gán class 'open' qua JS */
         #door.open .leftDoor { transform: translateX(-100%); }
         #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
-        /* --- KẾT THÚC CSS CỬA --- */
 
         .petal {
             position: absolute;
@@ -368,26 +371,60 @@
     <section id="khao-sat">
         <h1>Kết quả & Khảo sát</h1>
         <div class="grid-container" style="align-items: flex-start;">
-            <div class="card" style="width: 400px; text-align: left;">
-                <h2>📊 Thống kê sơ bộ</h2>
+            <div class="card" style="width: 400px; text-align: left; cursor: default;">
+                <h2 style="text-align: center;">📊 Thống kê sơ bộ</h2>
                 <div class="stats-box">
-                    <p><b>65%</b> giới trẻ yêu thích tìm hiểu Cổ phục Việt.</p>
-                    <p><b>40%</b> nhận diện đúng các hoa văn thời Lý - Trần.</p>
-                    <p><b>92%</b> tự hào về ẩm thực truyền thống.</p>
+                    <p><b class="counter" data-target="65">0</b><b>%</b> giới trẻ yêu thích tìm hiểu Cổ phục Việt.</p>
+                    <p><b class="counter" data-target="40">0</b><b>%</b> nhận diện đúng các hoa văn thời Lý - Trần.</p>
+                    <p><b class="counter" data-target="92">0</b><b>%</b> tự hào về ẩm thực truyền thống.</p>
                 </div>
             </div>
             
-            <div class="card" style="width: 400px;">
+            <div class="card" style="width: 450px; cursor: default;">
                 <h2>Thực hiện khảo sát</h2>
-                <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đóng góp ý kiến!');">
-                    <input type="text" placeholder="Tên của bạn..." required>
-                    <select>
-                        <option>Bạn thích lĩnh vực nào nhất?</option>
-                        <option>Trang phục cổ bạn quan tâm</option>
-                        <option>Ẩm thực bạn yêu thích</option>
-                        <option>Lịch sử & Kiến trúc</option>
+                <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đóng góp ý kiến để VietVerse hoàn thiện hơn!');">
+                    <input type="text" placeholder="Tên hoặc Biệt danh của bạn..." required>
+                    
+                    <select required>
+                        <option value="" disabled selected>Bạn đang là...</option>
+                        <option>Học sinh THPT</option>
+                        <option>Sinh viên</option>
+                        <option>Người đi làm</option>
                     </select>
-                    <button type="submit" style="width: 100%;">Gửi đánh giá</button>
+
+                    <select required>
+                        <option value="" disabled selected>Lĩnh vực văn hóa bạn quan tâm nhất?</option>
+                        <option>Trang phục cổ (Áo tấc, Nhật bình...)</option>
+                        <option>Ẩm thực truyền thống ba miền</option>
+                        <option>Lịch sử & Kiến trúc cổ</option>
+                        <option>Văn học & Nghệ thuật dân gian</option>
+                    </select>
+
+                    <select required>
+                        <option value="" disabled selected>Triều đại nào bạn muốn tìm hiểu sâu hơn?</option>
+                        <option>Nhà Lý - Trần</option>
+                        <option>Nhà Hồ & Lê Sơ (Cải cách Hồ Quý Ly, Lê Thánh Tông...)</option>
+                        <option>Nhà Nguyễn</option>
+                    </select>
+
+                    <select required>
+                        <option value="" disabled selected>Tác gia văn học nào bạn yêu thích nhất?</option>
+                        <option>Đại thi hào Nguyễn Du</option>
+                        <option>Nhà thơ Tố Hữu</option>
+                        <option>Nhà thơ Lê Đạt</option>
+                        <option>Tác giả khác</option>
+                    </select>
+
+                    <select required>
+                        <option value="" disabled selected>Hình thức tìm hiểu văn hóa bạn thích nhất?</option>
+                        <option>Tham gia Câu lạc bộ Văn hóa ở trường</option>
+                        <option>Trải nghiệm web tương tác như VietVerse</option>
+                        <option>Tham gia các dự án nghệ thuật, triển lãm</option>
+                    </select>
+
+                    <textarea placeholder="Bạn có góp ý hay mong muốn gì thêm cho VietVerse không?..." rows="3" required></textarea>
+
+                    <button type="submit" style="width: 100%; margin-top: 15px;">Gửi đánh giá</button>
                 </form>
             </div>
         </div>
@@ -395,19 +432,16 @@
     </section>
 
     <script>
-        // --- JS CHO CỬA ---
         function batDauVaoWeb() {
             const door = document.getElementById("door");
-            door.classList.add("open"); // Kéo cửa sang 2 bên
-            door.style.pointerEvents = "none"; // Ngăn click đúp
+            door.classList.add("open"); 
+            door.style.pointerEvents = "none"; 
             
-            // Đợi 1.5s cho cửa mở xong rồi ẩn nó đi hoàn toàn
             setTimeout(() => {
                 door.style.display = 'none';
             }, 1500);
         }
 
-        // JS chuyển phòng
         function openDoor(target) {
             document.querySelectorAll("section").forEach(s => {
                 s.classList.remove("active");
@@ -417,10 +451,36 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
             
             if(target === 'quiz') startQuiz();
+            
+            if(target === 'khao-sat') {
+                setTimeout(chaySoLieu, 400); 
+            }
         }
-        // --- KẾT THÚC JS CỬA ---
 
-        // --- HIỆU ỨNG HOA RƠI KHI CLICK ---
+        function chaySoLieu() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 40; 
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target'); 
+                
+                const updateCount = () => {
+                    const count = +counter.innerText;
+                    const inc = target / speed; 
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 30); 
+                    } else {
+                        counter.innerText = target; 
+                    }
+                };
+                
+                counter.innerText = '0'; 
+                updateCount(); 
+            });
+        }
+
         document.addEventListener('click', function(e) {
             const petal = document.createElement('div');
             petal.classList.add('petal');
@@ -435,7 +495,6 @@
             }, 2000);
         });
 
-        // --- CƠ SỞ DỮ LIỆU DI SẢN ---
         const diSanData = {
             'ao-dai': {
                 ten: 'Áo Dài Việt Nam',
@@ -494,23 +553,22 @@
             }
         }
 
-        // --- HỆ THỐNG QUIZ ĐỘNG ---
         const quizData = [
             { question: "Phở có nguồn gốc chủ yếu từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
-            { question: "Chiếc áo tấc thường được mặc vào dịp nào thời xưa?", options: ["Làm ruộng", "Lễ tết, hội hè", "Đi ngủ"], answer: 1 },
+            { question: "Chiếc áo tấc thường được mặc vào dịp nào thời xưa?", options: ["Đám cưới", "Lễ tết, hội hè", "Cúng bái"], answer: 1 },
             { question: "Chùa Một Cột được xây dựng dưới triều đại nào?", options: ["Triều Lý", "Triều Trần", "Triều Lê"], answer: 0 },
             { question: "Nhạc cụ nào sau đây có một dây duy nhất?", options: ["Đàn Tranh", "Đàn Nguyệt", "Đàn Bầu"], answer: 2 },
             { question: "Điệu múa chim Lạc thường được khắc trên vật phẩm nào?", options: ["Trống đồng Đông Sơn", "Gốm Bát Tràng", "Tranh Đông Hồ"], answer: 0 },
             { question: "Tết Nguyên Đán của Việt Nam thường diễn ra vào thời gian nào?", options: ["Tháng 1 dương lịch", "Cuối tháng 12 dương lịch", "Theo lịch âm (thường vào tháng 1 hoặc 2 dương lịch)"], answer: 2 },
-            { question: "Trang phục truyền thống phổ biến của phụ nữ Việt Nam là gì?", options: ["Kimono", "Áo dài", "Hanbok"], answer: 1 },
-            { question: "Món ăn nào sau đây thường xuất hiện trong ngày Tết cổ truyền?", options: ["Bánh chưng", "Pizza", "Hamburger"], answer: 0 },
+            { question: "Trang phục truyền thống phổ biến của phụ nữ Việt Nam là gì?", options: ["Hán Phục", "Áo dài", "Áo then"], answer: 1 },
+            { question: "Món ăn nào sau đây thường xuất hiện trong ngày Tết cổ truyền?", options: ["Bánh chưng", "Bánh pía", "Bánh bò"], answer: 0 },
             { question: "Lễ hội chùa Hương diễn ra ở tỉnh/thành nào?", options: ["Hà Nội", "Huế", "Đà Nẵng"], answer: 0 },
             { question: "Loại hình nghệ thuật truyền thống nào thường có con rối di chuyển trên mặt nước?", options: ["Cải lương", "Múa rối nước", "Hát chèo"], answer: 1 },
-            { question: "Tín ngưỡng thờ cúng tổ tiên là đặc trưng của văn hóa nào?", options: ["Văn hóa Việt Nam", "Văn hóa phương Tây", "Văn hóa châu Phi"], answer: 0 },
+            { question: "Tín ngưỡng thờ cúng tổ tiên là đặc trưng của văn hóa nào?", options: ["Văn hóa Việt Nam", "Văn hóa miền Nam", "Văn hóa miền Bắc"], answer: 0 },
             { question: "Bánh tét phổ biến hơn ở vùng nào của Việt Nam?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 2 },
             { question: "Nhạc cụ truyền thống nào có 16 dây?", options: ["Đàn tranh", "Đàn bầu", "Đàn nhị"], answer: 0 },
             { question: "Lễ Vu Lan báo hiếu thường diễn ra vào tháng mấy âm lịch?", options: ["Tháng 1", "Tháng 7", "Tháng 10"], answer: 1 },
-            { question: "Phong tục lì xì trong dịp Tết mang ý nghĩa gì?", options: ["Chúc may mắn và tài lộc", "Trang trí nhà cửa", "Tưởng nhớ tổ tiên"], answer: 0 },
+            { question: "Phong tục lì xì trong dịp Tết mang ý nghĩa gì?", options: ["Chúc may mắn và tài lộc", "Chúc trẻ con mau ăn chóng lớn", "Tưởng nhớ tổ tiên"], answer: 0 },
             { question: "Món phở có nguồn gốc từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
             { question: "Hát quan họ là di sản văn hóa của tỉnh nào?", options: ["Bắc Ninh", "Thanh Hóa", "Lâm Đồng"], answer: 0 },
             { question: "Ngày Giỗ Tổ Hùng Vương diễn ra vào ngày nào âm lịch?", options: ["10/3", "15/8", "1/1"], answer: 0 },
