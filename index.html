@@ -33,7 +33,6 @@
             background-attachment: fixed;
             color: var(--mau-nau);
             overflow-x: hidden;
-            /* Thay đổi thành font Lora */
             font-family: 'Lora', serif;
             font-weight: 400;
         }
@@ -181,52 +180,31 @@
             width: 100%;
         }
 
-        /* --- CSS CHO CÁI CỬA --- */
+        /* --- CSS CHO CÁI CỬA TRƠN (KHÔNG CHỮ) --- */
         #door {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            display: flex;
+            display: flex; /* Giúp 2 cánh cửa tự chia đôi màn hình */
             z-index: 9999;
-            justify-content: center;
-            align-items: center;
+            cursor: pointer; /* Hiển thị biểu tượng bàn tay để biết có thể click */
         }
 
         .door {
-            position: absolute;
-            top: 0;
             width: 50%; height: 100%;
             background-image: url("cua@4x.png");
             background-color: var(--mau-nau); 
             background-size: cover;
             background-position: center;
-            transition: transform 1.5s ease-in-out; 
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1); /* Hiệu ứng gia tốc mượt mà */
         }
 
-        .leftDoor { left: 0; transform: translateX(0); border-right: 2px solid #111; }
-        .rightDoor { right: 0; transform: translateX(0) scaleX(-1); border-left: 2px solid #111; }
+        .leftDoor { transform: translateX(0); border-right: 2px solid #111; }
+        .rightDoor { transform: translateX(0) scaleX(-1); border-left: 2px solid #111; }
 
+        /* Khi được gán class 'open' qua JS */
         #door.open .leftDoor { transform: translateX(-100%); }
         #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
-
-        .door-content {
-            position: relative;
-            z-index: 10000;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.6); 
-            padding: 40px;
-            border-radius: 15px;
-            border: 2px solid var(--mau-vang);
-            transition: opacity 0.5s; 
-        }
-
-        #door.open .door-content {
-            opacity: 0; 
-            pointer-events: none;
-        }
-        
-        .door-content h1 { color: var(--mau-vang); font-size: 110px; margin-bottom: 5px; }
-        .door-content p { color: var(--mau-trang); font-size: 22px; }
         /* --- KẾT THÚC CSS CỬA --- */
 
         .petal {
@@ -253,14 +231,9 @@
 
     <div class="overlay"></div>
 
-    <div id="door">
+    <div id="door" onclick="batDauVaoWeb()">
         <div class="door leftDoor"></div>
         <div class="door rightDoor"></div>
-        <div class="door-content">
-            <h1>VietVerse</h1>
-            <p>Khám phá chiều sâu văn hóa Việt Nam</p>
-            <button onclick="batDauVaoWeb()">Khai mở cánh cửa</button>
-        </div>
     </div>
 
     <section id="menu" class="active">
@@ -425,15 +398,16 @@
         // --- JS CHO CỬA ---
         function batDauVaoWeb() {
             const door = document.getElementById("door");
-            door.classList.add("open"); // Mở cửa ra 2 bên
+            door.classList.add("open"); // Kéo cửa sang 2 bên
+            door.style.pointerEvents = "none"; // Ngăn click đúp
             
-            // Đợi 1.5s cho cửa mở xong rồi ẩn nó đi để không chắn màn hình
+            // Đợi 1.5s cho cửa mở xong rồi ẩn nó đi hoàn toàn
             setTimeout(() => {
                 door.style.display = 'none';
             }, 1500);
         }
 
-        // JS chuyển phòng không dùng cửa nữa
+        // JS chuyển phòng
         function openDoor(target) {
             document.querySelectorAll("section").forEach(s => {
                 s.classList.remove("active");
@@ -470,4 +444,130 @@
             },
             'ao-tac': {
                 ten: 'Áo Tấc',
-                thongTin: 'Áo tấc, hay còn gọi là áo ngũ thân tay thụng, là loại lễ phục cổ truyền thời Nguyễn. Áo được mặc cùng với quần thụng, che kín cơ thể, thể
+                thongTin: 'Áo tấc, hay còn gọi là áo ngũ thân tay thụng, là loại lễ phục cổ truyền thời Nguyễn. Áo được mặc cùng với quần thụng, che kín cơ thể, thể hiện sự trang trọng và quy củ của người xưa.',
+                parent: 'tv-trang-phuc'
+            },
+            'nhat-binh': {
+                ten: 'Áo Nhật Bình',
+                thongTin: 'Là thường phục của hoàng hậu, phi tần và công chúa thời Nguyễn. Đặc trưng của Nhật Bình là hoa văn lộng lẫy và dải cổ áo to bản tạo thành hình chữ nhật trước ngực.',
+                parent: 'tv-trang-phuc'
+            },
+            'cay-tre': {
+                ten: 'Cây Tre Trăm Đốt',
+                thongTin: 'Tre gắn bó mật thiết với làng quê Việt Nam. Tre vừa là vũ khí chống giặc (Thánh Gióng), vừa là vật liệu xây nhà, đan lát. Tre tượng trưng cho sự kiên cường, bất khuất của người Việt.',
+                parent: 'tv-bieu-tuong'
+            },
+            'chim-lac': {
+                ten: 'Chim Lạc',
+                thongTin: 'Chim Lạc là vật tổ của người Việt cổ, xuất hiện nhiều trên mặt trống đồng Đông Sơn. Hình ảnh chim Lạc đang bay thể hiện khát vọng chinh phục bầu trời và vươn tới tự do.',
+                parent: 'tv-bieu-tuong'
+            },
+            'cay-lua': {
+                ten: 'Cây Lúa Nước',
+                thongTin: 'Nền văn minh lúa nước là cốt lõi của văn hóa Việt Nam. Cây lúa không chỉ mang lại ấm no mà còn hình thành nên các lễ hội, phong tục tập quán và tính cộng đồng làng xã.',
+                parent: 'tv-bieu-tuong'
+            },
+            'quoc-hoc': {
+                ten: 'Trường Quốc Học Huế',
+                thongTin: 'Ngôi trường cổ kính có tuổi đời hơn 120 năm, nổi bật với màu sơn đỏ sẫm và lối kiến trúc giao thoa giữa Pháp và Á Đông. Đây là nơi ươm mầm nhiều nhân tài của đất nước.',
+                parent: 'tv-kien-truc'
+            },
+            'chua-mot-cot': {
+                ten: 'Chùa Một Cột',
+                thongTin: 'Biểu tượng kiến trúc độc đáo của thủ đô Hà Nội, được xây dựng từ thời Lý (1049). Chùa có hình dáng như một đóa sen khổng lồ vươn lên khỏi mặt nước.',
+                parent: 'tv-kien-truc'
+            },
+            'nha-rong': {
+                ten: 'Nhà Rông Tây Nguyên',
+                thongTin: 'Ngôi nhà sinh hoạt cộng đồng của các dân tộc thiểu số ở Tây Nguyên. Nhà Rông có mái nhọn vút cao lên bầu trời, là nơi diễn ra các lễ hội và hội họp của buôn làng.',
+                parent: 'tv-kien-truc'
+            }
+        };
+
+        function xemChiTiet(idDiSan) {
+            const data = diSanData[idDiSan];
+            if (data) {
+                document.getElementById('ds-ten').innerText = data.ten;
+                document.getElementById('ds-thong-tin').innerText = data.thongTin;
+                document.getElementById('btn-back-to-sub').setAttribute('onclick', `openDoor('${data.parent}')`);
+                openDoor('di-san-chi-tiet');
+            }
+        }
+
+        // --- HỆ THỐNG QUIZ ĐỘNG ---
+        const quizData = [
+            { question: "Phở có nguồn gốc chủ yếu từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
+            { question: "Chiếc áo tấc thường được mặc vào dịp nào thời xưa?", options: ["Làm ruộng", "Lễ tết, hội hè", "Đi ngủ"], answer: 1 },
+            { question: "Chùa Một Cột được xây dựng dưới triều đại nào?", options: ["Triều Lý", "Triều Trần", "Triều Lê"], answer: 0 },
+            { question: "Nhạc cụ nào sau đây có một dây duy nhất?", options: ["Đàn Tranh", "Đàn Nguyệt", "Đàn Bầu"], answer: 2 },
+            { question: "Điệu múa chim Lạc thường được khắc trên vật phẩm nào?", options: ["Trống đồng Đông Sơn", "Gốm Bát Tràng", "Tranh Đông Hồ"], answer: 0 },
+            { question: "Tết Nguyên Đán của Việt Nam thường diễn ra vào thời gian nào?", options: ["Tháng 1 dương lịch", "Cuối tháng 12 dương lịch", "Theo lịch âm (thường vào tháng 1 hoặc 2 dương lịch)"], answer: 2 },
+            { question: "Trang phục truyền thống phổ biến của phụ nữ Việt Nam là gì?", options: ["Kimono", "Áo dài", "Hanbok"], answer: 1 },
+            { question: "Món ăn nào sau đây thường xuất hiện trong ngày Tết cổ truyền?", options: ["Bánh chưng", "Pizza", "Hamburger"], answer: 0 },
+            { question: "Lễ hội chùa Hương diễn ra ở tỉnh/thành nào?", options: ["Hà Nội", "Huế", "Đà Nẵng"], answer: 0 },
+            { question: "Loại hình nghệ thuật truyền thống nào thường có con rối di chuyển trên mặt nước?", options: ["Cải lương", "Múa rối nước", "Hát chèo"], answer: 1 },
+            { question: "Tín ngưỡng thờ cúng tổ tiên là đặc trưng của văn hóa nào?", options: ["Văn hóa Việt Nam", "Văn hóa phương Tây", "Văn hóa châu Phi"], answer: 0 },
+            { question: "Bánh tét phổ biến hơn ở vùng nào của Việt Nam?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 2 },
+            { question: "Nhạc cụ truyền thống nào có 16 dây?", options: ["Đàn tranh", "Đàn bầu", "Đàn nhị"], answer: 0 },
+            { question: "Lễ Vu Lan báo hiếu thường diễn ra vào tháng mấy âm lịch?", options: ["Tháng 1", "Tháng 7", "Tháng 10"], answer: 1 },
+            { question: "Phong tục lì xì trong dịp Tết mang ý nghĩa gì?", options: ["Chúc may mắn và tài lộc", "Trang trí nhà cửa", "Tưởng nhớ tổ tiên"], answer: 0 },
+            { question: "Món phở có nguồn gốc từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
+            { question: "Hát quan họ là di sản văn hóa của tỉnh nào?", options: ["Bắc Ninh", "Thanh Hóa", "Lâm Đồng"], answer: 0 },
+            { question: "Ngày Giỗ Tổ Hùng Vương diễn ra vào ngày nào âm lịch?", options: ["10/3", "15/8", "1/1"], answer: 0 },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('q-total').innerText = quizData.length;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = quizData[currentQuestionIndex];
+            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('q-current').innerText = currentQuestionIndex + 1;
+            document.getElementById('quiz-status').innerText = "";
+            
+            const btnContainer = document.getElementById('answers-btn');
+            btnContainer.innerHTML = ""; 
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index);
+                btnContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const correctIndex = quizData[currentQuestionIndex].answer;
+            const statusBox = document.getElementById('quiz-status');
+
+            if(selectedIndex === correctIndex) {
+                statusBox.innerText = "✅ Chính xác!";
+                score++;
+            } else {
+                statusBox.innerText = `❌ Chưa đúng! Đáp án đúng là: ${quizData[currentQuestionIndex].options[correctIndex]}`;
+            }
+
+            const btns = document.querySelectorAll('#answers-btn button');
+            btns.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if(currentQuestionIndex < quizData.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById('question-text').innerText = `Hoàn thành! Điểm của bạn: ${score}/${quizData.length}`;
+                    document.getElementById('answers-btn').innerHTML = `<button onclick="startQuiz()">Chơi lại từ đầu</button>`;
+                    statusBox.innerText = "";
+                }
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
