@@ -178,6 +178,7 @@
             margin: 10px 0;
         }
 
+       /* --- HIỆU ỨNG CỬA CHUYỂN CẢNH --- */
         #door {
             position: fixed;
             top: 0; left: 0;
@@ -193,15 +194,18 @@
             background-color: var(--mau-nau);
             background-size: cover;
             background-position: center;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            /* Chỉnh thời gian transition xuống 1s để mượt và nhanh hơn */
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
             border-right: 2px solid #333;
         }
 
-        .leftDoor { transform: translateX(0); }
-        .rightDoor { transform: translateX(0) scaleX(-1); border-left: 2px solid #333; border-right: none;}
+        /* Trạng thái mặc định: CỬA MỞ (nằm giấu ở 2 mép màn hình) */
+        .leftDoor { transform: translateX(-100%); }
+        .rightDoor { transform: translateX(100%) scaleX(-1); border-left: 2px solid #333; border-right: none;}
 
-        #door.open .leftDoor { transform: translateX(-100%); }
-        #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
+        /* Khi có class "close": CỬA ĐÓNG LẠI (chạm nhau ở giữa) */
+        #door.close .leftDoor { transform: translateX(0); }
+        #door.close .rightDoor { transform: translateX(0) scaleX(-1); }
 
         .petal {
             position: absolute;
@@ -398,23 +402,30 @@
     </section>
 
     <script>
-        // --- LOGIC CHUYỂN TRANG CÓ CỬA ĐÓNG/MỞ ---
+// --- LOGIC CHUYỂN TRANG CÓ CỬA ĐÓNG/MỞ ---
         function openDoor(target) {
             const door = document.getElementById("door");
-            door.classList.add("open");
+            
+            // Bước 1: Kéo cửa đóng lại để che màn hình cũ
+            door.classList.add("close");
 
+            // Bước 2: Đợi 1 giây để cửa đóng vào khớp nhau, sau đó âm thầm đổi nội dung
             setTimeout(() => {
+                // Tắt tất cả các phòng hiện tại
                 document.querySelectorAll("section").forEach(s => {
                     s.classList.remove("active");
                 });
+                // Bật phòng người dùng muốn tới
                 document.getElementById(target).classList.add("active");
-                door.classList.remove("open");
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 
+                // Khởi động lại quiz nếu vô phòng quiz
                 if(target === 'quiz') startQuiz();
-            }, 1100);
-        }
 
+                // Bước 3: Đổi nội dung xong thì kéo cửa mở ra lại
+                door.classList.remove("close");
+            }, 1000); // 1000ms (1 giây) khớp với thời gian transition trong CSS
+        }
         // --- HIỆU ỨNG HOA RƠI KHI CLICK ---
         document.addEventListener('click', function(e) {
             const petal = document.createElement('div');
