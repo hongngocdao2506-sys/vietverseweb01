@@ -26,9 +26,8 @@
         }
 
         body {
-            /* Giữ nguyên background của bạn */
             background-image: url("Background web@4x.png");
-            background-color: #eaddcf; /* Màu nền dự phòng nếu ảnh lỗi */
+            background-color: #eaddcf; 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -38,14 +37,13 @@
             font-weight: 700;
         }
 
-        /* Lớp phủ làm dịu nền để chữ nổi bật hơn */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(245, 236, 227, 0.85); /* Màu be bán trong suốt */
+            background: rgba(245, 236, 227, 0.85); 
             z-index: -1;
         }
 
@@ -63,7 +61,7 @@
 
         p {
             max-width: 800px;
-            font-size: 24px; /* Tăng size vì Srisakdi khá nhỏ */
+            font-size: 24px; 
             line-height: 1.6;
             text-align: center;
         }
@@ -86,7 +84,6 @@
             transform: translateY(0);
         }
 
-        /* Buttons */
         button {
             padding: 12px 30px;
             background: var(--mau-do);
@@ -108,7 +105,6 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
-        /* Grid Layout cho các Phòng / Menu */
         .grid-container {
             display: flex;
             gap: 30px;
@@ -141,7 +137,6 @@
             margin-bottom: 15px;
         }
 
-        /* Khu vực Quiz */
         .quiz-container {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px;
@@ -163,7 +158,6 @@
             background: var(--mau-do);
         }
 
-        /* Khảo sát & Thống kê */
         .stats-box {
             background: var(--mau-be);
             padding: 20px;
@@ -184,7 +178,6 @@
             margin: 10px 0;
         }
 
-        /* Cửa chuyển cảnh */
         #door {
             position: fixed;
             top: 0; left: 0;
@@ -197,7 +190,7 @@
         .door {
             width: 50%; height: 100%;
             background-image: url("cua@4x.png");
-            background-color: var(--mau-nau); /* Fallback */
+            background-color: var(--mau-nau);
             background-size: cover;
             background-position: center;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
@@ -210,13 +203,12 @@
         #door.open .leftDoor { transform: translateX(-100%); }
         #door.open .rightDoor { transform: translateX(100%) scaleX(-1); }
 
-        /* Hiệu ứng Cánh hoa rơi */
         .petal {
             position: absolute;
             width: 16px;
             height: 16px;
-            background-color: #ff9999; /* Màu cánh đào */
-            border-radius: 15px 0 15px 0; /* Tạo hình cánh hoa */
+            background-color: #ff9999; 
+            border-radius: 15px 0 15px 0; 
             pointer-events: none;
             z-index: 9998;
             animation: fall 2s ease-in forwards;
@@ -228,7 +220,6 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
             100% { transform: translateY(150px) rotate(360deg); opacity: 0; }
         }
-
     </style>
 </head>
 
@@ -276,34 +267,21 @@
         <div class="grid-container">
             <div class="card">
                 <h2>Miền Bắc</h2>
-                <p>Ai về xứ Bắc ta đi với
-Thăm lại non sông giống Lạc Hồng
-Từ độ mang gươm đi mở cõi
-Trời Nam thương nhớ đất Thăng Long
-</p>
-                </div>
+                <p>Ai về xứ Bắc ta đi với<br>Thăm lại non sông giống Lạc Hồng<br>Từ độ mang gươm đi mở cõi<br>Trời Nam thương nhớ đất Thăng Long</p>
+            </div>
             <div class="card">
                 <h2>Miền Trung</h2>
-                <p>Miền Trung
-Tấm lưng trần đen sạm
-Những đốt sống Trường Sơn lởm chởm dăng màn
-Thoáng bóng giặc núi bửa thành máng súng
-Những đứa con văng như mảnh đạn
-Thương mẹ một mình trời sinh đá mồ côi</p>
+                <p>Miền Trung<br>Tấm lưng trần đen sạm<br>Những đốt sống Trường Sơn lởm chởm dăng màn<br>Thoáng bóng giặc núi bửa thành máng súng<br>Thương mẹ một mình trời sinh đá mồ côi</p>
             </div>
             <div class="card">
                 <h2>Miền Nam</h2>
-                <p>Nếu con hỏi quê nào đẹp nhất?
-Bóng dừa xanh quanh sóng biển lam
-Óng xanh lúa chan hoà mặt đất
-Xanh ngát trời... Quê ấy: Miền Nam!</p>
+                <p>Nếu con hỏi quê nào đẹp nhất?<br>Bóng dừa xanh quanh sóng biển lam<br>Óng xanh lúa chan hoà mặt đất<br>Xanh ngát trời... Quê ấy: Miền Nam!</p>
             </div>
         </div>
         <button onclick="openDoor('menu')">Quay lại Bản đồ</button>
     </section>
 
     <section id="thu-vien">
-       <section id="thu-vien">
         <h1>Thư viện Di sản</h1>
         <p>Chọn một danh mục để khám phá kho tàng văn hóa.</p>
         <div class="grid-container">
@@ -378,17 +356,12 @@ Xanh ngát trời... Quê ấy: Miền Nam!</p>
         </div>
         <button id="btn-back-to-sub" onclick="openDoor('thu-vien')">Quay lại</button>
     </section>
-            </div>
-        </div>
-        <button onclick="openDoor('menu')">Quay lại Bản đồ</button>
-    </section>
 
     <section id="quiz">
         <h1>Thách thức Kiến thức</h1>
         <div class="quiz-container">
             <h2 id="question-text">Đang tải câu hỏi...</h2>
-            <div id="answers-btn">
-                </div>
+            <div id="answers-btn"></div>
             <p id="quiz-status" style="margin-top: 15px; color: var(--mau-do); font-size: 20px;"></p>
             <p>Câu: <span id="q-current">1</span> / <span id="q-total">20</span></p>
         </div>
@@ -438,7 +411,6 @@ Xanh ngát trời... Quê ấy: Miền Nam!</p>
                 door.classList.remove("open");
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 
-                // Khởi động lại quiz nếu mở trang quiz
                 if(target === 'quiz') startQuiz();
             }, 1100);
         }
@@ -448,52 +420,96 @@ Xanh ngát trời... Quê ấy: Miền Nam!</p>
             const petal = document.createElement('div');
             petal.classList.add('petal');
             
-            // Lấy vị trí click
             petal.style.left = (e.pageX - 8) + 'px'; 
             petal.style.top = (e.pageY - 8) + 'px';
             
             document.body.appendChild(petal);
 
-            // Tự động xóa cánh hoa sau 2 giây (thời gian animation)
             setTimeout(() => {
                 petal.remove();
             }, 2000);
         });
 
+        // --- CƠ SỞ DỮ LIỆU DI SẢN (JS Bổ sung để phòng chi tiết hoạt động) ---
+        const diSanData = {
+            'ao-dai': {
+                ten: 'Áo Dài Việt Nam',
+                thongTin: 'Áo dài là trang phục truyền thống mang tính biểu tượng của Việt Nam. Được cách tân từ áo ngũ thân, áo dài tôn vinh vẻ đẹp kín đáo nhưng vẫn tôn lên đường nét mềm mại của người phụ nữ Việt.',
+                parent: 'tv-trang-phuc'
+            },
+            'ao-tac': {
+                ten: 'Áo Tấc',
+                thongTin: 'Áo tấc, hay còn gọi là áo ngũ thân tay thụng, là loại lễ phục cổ truyền thời Nguyễn. Áo được mặc cùng với quần thụng, che kín cơ thể, thể hiện sự trang trọng và quy củ của người xưa.',
+                parent: 'tv-trang-phuc'
+            },
+            'nhat-binh': {
+                ten: 'Áo Nhật Bình',
+                thongTin: 'Là thường phục của hoàng hậu, phi tần và công chúa thời Nguyễn. Đặc trưng của Nhật Bình là hoa văn lộng lẫy và dải cổ áo to bản tạo thành hình chữ nhật trước ngực.',
+                parent: 'tv-trang-phuc'
+            },
+            'cay-tre': {
+                ten: 'Cây Tre Trăm Đốt',
+                thongTin: 'Tre gắn bó mật thiết với làng quê Việt Nam. Tre vừa là vũ khí chống giặc (Thánh Gióng), vừa là vật liệu xây nhà, đan lát. Tre tượng trưng cho sự kiên cường, bất khuất của người Việt.',
+                parent: 'tv-bieu-tuong'
+            },
+            'chim-lac': {
+                ten: 'Chim Lạc',
+                thongTin: 'Chim Lạc là vật tổ của người Việt cổ, xuất hiện nhiều trên mặt trống đồng Đông Sơn. Hình ảnh chim Lạc đang bay thể hiện khát vọng chinh phục bầu trời và vươn tới tự do.',
+                parent: 'tv-bieu-tuong'
+            },
+            'cay-lua': {
+                ten: 'Cây Lúa Nước',
+                thongTin: 'Nền văn minh lúa nước là cốt lõi của văn hóa Việt Nam. Cây lúa không chỉ mang lại ấm no mà còn hình thành nên các lễ hội, phong tục tập quán và tính cộng đồng làng xã.',
+                parent: 'tv-bieu-tuong'
+            },
+            'quoc-hoc': {
+                ten: 'Trường Quốc Học Huế',
+                thongTin: 'Ngôi trường cổ kính có tuổi đời hơn 120 năm, nổi bật với màu sơn đỏ sẫm và lối kiến trúc giao thoa giữa Pháp và Á Đông. Đây là nơi ươm mầm nhiều nhân tài của đất nước.',
+                parent: 'tv-kien-truc'
+            },
+            'chua-mot-cot': {
+                ten: 'Chùa Một Cột',
+                thongTin: 'Biểu tượng kiến trúc độc đáo của thủ đô Hà Nội, được xây dựng từ thời Lý (1049). Chùa có hình dáng như một đóa sen khổng lồ vươn lên khỏi mặt nước.',
+                parent: 'tv-kien-truc'
+            },
+            'nha-rong': {
+                ten: 'Nhà Rông Tây Nguyên',
+                thongTin: 'Ngôi nhà sinh hoạt cộng đồng của các dân tộc thiểu số ở Tây Nguyên. Nhà Rông có mái nhọn vút cao lên bầu trời, là nơi diễn ra các lễ hội và hội họp của buôn làng.',
+                parent: 'tv-kien-truc'
+            }
+        };
+
+        // --- HÀM HIỂN THỊ CHI TIẾT DI SẢN ---
+        function xemChiTiet(idDiSan) {
+            const data = diSanData[idDiSan];
+            if (data) {
+                document.getElementById('ds-ten').innerText = data.ten;
+                document.getElementById('ds-thong-tin').innerText = data.thongTin;
+                document.getElementById('btn-back-to-sub').setAttribute('onclick', `openDoor('${data.parent}')`);
+                openDoor('di-san-chi-tiet');
+            }
+        }
+
         // --- HỆ THỐNG QUIZ ĐỘNG ---
-        // Bạn có thể thêm đủ 20 câu vào mảng này theo cú pháp bên dưới
         const quizData = [
             { question: "Phở có nguồn gốc chủ yếu từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
             { question: "Chiếc áo tấc thường được mặc vào dịp nào thời xưa?", options: ["Làm ruộng", "Lễ tết, hội hè", "Đi ngủ"], answer: 1 },
             { question: "Chùa Một Cột được xây dựng dưới triều đại nào?", options: ["Triều Lý", "Triều Trần", "Triều Lê"], answer: 0 },
             { question: "Nhạc cụ nào sau đây có một dây duy nhất?", options: ["Đàn Tranh", "Đàn Nguyệt", "Đàn Bầu"], answer: 2 },
-  { question: "Điệu múa chim Lạc thường được khắc trên vật phẩm nào?", options: ["Trống đồng Đông Sơn", "Gốm Bát Tràng", "Tranh Đông Hồ"], answer: 0 }
-             
-  { question: "Tết Nguyên Đán của Việt Nam thường diễn ra vào thời gian nào?", options: ["Tháng 1 dương lịch", "Cuối tháng 12 dương lịch", "Theo lịch âm (thường vào tháng 1 hoặc 2 dương lịch)"], answer: 2 },
-
-  { question: "Trang phục truyền thống phổ biến của phụ nữ Việt Nam là gì?", options: ["Kimono", "Áo dài", "Hanbok"], answer: 1 },
-
-  { question: "Món ăn nào sau đây thường xuất hiện trong ngày Tết cổ truyền?", options: ["Bánh chưng", "Pizza", "Hamburger"], answer: 0 },
-
-  { question: "Lễ hội chùa Hương diễn ra ở tỉnh/thành nào?", options: ["Hà Nội", "Huế", "Đà Nẵng"], answer: 0 },
-
-  { question: "Loại hình nghệ thuật truyền thống nào thường có con rối di chuyển trên mặt nước?", options: ["Cải lương", "Múa rối nước", "Hát chèo"], answer: 1 },
-
-  { question: "Tín ngưỡng thờ cúng tổ tiên là đặc trưng của văn hóa nào?", options: ["Văn hóa Việt Nam", "Văn hóa phương Tây", "Văn hóa châu Phi"], answer: 0 },
-
-  { question: "Bánh tét phổ biến hơn ở vùng nào của Việt Nam?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 2 },
-
-  { question: "Nhạc cụ truyền thống nào có 16 dây?", options: ["Đàn tranh", "Đàn bầu", "Đàn nhị"], answer: 0 },
-
-  { question: "Lễ Vu Lan báo hiếu thường diễn ra vào tháng mấy âm lịch?", options: ["Tháng 1", "Tháng 7", "Tháng 10"], answer: 1 },
-
-  { question: "Phong tục lì xì trong dịp Tết mang ý nghĩa gì?", options: ["Chúc may mắn và tài lộc", "Trang trí nhà cửa", "Tưởng nhớ tổ tiên"], answer: 0 },
-
-  { question: "Món phở có nguồn gốc từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
-
-  { question: "Hát quan họ là di sản văn hóa của tỉnh nào?", options: ["Bắc Ninh", "Thanh Hóa", "Lâm Đồng"], answer: 0 },
-
-  { question: "Ngày Giỗ Tổ Hùng Vương diễn ra vào ngày nào âm lịch?", options: ["10/3", "15/8", "1/1"], answer: 0 },
+            { question: "Điệu múa chim Lạc thường được khắc trên vật phẩm nào?", options: ["Trống đồng Đông Sơn", "Gốm Bát Tràng", "Tranh Đông Hồ"], answer: 0 },
+            { question: "Tết Nguyên Đán của Việt Nam thường diễn ra vào thời gian nào?", options: ["Tháng 1 dương lịch", "Cuối tháng 12 dương lịch", "Theo lịch âm (thường vào tháng 1 hoặc 2 dương lịch)"], answer: 2 },
+            { question: "Trang phục truyền thống phổ biến của phụ nữ Việt Nam là gì?", options: ["Kimono", "Áo dài", "Hanbok"], answer: 1 },
+            { question: "Món ăn nào sau đây thường xuất hiện trong ngày Tết cổ truyền?", options: ["Bánh chưng", "Pizza", "Hamburger"], answer: 0 },
+            { question: "Lễ hội chùa Hương diễn ra ở tỉnh/thành nào?", options: ["Hà Nội", "Huế", "Đà Nẵng"], answer: 0 },
+            { question: "Loại hình nghệ thuật truyền thống nào thường có con rối di chuyển trên mặt nước?", options: ["Cải lương", "Múa rối nước", "Hát chèo"], answer: 1 },
+            { question: "Tín ngưỡng thờ cúng tổ tiên là đặc trưng của văn hóa nào?", options: ["Văn hóa Việt Nam", "Văn hóa phương Tây", "Văn hóa châu Phi"], answer: 0 },
+            { question: "Bánh tét phổ biến hơn ở vùng nào của Việt Nam?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 2 },
+            { question: "Nhạc cụ truyền thống nào có 16 dây?", options: ["Đàn tranh", "Đàn bầu", "Đàn nhị"], answer: 0 },
+            { question: "Lễ Vu Lan báo hiếu thường diễn ra vào tháng mấy âm lịch?", options: ["Tháng 1", "Tháng 7", "Tháng 10"], answer: 1 },
+            { question: "Phong tục lì xì trong dịp Tết mang ý nghĩa gì?", options: ["Chúc may mắn và tài lộc", "Trang trí nhà cửa", "Tưởng nhớ tổ tiên"], answer: 0 },
+            { question: "Món phở có nguồn gốc từ vùng nào?", options: ["Miền Bắc", "Miền Trung", "Miền Nam"], answer: 0 },
+            { question: "Hát quan họ là di sản văn hóa của tỉnh nào?", options: ["Bắc Ninh", "Thanh Hóa", "Lâm Đồng"], answer: 0 },
+            { question: "Ngày Giỗ Tổ Hùng Vương diễn ra vào ngày nào âm lịch?", options: ["10/3", "15/8", "1/1"], answer: 0 },
         ];
 
         let currentQuestionIndex = 0;
@@ -513,7 +529,7 @@ Xanh ngát trời... Quê ấy: Miền Nam!</p>
             document.getElementById('quiz-status').innerText = "";
             
             const btnContainer = document.getElementById('answers-btn');
-            btnContainer.innerHTML = ""; // Xóa nút cũ
+            btnContainer.innerHTML = ""; 
 
             q.options.forEach((opt, index) => {
                 const btn = document.createElement('button');
@@ -534,11 +550,9 @@ Xanh ngát trời... Quê ấy: Miền Nam!</p>
                 statusBox.innerText = `❌ Chưa đúng! Đáp án đúng là: ${quizData[currentQuestionIndex].options[correctIndex]}`;
             }
 
-            // Vô hiệu hóa các nút sau khi trả lời
             const btns = document.querySelectorAll('#answers-btn button');
             btns.forEach(b => b.disabled = true);
 
-            // Chuyển câu sau 1.5 giây
             setTimeout(() => {
                 currentQuestionIndex++;
                 if(currentQuestionIndex < quizData.length) {
